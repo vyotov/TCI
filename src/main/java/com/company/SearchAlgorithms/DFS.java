@@ -108,4 +108,19 @@ public class DFS extends BaseSearchAlgorithm {
         }
         return new JSONObject();
     }
+
+    @Override
+    public int getNumberOfPagers() {
+        return 0;
+    }
+
+    @Override
+    public int getTimeElapsed() {
+        return 0;
+    }
+
+    @Override
+    public int getSeachDepth() {
+        return 0;
+    }
 }
