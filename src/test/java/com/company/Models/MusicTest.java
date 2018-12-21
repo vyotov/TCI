@@ -10,7 +10,7 @@ import static org.junit.Assert.assertNotEquals;
 public class MusicTest{
 
     @Test
-    public void IsGettingRgihtName() {
+    public void IsGettingRightName() {
         //TODO
     }
     @Test
