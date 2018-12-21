@@ -1,4 +1,4 @@
-package com.company.Models;
+package com.company.Models.regularTests;
 
 import org.junit.Before;
 import org.junit.Test;

@@ -1,4 +1,4 @@
-package com.company.Models;
+package com.company.Models.regularTests;
 import junitparams.Parameters;
 import org.junit.Assert;
 import org.junit.Test;
