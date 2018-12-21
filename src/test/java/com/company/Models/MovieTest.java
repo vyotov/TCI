@@ -5,8 +5,6 @@ import org.junit.Test;
 
 public class MovieTest {
 
-    Movie mMovie;
-
     /*** Method to initialize a movie object*/
     @Before
     public void setUp() {
