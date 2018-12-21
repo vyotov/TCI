@@ -1,4 +1,4 @@
-package com.company.Catalogs;
+package com.company.Models;
 
 public class Music {
 

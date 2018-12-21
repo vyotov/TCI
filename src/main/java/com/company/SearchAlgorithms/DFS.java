@@ -1,11 +1,6 @@
 package com.company.SearchAlgorithms;
 
-import com.company.Catalogs.Book;
-import com.company.Catalogs.Movies;
-import com.company.Catalogs.Music;
-import com.company.Constants;
 import com.company.BaseSearchAlgorithm;
-import com.google.gson.Gson;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.jsoup.Jsoup;

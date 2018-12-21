@@ -1,4 +1,4 @@
-package com.company.Catalogs;
+package com.company.Models;
 
 import java.util.ArrayList;
 import java.util.List;

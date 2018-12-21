@@ -1,8 +1,8 @@
-package com.company.Catalogs;
+package com.company.Models;
 
 import java.util.List;
 
-public class Movies {
+public class Movie {
 
     private String title;
     private String genre;
@@ -40,6 +40,8 @@ public class Movies {
     public List<String> getStars() {
         return stars;
     }
+
+
 }
 
 
