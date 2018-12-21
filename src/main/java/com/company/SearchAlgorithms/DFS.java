@@ -120,7 +120,7 @@ public class DFS extends BaseSearchAlgorithm {
     }
 
     @Override
-    public int getSeachDepth() {
+    public int getSearchDepth() {
         return 0;
     }
 }

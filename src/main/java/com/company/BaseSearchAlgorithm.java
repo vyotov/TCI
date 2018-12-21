@@ -50,5 +50,5 @@ public abstract class BaseSearchAlgorithm implements ISearch {
 
     public abstract int getNumberOfPagers();
     public abstract int getTimeElapsed();
-    public abstract int getSeachDepth();
+    public abstract int getSearchDepth();
 }
