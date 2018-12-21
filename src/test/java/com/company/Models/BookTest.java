@@ -20,6 +20,10 @@ public class BookTest{
     @org.junit.Test
     public void IsGettingRightAuthors() {//TODO }
     @org.junit.Test
+    public void IsAuthorsListEmpty() {//TODO }
+    @org.junit.Test
+    public void IsNumberOfAuthorsCorrect() {//TODO }
+    @org.junit.Test
     public void IsGettingRightPublisher() {//TODO }
     @org.junit.Test
     public void IsGettingRightISBN() {//TODO }
