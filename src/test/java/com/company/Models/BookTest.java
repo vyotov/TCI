@@ -1,3 +1,4 @@
+package com.company.Models;
 import junitparams.Parameters;
 import org.junit.Assert;
 import org.junit.Test;
@@ -46,7 +47,4 @@ public class BookTest{
     public void IsGettingRightISBN() {
         //TODO
     }
-
-
-
 }
