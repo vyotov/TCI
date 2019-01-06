@@ -1,5 +1,7 @@
 package com.company;
 
+import com.company.SearchAlgorithms.Extractor;
+
 import java.io.IOException;
 
 public class Main {
@@ -7,7 +9,7 @@ public class Main {
     private static final String SEARCH_WORD = "Clean Code: A Handbook of Agile Software Craftsmanship";
 
     public static void main(String[] args) throws IOException {
-        //Create instance:
+       /* //Create instance:
         WebCrawler webCrawler = new WebCrawler("http://localhost:8888/sample_site_to_crawl/");
         //Start crawler:
         webCrawler.start();
@@ -23,6 +25,10 @@ public class Main {
             System.out.print(SEARCH_WORD);
         }
         System.out.println("");
-
+*/
+        Extractor bwc = new Extractor();
+        bwc.getPageLinks("http://localhost:8888/sample_site_to_crawl");
+        bwc.searchById("103");
+        System.out.println(bwc.getPageCount());
     }
 }
