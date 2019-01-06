@@ -6,9 +6,10 @@ import java.util.List;
 public class Book {
 
     private String name;
+    private String category;
     private String genre;
     private String format;
-    private int year;
+    private String year;
     private List<String> authors = new ArrayList<>();
     private String publisher;
     private String isbn;
@@ -26,7 +27,7 @@ public class Book {
         return format;
     }
 
-    public int getYear() {
+    public String getYear() {
         return year;
     }
 
@@ -40,5 +41,16 @@ public class Book {
 
     public String getIsbn() {
         return isbn;
+    }
+
+    public Book(String name, String category,String genre, String format, String year, List<String> authors, String publisher, String isbn) {
+        this.name = name;
+        this.category  =category;
+        this.genre = genre;
+        this.format = format;
+        this.year = year;
+        this.authors = authors;
+        this.publisher = publisher;
+        this.isbn = isbn;
     }
 }
