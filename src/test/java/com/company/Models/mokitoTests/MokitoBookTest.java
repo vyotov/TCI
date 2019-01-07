@@ -5,37 +5,37 @@ import org.junit.Test;
 public class MokitoBookTest {
 
     @Test
-    void isGettingBookByName()
+    public void isGettingBookByName()
     {
         //TODO
     }
     @Test
-    void isGettingBookByAuthor()
+    public void isGettingBookByAuthor()
     {
         //TODO
     }
     @Test
-    void isGettingBookByNameAndAuthor()
+    public void isGettingBookByNameAndAuthor()
     {
         //TODO
     }
     @Test
-    void isGettingBookByYear()
+    public void isGettingBookByYear()
     {
         //TODO
     }
     @Test
-    void isGettingBookByPublisher()
+    public void isGettingBookByPublisher()
     {
         //TODO
     }
     @Test
-    void isGettingBookByGenre()
+    public void isGettingBookByGenre()
     {
         //TODO
     }
     @Test
-    void isGettingBookByISBN()
+    public void isGettingBookByISBN()
     {
         //TODO
     }
