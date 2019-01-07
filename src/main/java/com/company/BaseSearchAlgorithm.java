@@ -46,4 +46,9 @@ public abstract class BaseSearchAlgorithm implements ISearch {
         }
         return result;
     }
+
+
+    public abstract int getNumberOfPagers();
+    public abstract int getTimeElapsed();
+    public abstract int getSearchDepth();
 }
