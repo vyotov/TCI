@@ -4,13 +4,8 @@ import com.company.Models.Book;
 import com.company.Models.Movie;
 import com.company.Models.Music;
 import com.company.utils.Constants;
-import com.fasterxml.jackson.core.JsonGenerationException;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.JsonMappingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
-import com.oracle.javafx.jmx.json.JSONException;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.jsoup.Jsoup;
@@ -107,26 +102,33 @@ public class DataExtractor {
         String format = "";
         String year = "";
         String artist = "";
+        jsonResult.put("id", getId());
+        jsonResult.put("time", "timeee");
+        //TODO fix name
+        jsonObject.put("name", getTitle());
         for (int i = 0, l = th.size(); i < l; i++) {
             String key = th.get(i).text();
             String value = td.get(i).text();
             if (key.equals("Genre")) {
                 genre = value;
+                jsonObject.put("genre", genre);
             }
             if (key.equals("Format")) {
                 format = value;
+                jsonObject.put("format",format);
             }
             if (key.equals("Year")) {
                 year = value;
+                jsonObject.put("year",format);
             }
             if (key.equals("Artist")) {
                 artist = value;
+                jsonObject.put("artist",artist);
             }
         }
-        Music music = new Music("", "Music", genre, format, year, artist);
-        jsonResult.put("id", getId());
-        jsonResult.put("time", "timeee");
-        jsonResult.put("result", gson.toJson(music));
+
+        jsonResult.put("result", jsonObject);
+
         if (dataListener != null) {
             dataListener.onObjectFound(jsonResult);
         }
@@ -198,36 +200,44 @@ public class DataExtractor {
         String authors = "";
         String publisher = "";
         String ISBN = "";
+        jsonResult.put("id", getId());
+        jsonResult.put("time", "timeee");
+        //TODO fix name
+        jsonObject.put("name", getTitle());
         for (int i = 0, l = th.size(); i < l; i++) {
             String key = th.get(i).text();
             String value = td.get(i).text();
             if (key.equals("Genre")) {
                 genre = value;
+                jsonObject.put("genre",genre);
             }
             if (key.equals("Category")) {
                 category = value;
+                jsonObject.put("category",category);
             }
             if (key.equals("Format")) {
                 format = value;
+                jsonObject.put("format",format);
             }
             if (key.equals("Year")) {
                 year = value;
+                jsonObject.put("year",year);
             }
             if (key.equals("Authors")) {
                 authors = value;
+                jsonObject.put("authors",authors);
             }
             if (key.equals("Publisher")) {
                 publisher = value;
+                jsonObject.put("publisher",publisher);
             }
             if (key.equals("ISBN")) {
                 ISBN = value;
+                jsonObject.put("ISBN",ISBN);
             }
         }
-        Book book = new Book("", category, genre, format, year, Arrays.asList(authors.split(",")), publisher, ISBN);
-        jsonResult.put("id", getId());
-        jsonResult.put("time", "timeee");
-        Object request = gson.toJson(book);
-        jsonResult.put("result", gson.toJson(book));
+        jsonResult.put("result", jsonObject);
+
         if (dataListener != null) {
             dataListener.onObjectFound(jsonResult);
         }

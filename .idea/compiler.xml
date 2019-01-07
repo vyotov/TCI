@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <bytecodeTargetLevel>
+      <module name="tci.webcrawler.WebCrawler.main" target="1.8" />
+      <module name="tci.webcrawler.WebCrawler.test" target="1.8" />
+      <module name="venci_branch" target="8" />
+    </bytecodeTargetLevel>
+  </component>
+</project>
