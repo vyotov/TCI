@@ -1,5 +1,9 @@
 package com.company.SearchAlgorithms;
 
+import com.company.Models.Book;
+import com.company.Models.Movie;
+import com.company.Models.Music;
+import org.json.simple.JSONObject;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -58,8 +62,9 @@ public class Extractor implements DataExtractor.DataListener {
         return links.size();
     }
 
-    @Override
-    public void onDataLoaded() {
 
+    @Override
+    public void onObjectFound(JSONObject jsonObject) {
+        System.out.println(jsonObject.toString());
     }
 }
