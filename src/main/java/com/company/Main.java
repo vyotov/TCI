@@ -28,7 +28,7 @@ public class Main {
 */
         Extractor bwc = new Extractor();
         bwc.getPageLinks("http://localhost:8888/sample_site_to_crawl");
-        bwc.searchById("201");
+        bwc.searchById("202");
         System.out.println(bwc.getPageCount());
     }
 }
