@@ -16,8 +16,6 @@ import java.util.HashSet;
 public class Extractor {
 
     private HashSet<String> links;
-    private long startTime;
-    private long endTime;
 
     private Gson mGson = new Gson();
     public Extractor() {
@@ -70,7 +68,6 @@ public class Extractor {
             }
         }
     }
-
 
     public void getAllObjects() throws IOException {
         for (String url : links) {
