@@ -4,13 +4,7 @@ import com.company.Models.Book;
 import com.company.Models.Movie;
 import com.company.Models.Music;
 import com.company.utils.Constants;
-import com.fasterxml.jackson.core.JsonGenerationException;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.JsonMappingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
-import com.google.gson.JsonObject;
-import com.oracle.javafx.jmx.json.JSONException;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.jsoup.Jsoup;
@@ -61,17 +55,17 @@ public class DataExtractor {
                 switch (value) {
                     case Constants.music:
                         //Extra specific object
-                        getMusicObject(table);
+                        parseMusic(table);
                         System.out.println("Music");
                         break;
                     case Constants.movies:
                         //Extra specific object
-                        getMoviesObject(table);
+                        parseMovie(table);
                         System.out.println("Movies");
                         break;
                     case Constants.books:
                         //Extra specific object
-                        getBooksObject(table);
+                        parseBook(table);
                         System.out.println("Books");
                         break;
                 }
@@ -99,8 +93,8 @@ public class DataExtractor {
         return doc.getElementsByTag("h1").last().text();
     }
 
-    //TODO
-    private void getMusicObject(Element table) {
+
+    private void parseMusic(Element table) {
         Elements th = table.getElementsByTag("th");
         Elements td = table.getElementsByTag("td");
         String genre = "";
@@ -123,17 +117,13 @@ public class DataExtractor {
                 artist = value;
             }
         }
-        Music music = new Music("", "Music", genre, format, year, artist);
-        jsonResult.put("id", getId());
-        jsonResult.put("time", "timeee");
-        jsonResult.put("result", gson.toJson(music));
+        Music music = new Music(getTitle(), "Music", genre, format, year, artist);
         if (dataListener != null) {
-            dataListener.onObjectFound(jsonResult);
+            dataListener.onMusic(music);
         }
     }
 
-    //DONE
-    private void getMoviesObject(Element table) {
+    private void parseMovie(Element table) {
         Elements th = table.getElementsByTag("th");
         Elements td = table.getElementsByTag("td");
         String genre = "";
@@ -145,11 +135,6 @@ public class DataExtractor {
         String stars = "";
         //Set the name
 
-
-        jsonResult.put("id", getId());
-        jsonResult.put("time", "timeee");
-        //TODO fix name
-        jsonObject.put("name", getTitle());
         for (int i = 0, l = th.size(); i < l; i++) {
             String key = th.get(i).text();
             String value = td.get(i).text();
@@ -181,14 +166,13 @@ public class DataExtractor {
                 stars = value;
             }
         }
-        jsonResult.put("result", jsonObject);
-
+        Movie movie = new Movie(getTitle(), category, genre, format, year, director, Arrays.asList(writers.split(",")), Arrays.asList(stars.split(",")));
         if (dataListener != null) {
-            dataListener.onObjectFound(jsonResult);
+            dataListener.onMovie(movie);
         }
     }
 
-    private void getBooksObject(Element table) {
+    private void parseBook(Element table) {
         Elements th = table.getElementsByTag("th");
         Elements td = table.getElementsByTag("td");
         String genre = "";
@@ -223,18 +207,18 @@ public class DataExtractor {
                 ISBN = value;
             }
         }
-        Book book = new Book("", category, genre, format, year, Arrays.asList(authors.split(",")), publisher, ISBN);
-        jsonResult.put("id", getId());
-        jsonResult.put("time", "timeee");
-        Object request = gson.toJson(book);
-        jsonResult.put("result", gson.toJson(book));
+        Book book = new Book(getTitle(), category, genre, format, year, Arrays.asList(authors.split(",")), publisher, ISBN);
         if (dataListener != null) {
-            dataListener.onObjectFound(jsonResult);
+            dataListener.onBook(book);
         }
     }
 
     public interface DataListener {
-        void onObjectFound(JSONObject jsonObject);
 
+        void onMusic(Music music);
+
+        void onMovie(Movie movie);
+
+        void onBook(Book book);
     }
 }
