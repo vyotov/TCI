@@ -19,12 +19,7 @@ public class Extractor {
     private long startTime;
     private long endTime;
 
-    private Book mBook;
-    private Movie mMovie;
-    private Music mMusic;
-
     private Gson mGson = new Gson();
-
     public Extractor() {
         links = new HashSet<>();
     }
@@ -44,8 +39,6 @@ public class Extractor {
                     }
                     getPageLinks(page.attr("abs:href"));
                 }
-                //endTime = System.currentTimeMillis();
-
             } catch (IOException e) {
                 System.err.println(e.getMessage());
             }
@@ -61,19 +54,16 @@ public class Extractor {
                     @Override
                     public void onMusic(Music music) {
                         System.out.println(mGson.toJson(music));
-                        mMusic = music;
                     }
 
                     @Override
                     public void onMovie(Movie movie) {
                         System.out.println(mGson.toJson(movie));
-                        mMovie = movie;
                     }
 
                     @Override
                     public void onBook(Book book) {
                         System.out.println(mGson.toJson(book));
-                        mBook = book;
                     }
                 }).exact();
                 break;
@@ -81,26 +71,33 @@ public class Extractor {
         }
     }
 
-    /**
-     * Call only after search by id
-     *
-     * @return
-     */
-    public Movie getMovie() {
-        return mMovie;
+
+    public void getAllObjects() throws IOException {
+        for (String url : links) {
+            String number = url.substring(url.lastIndexOf("=") + 1);
+            if (!number.equals("") && isInt(number)) {
+                new DataExtractor(url).setDataListener(new DataExtractor.DataListener() {
+                    @Override
+                    public void onMusic(Music music) {
+                        System.out.println(mGson.toJson(music));
+                    }
+
+                    @Override
+                    public void onMovie(Movie movie) {
+                        System.out.println(mGson.toJson(movie));
+                    }
+
+                    @Override
+                    public void onBook(Book book) {
+                        System.out.println(mGson.toJson(book));
+                    }
+                }).exact();
+            }
+        }
     }
 
-    public Book getBook() {
-        return mBook;
-    }
-
-    public Music getMusic() {
-        return mMusic;
-    }
-
-
-    public void getAllObjects() {
-
+    private boolean isInt(String string) {
+        return string.matches("\\d+");
     }
 
 

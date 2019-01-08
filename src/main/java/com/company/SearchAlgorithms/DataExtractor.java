@@ -17,14 +17,9 @@ import java.util.Arrays;
 
 
 public class DataExtractor {
-    private JSONArray jsonArray;
-    private JSONObject jsonResult;
-    private JSONObject jsonObject;
-    private String url;
     private DataListener dataListener;
     private Document doc;
-    private Gson gson = new Gson();
-    private String objectName;
+
 
     /*** Method used to set the data listener to notify the Extractor class once object is found.
      * In case the work is executed async.*/
@@ -34,10 +29,6 @@ public class DataExtractor {
     }
 
     DataExtractor(String url) throws IOException {
-        this.jsonArray = new JSONArray();
-        this.jsonResult = new JSONObject();
-        this.jsonObject = new JSONObject();
-        this.url = url;
         this.doc = Jsoup.connect(url).get();
     }
 
@@ -56,32 +47,18 @@ public class DataExtractor {
                     case Constants.music:
                         //Extra specific object
                         parseMusic(table);
-                        System.out.println("Music");
                         break;
                     case Constants.movies:
                         //Extra specific object
                         parseMovie(table);
-                        System.out.println("Movies");
                         break;
                     case Constants.books:
                         //Extra specific object
                         parseBook(table);
-                        System.out.println("Books");
                         break;
                 }
             }
         }
-    }
-
-    /**
-     * Method to find the id from a given url
-     *
-     * @return the id of the object that is searched
-     */
-    private String getId() {
-        String number = url.substring(url.lastIndexOf("=") + 1);
-        System.out.println(number);
-        return number;
     }
 
     /**
@@ -140,27 +117,21 @@ public class DataExtractor {
             String value = td.get(i).text();
             if (key.equals("Genre")) {
                 genre = value;
-                jsonObject.put("genre", genre);
             }
             if (key.equals("Category")) {
                 category = value;
-                jsonObject.put("category", category);
             }
             if (key.equals("Format")) {
                 format = value;
-                jsonObject.put("format", format);
             }
             if (key.equals("Year")) {
                 year = value;
-                jsonObject.put("year", year);
             }
             if (key.equals("Director")) {
                 director = value;
-                jsonObject.put("director", director);
             }
             if (key.equals("Writers")) {
                 writers = value;
-                jsonObject.put("director", director);
             }
             if (key.equals("Stars")) {
                 stars = value;
