@@ -8,6 +8,39 @@ public class Book {
     private String name;
     private String category;
     private String genre;
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
+    public void setGenre(String genre) {
+        this.genre = genre;
+    }
+
+    public void setFormat(String format) {
+        this.format = format;
+    }
+
+    public void setYear(String year) {
+        this.year = year;
+    }
+
+    public void setAuthors(List<String> authors) {
+        this.authors = authors;
+    }
+
+    public void setPublisher(String publisher) {
+        this.publisher = publisher;
+    }
+
+    public void setIsbn(String isbn) {
+        this.isbn = isbn;
+    }
+
     private String format;
     private String year;
     private List<String> authors = new ArrayList<>();
@@ -43,14 +76,5 @@ public class Book {
         return isbn;
     }
 
-    public Book(String name, String category,String genre, String format, String year, List<String> authors, String publisher, String isbn) {
-        this.name = name;
-        this.category  =category;
-        this.genre = genre;
-        this.format = format;
-        this.year = year;
-        this.authors = authors;
-        this.publisher = publisher;
-        this.isbn = isbn;
-    }
+    public Book(){}
 }

@@ -74,27 +74,26 @@ public class DataExtractor {
     private void parseMusic(Element table) {
         Elements th = table.getElementsByTag("th");
         Elements td = table.getElementsByTag("td");
-        String genre = "";
-        String format = "";
-        String year = "";
-        String artist = "";
+
+        Music music = new Music();
         for (int i = 0, l = th.size(); i < l; i++) {
             String key = th.get(i).text();
             String value = td.get(i).text();
             if (key.equals("Genre")) {
-                genre = value;
+                music.setGenre(value);
             }
             if (key.equals("Format")) {
-                format = value;
+                music.setFormat(value);
             }
             if (key.equals("Year")) {
-                year = value;
+                music.setYear(value);
             }
             if (key.equals("Artist")) {
-                artist = value;
+                music.setArtist(value);
             }
         }
-        Music music = new Music(getTitle(), "Music", genre, format, year, artist);
+
+
         if (dataListener != null) {
             dataListener.onMusic(music);
         }
@@ -103,41 +102,34 @@ public class DataExtractor {
     private void parseMovie(Element table) {
         Elements th = table.getElementsByTag("th");
         Elements td = table.getElementsByTag("td");
-        String genre = "";
-        String category = "";
-        String format = "";
-        String year = "";
-        String director = "";
-        String writers = "";
-        String stars = "";
+       Movie movie = new Movie();
         //Set the name
 
         for (int i = 0, l = th.size(); i < l; i++) {
             String key = th.get(i).text();
             String value = td.get(i).text();
             if (key.equals("Genre")) {
-                genre = value;
+                movie.setGenre(value);
             }
             if (key.equals("Category")) {
-                category = value;
+                movie.setCategory(value);
             }
             if (key.equals("Format")) {
-                format = value;
+                movie.setFormat(value);
             }
             if (key.equals("Year")) {
-                year = value;
+                movie.setYear(value);
             }
             if (key.equals("Director")) {
-                director = value;
+                movie.setDirector(value);
             }
             if (key.equals("Writers")) {
-                writers = value;
+                movie.setWriters(Arrays.asList(value.split(",")));
             }
             if (key.equals("Stars")) {
-                stars = value;
+                movie.setStars(Arrays.asList(value.split(",")));
             }
         }
-        Movie movie = new Movie(getTitle(), category, genre, format, year, director, Arrays.asList(writers.split(",")), Arrays.asList(stars.split(",")));
         if (dataListener != null) {
             dataListener.onMovie(movie);
         }
@@ -146,39 +138,33 @@ public class DataExtractor {
     private void parseBook(Element table) {
         Elements th = table.getElementsByTag("th");
         Elements td = table.getElementsByTag("td");
-        String genre = "";
-        String category = "";
-        String format = "";
-        String year = "";
-        String authors = "";
-        String publisher = "";
-        String ISBN = "";
+        Book book = new Book();
+
         for (int i = 0, l = th.size(); i < l; i++) {
             String key = th.get(i).text();
             String value = td.get(i).text();
             if (key.equals("Genre")) {
-                genre = value;
+                book.setGenre(value);
             }
             if (key.equals("Category")) {
-                category = value;
+                book.setCategory(value);
             }
             if (key.equals("Format")) {
-                format = value;
+                book.setFormat(value);
             }
             if (key.equals("Year")) {
-                year = value;
+                book.setYear(value);
             }
             if (key.equals("Authors")) {
-                authors = value;
+                book.setAuthors(Arrays.asList(value.split(",")));
             }
             if (key.equals("Publisher")) {
-                publisher = value;
+                book.setPublisher(value);
             }
             if (key.equals("ISBN")) {
-                ISBN = value;
+                book.setIsbn(value);
             }
         }
-        Book book = new Book(getTitle(), category, genre, format, year, Arrays.asList(authors.split(",")), publisher, ISBN);
         if (dataListener != null) {
             dataListener.onBook(book);
         }

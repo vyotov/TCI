@@ -6,6 +6,39 @@ public class Movie {
 
     private String title;
     private String category;
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
+    public void setGenre(String genre) {
+        this.genre = genre;
+    }
+
+    public void setFormat(String format) {
+        this.format = format;
+    }
+
+    public void setYear(String year) {
+        this.year = year;
+    }
+
+    public void setDirector(String director) {
+        this.director = director;
+    }
+
+    public void setWriters(List<String> writers) {
+        this.writers = writers;
+    }
+
+    public void setStars(List<String> stars) {
+        this.stars = stars;
+    }
+
     private String genre;
     private String format;
     private String year;
@@ -42,16 +75,7 @@ public class Movie {
         return stars;
     }
 
-    public Movie(String title,String category, String genre, String format, String year, String director, List<String> writers, List<String> stars) {
-        this.title = title;
-        this.category = category;
-        this.genre = genre;
-        this.format = format;
-        this.year = year;
-        this.director = director;
-        this.writers = writers;
-        this.stars = stars;
-    }
+    public Movie(){}
 }
 
 
