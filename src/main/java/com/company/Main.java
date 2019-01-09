@@ -12,7 +12,7 @@ public class Main {
         Extractor bwc = new Extractor();
         bwc.getPageLinks("http://localhost:8888");
         bwc.searchById("203");
-        bwc.getAllObjects();
+       // bwc.getAllObjects();
         System.out.println(bwc.getPageCount());
     }
 

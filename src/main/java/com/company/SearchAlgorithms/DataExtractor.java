@@ -4,9 +4,6 @@ import com.company.Models.Book;
 import com.company.Models.Movie;
 import com.company.Models.Music;
 import com.company.utils.Constants;
-import com.google.gson.Gson;
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -31,6 +28,7 @@ public class DataExtractor {
     DataExtractor(String url) throws IOException {
         this.doc = Jsoup.connect(url).get();
     }
+
 
     public void exact() {
         //Find the media details tag on the right of the page
@@ -60,6 +58,7 @@ public class DataExtractor {
             }
         }
     }
+
 
     /**
      * Method used to get the specific object name
@@ -93,7 +92,6 @@ public class DataExtractor {
             }
         }
 
-
         if (dataListener != null) {
             dataListener.onMusic(music);
         }
@@ -102,7 +100,7 @@ public class DataExtractor {
     private void parseMovie(Element table) {
         Elements th = table.getElementsByTag("th");
         Elements td = table.getElementsByTag("td");
-       Movie movie = new Movie();
+        Movie movie = new Movie();
         //Set the name
 
         for (int i = 0, l = th.size(); i < l; i++) {

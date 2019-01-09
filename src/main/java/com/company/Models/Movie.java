@@ -1,8 +1,9 @@
 package com.company.Models;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class Movie {
+public class Movie implements Serializable {
 
     private String title;
     private String category;

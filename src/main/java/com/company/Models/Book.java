@@ -1,9 +1,10 @@
 package com.company.Models;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Book {
+public class Book implements Serializable{
 
     private String name;
     private String category;
