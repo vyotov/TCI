@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.company.Models.mokitoTests.MokitoMovieTest" tests="8" skipped="0" failures="0" errors="0" timestamp="2019-01-12T18:34:21" hostname="Ventsislavs-MacBook-Pro.local" time="0.016">
+  <properties/>
+  <testcase name="isGettingMovieByFormat" classname="com.company.Models.mokitoTests.MokitoMovieTest" time="0.0"/>
+  <testcase name="isGettingMovieByWriters" classname="com.company.Models.mokitoTests.MokitoMovieTest" time="0.0"/>
+  <testcase name="isGettingMovieByTitleAndWriter" classname="com.company.Models.mokitoTests.MokitoMovieTest" time="0.0"/>
+  <testcase name="isGettingMovieByYear" classname="com.company.Models.mokitoTests.MokitoMovieTest" time="0.0"/>
+  <testcase name="isGettingMovieByDirector" classname="com.company.Models.mokitoTests.MokitoMovieTest" time="0.0"/>
+  <testcase name="isGettingMovieByGenre" classname="com.company.Models.mokitoTests.MokitoMovieTest" time="0.0"/>
+  <testcase name="isGettingMovieByStars" classname="com.company.Models.mokitoTests.MokitoMovieTest" time="0.0"/>
+  <testcase name="isGettingMovieByTitle" classname="com.company.Models.mokitoTests.MokitoMovieTest" time="0.0"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

@@ -38,6 +38,13 @@ jacoco {
     reportsDir = file("$buildDir/customJacocoReportDir")
 }
 
+test {
+    jacoco {
+        append = false
+        destinationFile = file("$buildDir/jacoco/jacocoTest.exec")
+    }
+}
+
 jacocoTestReport {
     reports {
         xml.enabled false
