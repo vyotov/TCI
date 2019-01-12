@@ -115,4 +115,16 @@ public class BookTest {
         // assert
         Assert.assertEquals(expected, actual);
     }
+
+    @org.junit.Test
+    public void IsGettingRightCategory() {
+        //Arrange
+        Book book = new Book();
+        String actual = "Books";
+        book.setCategory("Books");
+        // act
+        String expected = book.getCategory();
+        // assert
+        Assert.assertEquals(expected, actual);
+    }
 }
