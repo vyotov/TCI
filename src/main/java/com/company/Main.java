@@ -12,8 +12,9 @@ public class Main {
         Extractor bwc = new Extractor();
         bwc.getPageLinks("http://localhost:8888");
         //bwc.searchById("203");
-        bwc.getAllObjects();
-        System.out.println(bwc.getPageCount());
+        //bwc.getAllObjects();
+        bwc.findObjectByKeyWord("Drama");
+        //System.out.println(bwc.getPageCount());
     }
 
 }
