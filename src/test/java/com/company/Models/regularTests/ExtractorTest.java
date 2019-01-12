@@ -1,4 +1,4 @@
-package com.company.SearchAlgorithms;
+package com.company.Models.regularTests;
 
 import org.junit.Test;
 
