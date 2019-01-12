@@ -1,8 +1,12 @@
 group 'tci.webcrawler'
 version '1.0-SNAPSHOT'
 
+apply plugin: "com.gradle.build-scan"
 apply plugin: 'java'
 apply plugin: 'jacoco'
+apply plugin: 'com.adarshr.test-logger'
+apply plugin: "io.spring.dependency-management"
+
 
 sourceCompatibility = 1.8
 
@@ -23,7 +27,11 @@ dependencies {
     testCompile "org.mockito:mockito-core:1.+"
 }
 
-buildScan { termsOfServiceUrl = "https://gradle.com/terms-of-service"; termsOfServiceAgree = "yes" }
+
+buildScan {
+    termsOfServiceUrl = "https://gradle.com/terms-of-service";
+    termsOfServiceAgree = "yes"
+}
 
 jacoco {
     toolVersion = "0.8.2"
@@ -67,8 +75,8 @@ buildscript {
         }
     }
     dependencies {
+        classpath "com.gradle:build-scan-plugin:1.16"
         classpath 'com.adarshr:gradle-test-logger-plugin:1.1.2'
+        classpath "io.spring.gradle:dependency-management-plugin:1.0.3.RELEASE"
     }
 }
-
-apply plugin: 'com.adarshr.test-logger'
