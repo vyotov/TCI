@@ -8,11 +8,13 @@ public class MovieTest {
     /*** Method to initialize a movie object*/
     @Before
     public void setUp() {
+
     }
 
     /*** Method to test if getTitle return the correct Title for a given movie.*/
     @Test
     public void getTitle() {
+
     }
 
     /*** Method to test if getGenre return the correct Title for a given movie.*/
