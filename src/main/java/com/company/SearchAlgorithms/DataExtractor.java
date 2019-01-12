@@ -70,6 +70,8 @@ public class DataExtractor {
         Movie movie = new Movie();
         //Set the name/title
         movie.setTitle(getTitle());
+        movie.setCategory("Movie");
+
         for (int i = 0, l = th.size(); i < l; i++) {
             String key = th.get(i).text();
             String value = td.get(i).text();
