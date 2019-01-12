@@ -1,9 +1,12 @@
 package com.company.SearchAlgorithms;
 
 import com.company.Models.Book;
+import com.company.Models.Category;
 import com.company.Models.Movie;
 import com.company.Models.Music;
+import com.company.utils.Constants;
 import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 import com.google.gson.reflect.TypeToken;
 import org.json.simple.JSONObject;
 import org.jsoup.Jsoup;
@@ -23,12 +26,10 @@ public class Extractor {
     private List<Book> bookList;
     private List<Music> musicList;
     private List<Movie> movieList;
-    private Movie mMovie;
-    private Book mBook;
-    private Music mMusic;
     private Long startTime;
     private Long endTime;
     private Gson gson = new Gson();
+    private DataExtractor dataExtractor = new DataExtractor();
 
     public Extractor() {
         links = new HashSet<>();
@@ -59,92 +60,108 @@ public class Extractor {
         }
     }
 
+    Element table = null;
+
     public void searchById(String searchById) throws IOException {
         startTime = System.currentTimeMillis();
+        Object object = null;
         //Loop over the list:
         for (String url : links) {
             //Check which url matches the search word:
             if (url.contains(searchById)) {
-                new DataExtractor(url).setDataListener(new DataExtractor.DataListener() {
-                    @Override
-                    public void onMusic(Music music) {
-                        mMusic = music;
-                        //System.out.println(gson.toJson(music));
-                    }
-
-                    @Override
-                    public void onMovie(Movie movie) {
-                        //System.out.println(gson.toJson(movie));
-                        mMovie = movie;
-                    }
-
-                    @Override
-                    public void onBook(Book book) {
-                        mBook = book;
-                        //System.out.println(gson.toJson(book));
-                    }
-                }).exact();
+                Category category = findCategory(url);
+                switch (category) {
+                    case BOOKS:
+                        dataExtractor.setUrl(url);
+                        object = dataExtractor.parseBook(table);
+                        break;
+                    case MUSIC:
+                        dataExtractor.setUrl(url);
+                        object = dataExtractor.parseMusic(table);
+                        break;
+                    case MOVIE:
+                        dataExtractor.setUrl(url);
+                        object = dataExtractor.parseMovie(table);
+                        break;
+                }
                 break;
             }
         }
-        createJsonForSingle(searchById);
+        JSONObject result = new JSONObject();
+        endTime = System.currentTimeMillis();
+        result.put("id", searchById);
+        result.put("time", getTimeDuration());
+        result.put("result", gson.toJsonTree(object));
+        System.out.println(result.toString());
 
     }
 
-    private String getJsonStringForObject(Object object) {
-        return new Gson().toJson(object);
-    }
-
-
-    public void getAllObjects() throws IOException {
+    public JSONObject getAllObjects() throws IOException {
         startTime = System.currentTimeMillis();
+        List<Object> moviesList = new ArrayList<>();
+        List<Object> bookList = new ArrayList<>();
+        List<Object> musicList = new ArrayList<>();
         for (String url : links) {
             String number = url.substring(url.lastIndexOf("=") + 1);
             if (!number.equals("") && isInt(number)) {
-                new DataExtractor(url).setDataListener(new DataExtractor.DataListener() {
-
-                    @Override
-                    public void onMusic(Music music) {
-                        musicList.add(music);
-                    }
-
-                    @Override
-                    public void onMovie(Movie movie) {
-                        movieList.add(movie);
-                    }
-
-                    @Override
-                    public void onBook(Book book) {
-                        bookList.add(book);
-                    }
-                }).exact();
+                Category category = findCategory(url);
+                switch (category) {
+                    case BOOKS:
+                        dataExtractor.setUrl(url);
+                        bookList.add(dataExtractor.parseBook(table));
+                        break;
+                    case MUSIC:
+                        dataExtractor.setUrl(url);
+                        musicList.add(dataExtractor.parseMusic(table));
+                        break;
+                    case MOVIE:
+                        dataExtractor.setUrl(url);
+                        moviesList.add(dataExtractor.parseMovie(table));
+                        break;
+                }
             }
         }
-        createJsonForAll();
-    }
 
-    @SuppressWarnings("unchecked")
-    private JSONObject createJsonForAll() {
         JSONObject result = new JSONObject();
         endTime = System.currentTimeMillis();
-        result.put("time", (endTime - startTime));
-        result.put("movies", getJsonStringForObject(movieList));
-        result.put("books", getJsonStringForObject(bookList));
-        result.put("music", getJsonStringForObject(musicList));
-        //System.out.println(result.toString());
-        return result;
-    }
-
-    @SuppressWarnings("unchecked")
-    private JSONObject createJsonForSingle(String id) {
-        JSONObject result = new JSONObject();
-        endTime = System.currentTimeMillis();
-        result.put("id", id);
-        result.put("time", (endTime - startTime));
-        result.put("result", mMusic != null ? gson.toJson(mMusic) : (mBook != null ? gson.toJson(mBook) : (mMovie != null ? gson.toJson(mMovie) : "")));
-
+        result.put("time", getTimeDuration());
+        result.put("movies", gson.toJsonTree(moviesList));
+        result.put("books", gson.toJsonTree(bookList));
+        result.put("music", gson.toJsonTree(musicList));
         System.out.println(result.toString());
         return result;
+    }
+
+
+    public Category findCategory(String url) {
+        Document doc = null;
+        try {
+            doc = Jsoup.connect(url).get();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        //Find the media details tag on the right of the page
+        Elements results = doc.getElementsByClass(Constants.media_detail);
+        //Table
+        table = results.select("table").first();
+        Elements th = table.getElementsByTag("th");
+        Elements td = table.getElementsByTag("td");
+        for (int i = 0, l = th.size(); i < l; i++) {
+            String key = th.get(i).text();
+            String value = td.get(i).text();
+            //Check which category:
+            if (key.equals(Constants.category)) {
+                switch (value) {
+                    case Constants.music:
+                        return Category.MUSIC;
+                    case Constants.movies:
+                        return Category.MOVIE;
+                    case Constants.books:
+                        return Category.BOOKS;
+                }
+            }
+        }
+        return null;
     }
 
     public Long getTimeDuration() {
@@ -155,7 +172,6 @@ public class Extractor {
     private boolean isInt(String string) {
         return string.matches("\\d+");
     }
-
 
     public int getPageCount() {
         return links.size();

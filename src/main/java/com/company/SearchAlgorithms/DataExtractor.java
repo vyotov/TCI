@@ -1,6 +1,7 @@
 package com.company.SearchAlgorithms;
 
 import com.company.Models.Book;
+import com.company.Models.Category;
 import com.company.Models.Movie;
 import com.company.Models.Music;
 import com.company.utils.Constants;
@@ -14,51 +15,14 @@ import java.util.Arrays;
 
 
 public class DataExtractor {
-    private DataListener dataListener;
+
     private Document doc;
+    private String url;
 
 
-    /*** Method used to set the data listener to notify the Extractor class once object is found.
-     * In case the work is executed async.*/
-    public DataExtractor setDataListener(DataListener dataListener) {
-        this.dataListener = dataListener;
-        return this;
+    public void setUrl(String url) {
+        this.url = url;
     }
-
-    DataExtractor(String url) throws IOException {
-        this.doc = Jsoup.connect(url).get();
-    }
-
-
-    public void exact() {
-        //Find the media details tag on the right of the page
-        Elements results = doc.getElementsByClass(Constants.media_detail);
-        //Table
-        Element table = results.select("table").first();
-        Elements th = table.getElementsByTag("th");
-        Elements td = table.getElementsByTag("td");
-        for (int i = 0, l = th.size(); i < l; i++) {
-            String key = th.get(i).text();
-            String value = td.get(i).text();
-            if (key.equals(Constants.category)) {
-                switch (value) {
-                    case Constants.music:
-                        //Extra specific object
-                        parseMusic(table);
-                        break;
-                    case Constants.movies:
-                        //Extra specific object
-                        parseMovie(table);
-                        break;
-                    case Constants.books:
-                        //Extra specific object
-                        parseBook(table);
-                        break;
-                }
-            }
-        }
-    }
-
 
     /**
      * Method used to get the specific object name
@@ -70,11 +34,15 @@ public class DataExtractor {
     }
 
 
-    private void parseMusic(Element table) {
+    public Music parseMusic(Element table) throws IOException {
+        this.doc = Jsoup.connect(url).get();
         Elements th = table.getElementsByTag("th");
         Elements td = table.getElementsByTag("td");
 
         Music music = new Music();
+        music.setName(getTitle());
+        music.setCategory("Music");
+
         for (int i = 0, l = th.size(); i < l; i++) {
             String key = th.get(i).text();
             String value = td.get(i).text();
@@ -91,18 +59,17 @@ public class DataExtractor {
                 music.setArtist(value);
             }
         }
-
-        if (dataListener != null) {
-            dataListener.onMusic(music);
-        }
+        return music;
     }
 
-    private void parseMovie(Element table) {
+    public Movie parseMovie(Element table) throws IOException {
+        this.doc = Jsoup.connect(url).get();
+
         Elements th = table.getElementsByTag("th");
         Elements td = table.getElementsByTag("td");
         Movie movie = new Movie();
-        //Set the name
-
+        //Set the name/title
+        movie.setTitle(getTitle());
         for (int i = 0, l = th.size(); i < l; i++) {
             String key = th.get(i).text();
             String value = td.get(i).text();
@@ -128,15 +95,17 @@ public class DataExtractor {
                 movie.setStars(Arrays.asList(value.split(",")));
             }
         }
-        if (dataListener != null) {
-            dataListener.onMovie(movie);
-        }
+        return movie;
     }
 
-    private void parseBook(Element table) {
+    public Book parseBook(Element table) throws IOException {
+        this.doc = Jsoup.connect(url).get();
+
         Elements th = table.getElementsByTag("th");
         Elements td = table.getElementsByTag("td");
         Book book = new Book();
+        book.setName(getTitle());
+        book.setCategory("Book");
 
         for (int i = 0, l = th.size(); i < l; i++) {
             String key = th.get(i).text();
@@ -163,17 +132,10 @@ public class DataExtractor {
                 book.setIsbn(value);
             }
         }
-        if (dataListener != null) {
-            dataListener.onBook(book);
-        }
+
+        return book;
+
     }
 
-    public interface DataListener {
 
-        void onMusic(Music music);
-
-        void onMovie(Movie movie);
-
-        void onBook(Book book);
-    }
 }

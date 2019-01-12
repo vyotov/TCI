@@ -11,8 +11,8 @@ public class Main {
     public static void main(String[] args) throws IOException {
         Extractor bwc = new Extractor();
         bwc.getPageLinks("http://localhost:8888");
-        bwc.searchById("203");
-       // bwc.getAllObjects();
+        //bwc.searchById("203");
+        bwc.getAllObjects();
         System.out.println(bwc.getPageCount());
     }
 
