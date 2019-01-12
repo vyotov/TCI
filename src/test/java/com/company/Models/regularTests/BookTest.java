@@ -1,4 +1,5 @@
 package com.company.Models.regularTests;
+import com.company.Models.Book;
 import junitparams.Parameters;
 import org.junit.Assert;
 import org.junit.Test;
@@ -13,7 +14,13 @@ public class BookTest{
     @org.junit.Test
     public void IsGettingRgihtName()
     {
-        //TODO
+        //act
+        Book book = new Book();
+        book.setName("Clean Code: A Handbook of Agile Software Cr");
+        //arange
+        String actual = "Clean Code: A Handbook of Agile Software Craftsmanship";
+        //assert
+        Assert.assertEquals("Clean Code: A Handbook of Agile Software Craftsmanship","Clean Code: A Handbook of Agile Software Cr");
     }
     @org.junit.Test
     public void IsGettingRightGenre() {
