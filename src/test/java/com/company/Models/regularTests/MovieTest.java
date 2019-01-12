@@ -24,7 +24,7 @@ public class MovieTest {
     movie.setTitle("Office Space");
     String actual = "Office Space";
         //Act
-    String expected = movie.getGenre();
+    String expected = movie.getTitle();
         //Assert
         Assert.assertEquals(expected,actual);
     }
@@ -37,7 +37,7 @@ public class MovieTest {
         movie.setGenre("Comedy");
         String actual = "Comedy";
         //Act
-        String expected = movie.getTitle();
+        String expected = movie.getGenre();
         //Assert
         Assert.assertEquals(expected,actual);
     }
@@ -76,7 +76,7 @@ public class MovieTest {
         movie.setDirector("Mike Judge");
         String actual = "Mike Judge";
         //Act
-        String expected = movie.getFormat();
+        String expected = movie.getDirector();
         //Assert
         Assert.assertEquals(expected,actual);
     }
@@ -113,5 +113,18 @@ public class MovieTest {
         //Assert
         Assert.assertEquals(expected,stars);
 
+    }
+
+    /*** Method to test if getWriters return the correct Title for a given movie.*/
+    @Test
+    public void getCategory() {
+        //Arrange
+        Movie movie = new Movie();
+        movie.setCategory("Movies");
+        String actual = "Movies";
+        //Act
+        String expected = movie.getCategory();
+        //Assert
+        Assert.assertEquals(expected,actual);
     }
 }

@@ -77,6 +77,10 @@ public class Movie implements Serializable {
     }
 
     public Movie(){}
+
+    public String getCategory() {
+        return category;
+    }
 }
 
 
