@@ -6,7 +6,7 @@
     <content url="file://$MODULE_DIR$/../../src/test">
       <sourceFolder url="file://$MODULE_DIR$/../../src/test/java" isTestSource="true" />
     </content>
-    <orderEntry type="inheritedJdk" />
+    <orderEntry type="jdk" jdkName="1.8" jdkType="JavaSDK" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module" module-name="tci.webcrawler.WebCrawler.main" />
     <orderEntry type="library" name="Gradle: org.jsoup:jsoup:1.11.2" level="project" />

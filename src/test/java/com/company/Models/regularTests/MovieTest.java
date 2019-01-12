@@ -107,9 +107,9 @@ public class MovieTest {
         stars.add("Ajay Naidu");
         stars.add("Diedrich Bader");
         stars.add("Stephen Root");
-        movie.setWriters(stars);
+        movie.setStars(stars);
         //Act
-        List<String> expected = movie.getWriters();
+        List<String> expected = movie.getStars();
         //Assert
         Assert.assertEquals(expected,stars);
 

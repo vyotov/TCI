@@ -15,7 +15,16 @@ public class Book implements Serializable{
     private String publisher;
     private String isbn;
 
-
+    public Book(String name, String category, String genre, String format, String year, List<String> authors, String publisher, String isbn) {
+        this.name = name;
+        this.category = category;
+        this.genre = genre;
+        this.format = format;
+        this.year = year;
+        this.authors = authors;
+        this.publisher = publisher;
+        this.isbn = isbn;
+    }
 
     public void setName(String name) {
         this.name = name;
