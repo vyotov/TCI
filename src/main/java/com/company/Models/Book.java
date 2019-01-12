@@ -9,6 +9,13 @@ public class Book implements Serializable{
     private String name;
     private String category;
     private String genre;
+    private String format;
+    private String year;
+    private List<String> authors = new ArrayList<>();
+    private String publisher;
+    private String isbn;
+
+
 
     public void setName(String name) {
         this.name = name;
@@ -41,12 +48,6 @@ public class Book implements Serializable{
     public void setIsbn(String isbn) {
         this.isbn = isbn;
     }
-
-    private String format;
-    private String year;
-    private List<String> authors = new ArrayList<>();
-    private String publisher;
-    private String isbn;
 
 
     public String getName() {
