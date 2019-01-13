@@ -19,9 +19,13 @@ public class MokitoMusicTest {
     private static final String YEAR = "2015";
     private static final String ARTIST = "Elvis Presley";
 
+    /**
+     * Method used to check if empty music return null for name
+     *
+     * @throws IllegalArgumentException
+     */
     @Test
-    public void verifySpyMusicByName()
-    {
+    public void verifySpyMusicByName() {
         //arrange
         //spy
         Music spyMusic = spy(new Music());
@@ -29,27 +33,32 @@ public class MokitoMusicTest {
         //verify
         verify(spyMusic).getName();
         //assert
-        Assert.assertEquals(null,spyMusic.getName());
+        Assert.assertEquals(null, spyMusic.getName());
     }
-    //Mock Test
+
+    /**
+     * Method used to check if empty music return null for name
+     *
+     * @throws IllegalArgumentException
+     */
     @Test
-    public void verifyMockedMusicByName() throws IllegalArgumentException{
+    public void verifyMockedMusicByName() throws IllegalArgumentException {
         // arrange
         Music music = mock(Music.class);
         //act
         music.getName();
         //assert
         verify(music).getName();
-        Assert.assertEquals(null,music.getName());
+        Assert.assertEquals(null, music.getName());
 
     }
+
     //Stub Test
     @Test
-    public void shouldStubFakeObj()
-    {
+    public void shouldStubFakeObj() {
         //arrange
         //spy
-        Music spyMusic = spy(new Music(MUSIC_NAME,CATEGORY,GENRE,FORMAT,YEAR,ARTIST));
+        Music spyMusic = spy(new Music(MUSIC_NAME, CATEGORY, GENRE, FORMAT, YEAR, ARTIST));
         spyMusic.getName();
         //stub
         when(spyMusic.getName()).thenReturn(MUSIC_NAME);

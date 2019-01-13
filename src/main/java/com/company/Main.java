@@ -12,9 +12,10 @@ public class Main {
     public static void main(String[] args) throws IOException {
         Extractor bwc = new Extractor();
         bwc.getPageLinks("http://localhost:8888");
-        System.out.println( new Gson().toJsonTree( bwc.searchById("202")));
+      //  System.out.println( new Gson().toJsonTree( bwc.searchById("202")));
         //bwc.getAllObjects();
-       // System.out.println(bwc.searchByCategory("Mike Judge"));
+      //  bwc.searchModelByKeyWord("Mike Judge");
+        System.out.println(bwc.getAllObjects());
         //System.out.println(bwc.getPageCount());
     }
 

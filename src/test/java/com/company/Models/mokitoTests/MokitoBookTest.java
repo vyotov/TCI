@@ -54,8 +54,7 @@ public class MokitoBookTest {
     }
     //Stub Test
     @Test
-    public void shouldStubFakeObj()
-    {
+    public void shouldStubFakeObj() {
         //arrange
         FillInAurthors();
         //spy

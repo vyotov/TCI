@@ -1,6 +1,9 @@
 package com.company.SearchAlgorithms;
 
+import com.company.Models.Book;
 import com.company.Models.Category;
+import com.company.Models.Movie;
+import com.company.Models.Music;
 import com.company.utils.Constants;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
@@ -24,13 +27,13 @@ public class Extractor {
     private DataExtractor dataExtractor = new DataExtractor();
     private String searchById;
     private Element table = null;
-    private Object object = null;
-    
+    private String text;
+
     public Extractor() {
         links = new HashSet<>();
     }
 
-    //Find all URLs that start with "http://www.mkyong.com/page/" and add them to the HashSet
+    //Tested
     public void getPageLinks(String URL) {
         if (!links.contains(URL) && !URL.contains("twitter") && !URL.contains("facebook")) {
             try {
@@ -51,7 +54,10 @@ public class Extractor {
         }
     }
 
+    //Tested
     public Object searchById(String searchById) throws IOException {
+         Object object = null;
+
         this.searchById = searchById;
         startTime = System.currentTimeMillis();
 
@@ -80,16 +86,34 @@ public class Extractor {
         return object;
     }
 
-    public JSONObject getJsonForSearch() {
+    public JSONObject getJsonResultForSearchById(String searchById) throws IOException {
         JSONObject result = new JSONObject();
-        endTime = System.currentTimeMillis();
+        startTime = System.currentTimeMillis();
         result.put("id", searchById);
+        result.put("result", gson.toJsonTree(searchById(searchById)));
+        endTime = System.currentTimeMillis();
         result.put("time", getTimeDuration());
-        result.put("result", gson.toJsonTree(object));
-
         return result;
     }
 
+    //Tested
+    public boolean checkIfStringContainsOnlyNumbers(String string) {
+        return string.matches("\\d+");
+    }
+
+    //Tested
+    public JSONObject getJsonForSearchByKeyWord(String text) throws IOException {
+        startTime = System.currentTimeMillis();
+        JSONObject result = new JSONObject();
+        result.put("filter", text);
+
+        result.put("result",   gson.toJsonTree(findJsonForSearchText(getAllObjects(), text)));
+        endTime = System.currentTimeMillis();
+        result.put("time", getTimeDuration());
+        return result;
+    }
+
+    //Tested
     public JSONObject getAllObjects() throws IOException {
         startTime = System.currentTimeMillis();
         List<Object> moviesList = new ArrayList<>();
@@ -122,57 +146,44 @@ public class Extractor {
         result.put("movies", gson.toJsonTree(moviesList));
         result.put("books", gson.toJsonTree(bookList));
         result.put("music", gson.toJsonTree(musicList));
-        System.out.println(result.toString());
+        // System.out.println(result.toString());
         return result;
     }
 
-    public JSONObject searchByCategory(String text) throws IOException {
-        startTime = System.currentTimeMillis();
-        JSONObject jsObject = getAllObjects();
-        JsonObject jsonObject = findJsonForSearchText(jsObject, text);
-        JSONObject result = new JSONObject();
-        endTime = System.currentTimeMillis();
-        result.put("time", getTimeDuration());
-        result.put("filter", text);
-        result.put("result", jsonObject);
-        return result;
-    }
-
-
-    public JsonObject findJsonForSearchText(JSONObject jsObject, String text) {
-        Iterator it = jsObject.entrySet().iterator();
+    public Object findJsonForSearchText(JSONObject allJsonObject, String text) {
+        Iterator it = allJsonObject.entrySet().iterator();
         while (it.hasNext()) {
             Map.Entry entry = (Map.Entry) it.next(); //current entry in a loop
             if (entry.getKey().toString().equals("movies")) {
                 JsonArray jsonArray = (JsonArray) entry.getValue();
                 for (JsonElement jsonElement : jsonArray) {
                     if (((JsonObject) jsonElement).get("title").getAsString().equals(text)) {
-                        return (JsonObject) jsonElement;
+                        return new Gson().fromJson(jsonElement, Movie.class);
                     }
                     if (((JsonObject) jsonElement).get("category").getAsString().equals(text)) {
-                        return (JsonObject) jsonElement;
+                        return new Gson().fromJson(jsonElement, Movie.class);
                     }
                     if (((JsonObject) jsonElement).get("genre").getAsString().equals(text)) {
-                        return (JsonObject) jsonElement;
+                        return new Gson().fromJson(jsonElement, Movie.class);
                     }
                     if (((JsonObject) jsonElement).get("format").getAsString().equals(text)) {
-                        return (JsonObject) jsonElement;
+                        return new Gson().fromJson(jsonElement, Movie.class);
                     }
                     if (((JsonObject) jsonElement).get("year").getAsString().equals(text)) {
-                        return (JsonObject) jsonElement;
+                        return new Gson().fromJson(jsonElement, Movie.class);
                     }
                     if (((JsonObject) jsonElement).get("director").getAsString().equals(text)) {
-                        return (JsonObject) jsonElement;
+                        return new Gson().fromJson(jsonElement, Movie.class);
                     } else {
                         for (JsonElement element : ((JsonObject) jsonElement).get("writers").getAsJsonArray()) {
                             if (element.getAsString().trim().equals(text)) {
-                                return (JsonObject) jsonElement;
+                                return new Gson().fromJson(jsonElement, Movie.class);
                             }
                         }
 
                         for (JsonElement element : ((JsonObject) jsonElement).get("stars").getAsJsonArray()) {
                             if (element.getAsString().trim().equals(text)) {
-                                return (JsonObject) jsonElement;
+                                return new Gson().fromJson(jsonElement, Movie.class);
                             }
                         }
                     }
@@ -184,30 +195,30 @@ public class Extractor {
 
                 for (JsonElement jsonElement : jsonArray) {
                     if (((JsonObject) jsonElement).get("name").getAsString().equals(text)) {
-                        return (JsonObject) jsonElement;
+                        return new Gson().fromJson(jsonElement, Book.class);
                     }
                     if (((JsonObject) jsonElement).get("category").getAsString().equals(text)) {
-                        return (JsonObject) jsonElement;
+                        return new Gson().fromJson(jsonElement, Book.class);
                     }
                     if (((JsonObject) jsonElement).get("genre").getAsString().equals(text)) {
-                        return (JsonObject) jsonElement;
+                        return new Gson().fromJson(jsonElement, Book.class);
                     }
                     if (((JsonObject) jsonElement).get("format").getAsString().equals(text)) {
-                        return (JsonObject) jsonElement;
+                        return new Gson().fromJson(jsonElement, Book.class);
                     }
                     if (((JsonObject) jsonElement).get("year").getAsString().equals(text)) {
-                        return (JsonObject) jsonElement;
+                        return new Gson().fromJson(jsonElement, Book.class);
                     }
 
                     if (((JsonObject) jsonElement).get("publisher").getAsString().equals(text)) {
-                        return (JsonObject) jsonElement;
+                        return new Gson().fromJson(jsonElement, Book.class);
                     }
                     if (((JsonObject) jsonElement).get("isbn").getAsString().equals(text)) {
-                        return (JsonObject) jsonElement;
+                        return new Gson().fromJson(jsonElement, Book.class);
                     } else {
                         for (JsonElement element : ((JsonObject) jsonElement).get("authors").getAsJsonArray()) {
                             if (element.getAsString().trim().equals(text)) {
-                                return (JsonObject) jsonElement;
+                                return new Gson().fromJson(jsonElement, Book.class);
                             }
                         }
                     }
@@ -218,22 +229,22 @@ public class Extractor {
 
                 for (JsonElement jsonElement : jsonArray) {
                     if (((JsonObject) jsonElement).get("name").getAsString().equals(text)) {
-                        return (JsonObject) jsonElement;
+                        return new Gson().fromJson(jsonElement, Music.class);
                     }
                     if (((JsonObject) jsonElement).get("category").getAsString().equals(text)) {
-                        return (JsonObject) jsonElement;
+                        return new Gson().fromJson(jsonElement, Music.class);
                     }
                     if (((JsonObject) jsonElement).get("genre").getAsString().equals(text)) {
-                        return (JsonObject) jsonElement;
+                        return new Gson().fromJson(jsonElement, Music.class);
                     }
                     if (((JsonObject) jsonElement).get("format").getAsString().equals(text)) {
-                        return (JsonObject) jsonElement;
+                        return new Gson().fromJson(jsonElement, Music.class);
                     }
                     if (((JsonObject) jsonElement).get("year").getAsString().equals(text)) {
-                        return (JsonObject) jsonElement;
+                        return new Gson().fromJson(jsonElement, Music.class);
                     }
                     if (((JsonObject) jsonElement).get("artist").getAsString().equals(text)) {
-                        return (JsonObject) jsonElement;
+                        return new Gson().fromJson(jsonElement, Music.class);
                     }
                 }
             }
@@ -281,9 +292,6 @@ public class Extractor {
     }
 
 
-    public boolean checkIfStringContainsOnlyNumbers(String string) {
-        return string.matches("\\d+");
-    }
 
     public int getPageCount() {
         return links.size();
