@@ -22,7 +22,10 @@ public class Extractor {
     private Long endTime;
     private Gson gson = new Gson();
     private DataExtractor dataExtractor = new DataExtractor();
-
+    private String searchById;
+    private Element table = null;
+    private Object object = null;
+    
     public Extractor() {
         links = new HashSet<>();
     }
@@ -48,11 +51,10 @@ public class Extractor {
         }
     }
 
-    Element table = null;
-
-    public void searchById(String searchById) throws IOException {
+    public Object searchById(String searchById) throws IOException {
+        this.searchById = searchById;
         startTime = System.currentTimeMillis();
-        Object object = null;
+
         //Loop over the list:
         for (String url : links) {
             //Check which url matches the search word:
@@ -75,13 +77,17 @@ public class Extractor {
                 break;
             }
         }
+        return object;
+    }
+
+    public JSONObject getJsonForSearch() {
         JSONObject result = new JSONObject();
         endTime = System.currentTimeMillis();
         result.put("id", searchById);
         result.put("time", getTimeDuration());
         result.put("result", gson.toJsonTree(object));
-        System.out.println(result.toString());
 
+        return result;
     }
 
     public JSONObject getAllObjects() throws IOException {
@@ -91,7 +97,7 @@ public class Extractor {
         List<Object> musicList = new ArrayList<>();
         for (String url : links) {
             String number = url.substring(url.lastIndexOf("=") + 1);
-            if (!number.equals("") && isInt(number)) {
+            if (!number.equals("") && checkIfStringContainsOnlyNumbers(number)) {
                 Category category = findCategory(url);
                 switch (category) {
                     case BOOKS:
@@ -116,14 +122,14 @@ public class Extractor {
         result.put("movies", gson.toJsonTree(moviesList));
         result.put("books", gson.toJsonTree(bookList));
         result.put("music", gson.toJsonTree(musicList));
-        //System.out.println(result.toString());
+        System.out.println(result.toString());
         return result;
     }
 
     public JSONObject searchByCategory(String text) throws IOException {
         startTime = System.currentTimeMillis();
         JSONObject jsObject = getAllObjects();
-        JsonObject jsonObject = findJsonForSearchText(jsObject,text);
+        JsonObject jsonObject = findJsonForSearchText(jsObject, text);
         JSONObject result = new JSONObject();
         endTime = System.currentTimeMillis();
         result.put("time", getTimeDuration());
@@ -133,7 +139,7 @@ public class Extractor {
     }
 
 
-    public JsonObject findJsonForSearchText(JSONObject jsObject, String text){
+    public JsonObject findJsonForSearchText(JSONObject jsObject, String text) {
         Iterator it = jsObject.entrySet().iterator();
         while (it.hasNext()) {
             Map.Entry entry = (Map.Entry) it.next(); //current entry in a loop
@@ -198,8 +204,7 @@ public class Extractor {
                     }
                     if (((JsonObject) jsonElement).get("isbn").getAsString().equals(text)) {
                         return (JsonObject) jsonElement;
-                    }
-                    else{
+                    } else {
                         for (JsonElement element : ((JsonObject) jsonElement).get("authors").getAsJsonArray()) {
                             if (element.getAsString().trim().equals(text)) {
                                 return (JsonObject) jsonElement;
@@ -276,7 +281,7 @@ public class Extractor {
     }
 
 
-    private boolean isInt(String string) {
+    public boolean checkIfStringContainsOnlyNumbers(String string) {
         return string.matches("\\d+");
     }
 

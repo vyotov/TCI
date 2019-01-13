@@ -2,6 +2,7 @@ package com.company.Models;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Objects;
 
 public class Movie implements Serializable {
 
@@ -80,6 +81,27 @@ public class Movie implements Serializable {
 
     public String getCategory() {
         return category;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Movie)) return false;
+        Movie movie = (Movie) o;
+        return Objects.equals(title, movie.title) &&
+                Objects.equals(category, movie.category) &&
+                Objects.equals(genre, movie.genre) &&
+                Objects.equals(format, movie.format) &&
+                Objects.equals(year, movie.year) &&
+                Objects.equals(director, movie.director) &&
+                Objects.equals(writers, movie.writers) &&
+                Objects.equals(stars, movie.stars);
+    }
+
+    @Override
+    public int hashCode() {
+
+        return Objects.hash(title, category, genre, format, year, director, writers, stars);
     }
 }
 
