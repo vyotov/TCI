@@ -18,22 +18,23 @@ public class BookTest {
     public void IsGettingRightName() {
         //Arrange
         Book book = new Book();
-        String actual = "A Design Patterns: Elements of Reusable Object-Oriented Software";
+        String expected = "A Design Patterns: Elements of Reusable Object-Oriented Software";
         book.setName("A Design Patterns: Elements of Reusable Object-Oriented Software");
         // act
-        String expected = book.getName();
+        String actual = book.getName();
         // assert
         Assert.assertEquals(expected, actual);
     }
+
 
     @org.junit.Test
     public void IsGettingRightGenre() {
         //Arrange
         Book book = new Book();
-        String actual = "Tech";
+        String expected = "Tech";
         book.setGenre("Tech");
         // act
-        String expected = book.getGenre();
+        String actual = book.getGenre();
         // assert
         Assert.assertEquals(expected, actual);
     }
@@ -42,10 +43,10 @@ public class BookTest {
     public void IsGettingRightFormat() {
         //Arrange
         Book book = new Book();
-        String actual = "Paperback";
+        String expected = "Paperback";
         book.setFormat("Paperback");
         // act
-        String expected = book.getFormat();
+        String actual = book.getFormat();
         // assert
         Assert.assertEquals(expected, actual);
     }
@@ -54,10 +55,10 @@ public class BookTest {
     public void IsGettingRightYear() {
         //Arrange
         Book book = new Book();
-        String actual = "1994";
+        String expected = "1994";
         book.setYear("1994");
         // act
-        String expected = book.getYear();
+        String actual = book.getYear();
         // assert
         Assert.assertEquals(expected, actual);
     }
@@ -66,16 +67,16 @@ public class BookTest {
     public void IsGettingRightAuthors() {
         //Arrange
         Book book = new Book();
-        List<String> authors = new ArrayList<>();
-        authors.add("Erich Gamma");
-        authors.add("Richard Helm");
-        authors.add("Ralph Johnson");
-        authors.add("John Vlissides");
-        book.setAuthors(authors);
+        List<String> expectedAuthors = new ArrayList<>();
+        expectedAuthors.add("Erich Gamma");
+        expectedAuthors.add("Richard Helm");
+        expectedAuthors.add("Ralph Johnson");
+        expectedAuthors.add("John Vlissides");
+        book.setAuthors(expectedAuthors);
         // act
-        List<String> expected = book.getAuthors();
+        List<String> actual = book.getAuthors();
         // assert
-        Assert.assertEquals(expected, authors);
+        Assert.assertEquals(expectedAuthors, actual);
     }
 
     @org.junit.Test
@@ -83,12 +84,12 @@ public class BookTest {
         //Arrange
         Book book = new Book();
         //Empty list:
-        List<String> authors = new ArrayList<>();
-        book.setAuthors(authors);
+        List<String> expectedAuthors = new ArrayList<>();
+        book.setAuthors(expectedAuthors);
         // act
-        List<String> expected = book.getAuthors();
+        List<String> actual = book.getAuthors();
         // assert
-        Assert.assertEquals(expected, authors);
+        Assert.assertEquals(expectedAuthors, actual);
     }
 
 
@@ -96,10 +97,10 @@ public class BookTest {
     public void IsGettingRightPublisher() {
         //Arrange
         Book book = new Book();
-        String actual = "Prentice Hall";
+        String expected = "Prentice Hall";
         book.setPublisher("Prentice Hall");
         // act
-        String expected = book.getPublisher();
+        String actual = book.getPublisher();
         // assert
         Assert.assertEquals(expected, actual);
     }
@@ -108,10 +109,10 @@ public class BookTest {
     public void IsGettingRightISBN() {
         //Arrange
         Book book = new Book();
-        String actual = "978-0201633610";
+        String expected = "978-0201633610";
         book.setIsbn("978-0201633610");
         // act
-        String expected = book.getIsbn();
+        String actual = book.getIsbn();
         // assert
         Assert.assertEquals(expected, actual);
     }
@@ -120,11 +121,13 @@ public class BookTest {
     public void IsGettingRightCategory() {
         //Arrange
         Book book = new Book();
-        String actual = "Books";
+        String expected = "Books";
         book.setCategory("Books");
         // act
-        String expected = book.getCategory();
+        String actual = book.getCategory();
         // assert
         Assert.assertEquals(expected, actual);
     }
+
+
 }

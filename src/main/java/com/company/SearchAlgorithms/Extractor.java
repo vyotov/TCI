@@ -1,15 +1,11 @@
 package com.company.SearchAlgorithms;
 
-import com.company.Models.Book;
 import com.company.Models.Category;
-import com.company.Models.Movie;
-import com.company.Models.Music;
 import com.company.utils.Constants;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
-import com.google.gson.reflect.TypeToken;
 import org.json.simple.JSONObject;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -22,9 +18,6 @@ import java.util.*;
 public class Extractor {
 
     private HashSet<String> links;
-    private List<Book> bookList;
-    private List<Music> musicList;
-    private List<Movie> movieList;
     private Long startTime;
     private Long endTime;
     private Gson gson = new Gson();
@@ -32,11 +25,7 @@ public class Extractor {
 
     public Extractor() {
         links = new HashSet<>();
-        bookList = new ArrayList<>();
-        musicList = new ArrayList<>();
-        movieList = new ArrayList<>();
     }
-
 
     //Find all URLs that start with "http://www.mkyong.com/page/" and add them to the HashSet
     public void getPageLinks(String URL) {
@@ -131,8 +120,20 @@ public class Extractor {
         return result;
     }
 
-    public JsonObject searchByCategory(String text) throws IOException {
+    public JSONObject searchByCategory(String text) throws IOException {
+        startTime = System.currentTimeMillis();
         JSONObject jsObject = getAllObjects();
+        JsonObject jsonObject = findJsonForSearchText(jsObject,text);
+        JSONObject result = new JSONObject();
+        endTime = System.currentTimeMillis();
+        result.put("time", getTimeDuration());
+        result.put("filter", text);
+        result.put("result", jsonObject);
+        return result;
+    }
+
+
+    public JsonObject findJsonForSearchText(JSONObject jsObject, String text){
         Iterator it = jsObject.entrySet().iterator();
         while (it.hasNext()) {
             Map.Entry entry = (Map.Entry) it.next(); //current entry in a loop
@@ -235,7 +236,7 @@ public class Extractor {
              * do something for each entry
              */
         }
-        return null;
+        return new JsonObject();
     }
 
 
