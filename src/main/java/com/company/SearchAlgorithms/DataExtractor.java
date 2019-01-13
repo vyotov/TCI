@@ -11,7 +11,9 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 
 public class DataExtractor {
@@ -29,7 +31,7 @@ public class DataExtractor {
      *
      * @return
      */
-    private String getTitle() {
+    private String getTitle() throws IOException {
         return doc.getElementsByTag("h1").last().text();
     }
 
@@ -91,10 +93,20 @@ public class DataExtractor {
                 movie.setDirector(value);
             }
             if (key.equals("Writers")) {
-                movie.setWriters(Arrays.asList(value.split(",")));
+                List<String> writters = Arrays.asList(value.split(","));
+                List<String> result = new ArrayList();
+                for (String w : writters) {
+                    result.add(w.trim());
+                }
+                movie.setWriters(result);
             }
             if (key.equals("Stars")) {
-                movie.setStars(Arrays.asList(value.split(",")));
+                List<String> stars = Arrays.asList(value.split(","));
+                List<String> result = new ArrayList();
+                for (String w : stars) {
+                    result.add(w.trim());
+                }
+                movie.setStars(result);
             }
         }
         return movie;
