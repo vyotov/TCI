@@ -25,9 +25,7 @@ public class Extractor {
     private Long endTime;
     private Gson gson = new Gson();
     private DataExtractor dataExtractor = new DataExtractor();
-    private String searchById;
     private Element table = null;
-    private String text;
 
     public Extractor() {
         links = new HashSet<>();
@@ -42,10 +40,8 @@ public class Extractor {
                 Document document = Jsoup.connect(URL).get();
                 Elements allHyperLinks = document.select("a[href]");
                 for (Element page : allHyperLinks) {
-                    if (links.add(URL)) {
-                        //Remove the comment from the line below if you want to see it running on your editor
-                        System.out.println(URL);
-                    }
+                    //Add
+                    links.add(URL);
                     getPageLinks(page.attr("abs:href"));
                 }
             } catch (IOException e) {
@@ -56,11 +52,7 @@ public class Extractor {
 
     //Tested
     public Object searchById(String searchById) throws IOException {
-         Object object = null;
-
-        this.searchById = searchById;
-        startTime = System.currentTimeMillis();
-
+        Object object = null;
         //Loop over the list:
         for (String url : links) {
             //Check which url matches the search word:
@@ -86,6 +78,7 @@ public class Extractor {
         return object;
     }
 
+    //Tested
     public JSONObject getJsonResultForSearchById(String searchById) throws IOException {
         JSONObject result = new JSONObject();
         startTime = System.currentTimeMillis();
@@ -107,7 +100,7 @@ public class Extractor {
         JSONObject result = new JSONObject();
         result.put("filter", text);
 
-        result.put("result",   gson.toJsonTree(findJsonForSearchText(getAllObjects(), text)));
+        result.put("result", gson.toJsonTree(findObjectModelForSearchText(getAllObjects(), text)));
         endTime = System.currentTimeMillis();
         result.put("time", getTimeDuration());
         return result;
@@ -150,7 +143,8 @@ public class Extractor {
         return result;
     }
 
-    public Object findJsonForSearchText(JSONObject allJsonObject, String text) {
+
+    public Object findObjectModelForSearchText(JSONObject allJsonObject, String text) {
         Iterator it = allJsonObject.entrySet().iterator();
         while (it.hasNext()) {
             Map.Entry entry = (Map.Entry) it.next(); //current entry in a loop
@@ -257,6 +251,9 @@ public class Extractor {
 
 
     public Category findCategory(String url) {
+        if (url.equals("")) {
+            return null;
+        }
         Document doc = null;
         try {
             doc = Jsoup.connect(url).get();
@@ -290,7 +287,6 @@ public class Extractor {
     public Long getTimeDuration() {
         return endTime - startTime;
     }
-
 
 
     public int getPageCount() {
