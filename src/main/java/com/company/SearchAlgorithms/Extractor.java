@@ -131,72 +131,80 @@ public class Extractor {
         return result;
     }
 
-    public JsonObject findObjectByKeyWord(String text) throws IOException {
+    public JsonObject searchByCategory(String text) throws IOException {
         JSONObject jsObject = getAllObjects();
-
         Iterator it = jsObject.entrySet().iterator();
         while (it.hasNext()) {
             Map.Entry entry = (Map.Entry) it.next(); //current entry in a loop
-
             if (entry.getKey().toString().equals("movies")) {
                 JsonArray jsonArray = (JsonArray) entry.getValue();
-
                 for (JsonElement jsonElement : jsonArray) {
                     if (((JsonObject) jsonElement).get("title").getAsString().equals(text)) {
-                        System.out.println("found " +jsonElement.toString() );
-                        return (JsonObject)jsonElement;
+                        return (JsonObject) jsonElement;
                     }
                     if (((JsonObject) jsonElement).get("category").getAsString().equals(text)) {
-
-                        return (JsonObject)jsonElement;
+                        return (JsonObject) jsonElement;
                     }
                     if (((JsonObject) jsonElement).get("genre").getAsString().equals(text)) {
-                        System.out.println("foundGenre " +jsonElement.toString() );
-                        return (JsonObject)jsonElement;
+                        return (JsonObject) jsonElement;
                     }
                     if (((JsonObject) jsonElement).get("format").getAsString().equals(text)) {
-                        return (JsonObject)jsonElement;
+                        return (JsonObject) jsonElement;
                     }
                     if (((JsonObject) jsonElement).get("year").getAsString().equals(text)) {
-                        return (JsonObject)jsonElement;
+                        return (JsonObject) jsonElement;
                     }
                     if (((JsonObject) jsonElement).get("director").getAsString().equals(text)) {
-                        return (JsonObject)jsonElement;
+                        return (JsonObject) jsonElement;
+                    } else {
+                        for (JsonElement element : ((JsonObject) jsonElement).get("writers").getAsJsonArray()) {
+                            if (element.getAsString().trim().equals(text)) {
+                                return (JsonObject) jsonElement;
+                            }
+                        }
+
+                        for (JsonElement element : ((JsonObject) jsonElement).get("stars").getAsJsonArray()) {
+                            if (element.getAsString().trim().equals(text)) {
+                                return (JsonObject) jsonElement;
+                            }
+                        }
                     }
 
-
                 }
-
-
             }
             if (entry.getKey().toString().equals("books")) {
                 JsonArray jsonArray = (JsonArray) entry.getValue();
 
                 for (JsonElement jsonElement : jsonArray) {
                     if (((JsonObject) jsonElement).get("name").getAsString().equals(text)) {
-                        System.out.println("found " +jsonElement.toString() );
-                        return (JsonObject)jsonElement;
+                        return (JsonObject) jsonElement;
                     }
                     if (((JsonObject) jsonElement).get("category").getAsString().equals(text)) {
-                        return (JsonObject)jsonElement;
+                        return (JsonObject) jsonElement;
                     }
                     if (((JsonObject) jsonElement).get("genre").getAsString().equals(text)) {
-                        return (JsonObject)jsonElement;
+                        return (JsonObject) jsonElement;
                     }
                     if (((JsonObject) jsonElement).get("format").getAsString().equals(text)) {
-                        return (JsonObject)jsonElement;
+                        return (JsonObject) jsonElement;
                     }
                     if (((JsonObject) jsonElement).get("year").getAsString().equals(text)) {
-                        return (JsonObject)jsonElement;
+                        return (JsonObject) jsonElement;
                     }
 
                     if (((JsonObject) jsonElement).get("publisher").getAsString().equals(text)) {
-                        return (JsonObject)jsonElement;
+                        return (JsonObject) jsonElement;
                     }
                     if (((JsonObject) jsonElement).get("isbn").getAsString().equals(text)) {
-                        return (JsonObject)jsonElement;
+                        return (JsonObject) jsonElement;
                     }
-
+                    else{
+                        for (JsonElement element : ((JsonObject) jsonElement).get("authors").getAsJsonArray()) {
+                            if (element.getAsString().trim().equals(text)) {
+                                return (JsonObject) jsonElement;
+                            }
+                        }
+                    }
                 }
             }
             if (entry.getKey().toString().equals("music")) {
@@ -204,23 +212,22 @@ public class Extractor {
 
                 for (JsonElement jsonElement : jsonArray) {
                     if (((JsonObject) jsonElement).get("name").getAsString().equals(text)) {
-                        System.out.println("found " +jsonElement.toString() );
-                        return (JsonObject)jsonElement;
+                        return (JsonObject) jsonElement;
                     }
                     if (((JsonObject) jsonElement).get("category").getAsString().equals(text)) {
-                        return (JsonObject)jsonElement;
+                        return (JsonObject) jsonElement;
                     }
                     if (((JsonObject) jsonElement).get("genre").getAsString().equals(text)) {
-                        return (JsonObject)jsonElement;
+                        return (JsonObject) jsonElement;
                     }
                     if (((JsonObject) jsonElement).get("format").getAsString().equals(text)) {
-                        return (JsonObject)jsonElement;
+                        return (JsonObject) jsonElement;
                     }
                     if (((JsonObject) jsonElement).get("year").getAsString().equals(text)) {
-                        return (JsonObject)jsonElement;
+                        return (JsonObject) jsonElement;
                     }
                     if (((JsonObject) jsonElement).get("artist").getAsString().equals(text)) {
-                        return (JsonObject)jsonElement;
+                        return (JsonObject) jsonElement;
                     }
                 }
             }

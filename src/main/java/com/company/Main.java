@@ -13,7 +13,7 @@ public class Main {
         bwc.getPageLinks("http://localhost:8888");
         //bwc.searchById("203");
         //bwc.getAllObjects();
-        bwc.findObjectByKeyWord("Drama");
+        System.out.println(bwc.searchByCategory("Ralph Johnson"));
         //System.out.println(bwc.getPageCount());
     }
 
