@@ -16,9 +16,9 @@ public class MusicTest{
         //Arrange
         Music music = new Music();
         music.setName("Elvis Forever");
-        String actual = "Elvis Forever";
+        String expected = "Elvis Forever";
         //Act
-        String expected = music.getName();
+        String actual = music.getName();
         //Assert
         Assert.assertEquals(expected,actual);
     }
@@ -27,9 +27,9 @@ public class MusicTest{
         //Arrange
         Music music = new Music();
         music.setCategory("Music");
-        String actual = "Music";
+        String expected = "Music";
         //Act
-        String expected = music.getCategory();
+        String actual = music.getCategory();
         //Assert
         Assert.assertEquals(expected,actual);
     }
@@ -38,9 +38,9 @@ public class MusicTest{
         //Arrange
         Music music = new Music();
         music.setGenre("Rock");
-        String actual = "Rock";
+        String expected = "Rock";
         //Act
-        String expected = music.getGenre();
+        String actual = music.getGenre();
         //Assert
         Assert.assertEquals(expected,actual);
     }
@@ -49,9 +49,9 @@ public class MusicTest{
         //Arrange
         Music music = new Music();
         music.setFormat("Vinyl");
-        String actual = "Vinyl";
+        String expected = "Vinyl";
         //Act
-        String expected = music.getFormat();
+        String actual = music.getFormat();
         //Assert
         Assert.assertEquals(expected,actual);
     }
@@ -60,9 +60,9 @@ public class MusicTest{
         //Arrange
         Music music = new Music();
         music.setYear("2015");
-        String actual = "2015";
+        String expected = "2015";
         //Act
-        String expected = music.getYear();
+        String actual = music.getYear();
         //Assert
         Assert.assertEquals(expected,actual);
     }
@@ -71,9 +71,9 @@ public class MusicTest{
         //Arrange
         Music music = new Music();
         music.setArtist("Elvis Presley");
-        String actual = "Elvis Presley";
+        String expected = "Elvis Presley";
         //Act
-        String expected = music.getArtist();
+        String actual = music.getArtist();
         //Assert
         Assert.assertEquals(expected,actual);
     }

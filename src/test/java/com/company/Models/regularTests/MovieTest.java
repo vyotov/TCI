@@ -22,9 +22,9 @@ public class MovieTest {
         //Arrange
     Movie movie = new Movie();
     movie.setTitle("Office Space");
-    String actual = "Office Space";
+    String expected = "Office Space";
         //Act
-    String expected = movie.getTitle();
+    String actual = movie.getTitle();
         //Assert
         Assert.assertEquals(expected,actual);
     }
@@ -35,9 +35,9 @@ public class MovieTest {
         //Arrange
         Movie movie = new Movie();
         movie.setGenre("Comedy");
-        String actual = "Comedy";
+        String expected = "Comedy";
         //Act
-        String expected = movie.getGenre();
+        String actual = movie.getGenre();
         //Assert
         Assert.assertEquals(expected,actual);
     }
@@ -48,9 +48,9 @@ public class MovieTest {
         //Arrange
         Movie movie = new Movie();
         movie.setFormat("Blu-ray");
-        String actual = "Blu-ray";
+        String expected = "Blu-ray";
         //Act
-        String expected = movie.getFormat();
+        String actual = movie.getFormat();
         //Assert
         Assert.assertEquals(expected,actual);
     }
@@ -61,9 +61,9 @@ public class MovieTest {
         //Arrange
         Movie movie = new Movie();
         movie.setYear("1999");
-        String actual = "1999";
+        String expected = "1999";
         //Act
-        String expected = movie.getYear();
+        String actual = movie.getYear();
         //Assert
         Assert.assertEquals(expected,actual);
     }
@@ -74,9 +74,9 @@ public class MovieTest {
         //Arrange
         Movie movie = new Movie();
         movie.setDirector("Mike Judge");
-        String actual = "Mike Judge";
+        String expected = "Mike Judge";
         //Act
-        String expected = movie.getDirector();
+        String actual = movie.getDirector();
         //Assert
         Assert.assertEquals(expected,actual);
     }
@@ -86,13 +86,13 @@ public class MovieTest {
     public void getWriters() {
         //Arrange
         Movie movie = new Movie();
-        List<String> writers = new ArrayList<>();
-        writers.add("Mike Judge");
-        movie.setWriters(writers);
+        List<String> expected = new ArrayList<>();
+        expected.add("Mike Judge");
+        movie.setWriters(expected);
         //Act
-        List<String> expected = movie.getWriters();
+        List<String> actual = movie.getWriters();
         //Assert
-        Assert.assertEquals(expected,writers);
+        Assert.assertEquals(actual,expected);
     }
 
     /*** Method to test if getStars return the correct Title for a given movie.*/
@@ -100,18 +100,18 @@ public class MovieTest {
     public void getStars() {
         //Arrange
         Movie movie = new Movie();
-        List<String> stars = new ArrayList<>();
-        stars.add("Ron Livingston");
-        stars.add("Jennifer Aniston");
-        stars.add("David Herman");
-        stars.add("Ajay Naidu");
-        stars.add("Diedrich Bader");
-        stars.add("Stephen Root");
-        movie.setStars(stars);
+        List<String> expected = new ArrayList<>();
+        expected.add("Ron Livingston");
+        expected.add("Jennifer Aniston");
+        expected.add("David Herman");
+        expected.add("Ajay Naidu");
+        expected.add("Diedrich Bader");
+        expected.add("Stephen Root");
+        movie.setStars(expected);
         //Act
-        List<String> expected = movie.getStars();
+        List<String> actual = movie.getStars();
         //Assert
-        Assert.assertEquals(expected,stars);
+        Assert.assertEquals(actual,expected);
 
     }
 
@@ -121,9 +121,9 @@ public class MovieTest {
         //Arrange
         Movie movie = new Movie();
         movie.setCategory("Movies");
-        String actual = "Movies";
+        String expected = "Movies";
         //Act
-        String expected = movie.getCategory();
+        String actual = movie.getCategory();
         //Assert
         Assert.assertEquals(expected,actual);
     }

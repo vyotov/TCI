@@ -2,12 +2,17 @@ package com.company.Models;
 
 import java.io.Serializable;
 import java.util.List;
-import java.util.Objects;
 
 public class Movie implements Serializable {
 
     private String title;
     private String category;
+    private String genre;
+    private String format;
+    private String year;
+    private String director;
+    private List<String> writers;
+    private List<String> stars;
 
     public void setTitle(String title) {
         this.title = title;
@@ -37,21 +42,9 @@ public class Movie implements Serializable {
         this.writers = writers;
     }
 
-    public void setStars(List<String> stars) {
-        this.stars = stars;
-    }
+    public void setStars(List<String> stars) { this.stars = stars; }
 
-    private String genre;
-    private String format;
-    private String year;
-    private String director;
-    private List<String> writers;
-    private List<String> stars;
-
-
-    public String getTitle() {
-        return title;
-    }
+    public String getTitle() { return title; }
 
     public String getGenre() {
         return genre;
@@ -73,36 +66,11 @@ public class Movie implements Serializable {
         return writers;
     }
 
-    public List<String> getStars() {
-        return stars;
-    }
+    public List<String> getStars() { return stars; }
+
+    public String getCategory() { return category; }
 
     public Movie(){}
-
-    public String getCategory() {
-        return category;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Movie)) return false;
-        Movie movie = (Movie) o;
-        return Objects.equals(title, movie.title) &&
-                Objects.equals(category, movie.category) &&
-                Objects.equals(genre, movie.genre) &&
-                Objects.equals(format, movie.format) &&
-                Objects.equals(year, movie.year) &&
-                Objects.equals(director, movie.director) &&
-                Objects.equals(writers, movie.writers) &&
-                Objects.equals(stars, movie.stars);
-    }
-
-    @Override
-    public int hashCode() {
-
-        return Objects.hash(title, category, genre, format, year, director, writers, stars);
-    }
 }
 
 

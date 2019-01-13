@@ -21,8 +21,9 @@ public class BookTest {
         String expected = "A Design Patterns: Elements of Reusable Object-Oriented Software";
         book.setName("A Design Patterns: Elements of Reusable Object-Oriented Software");
         // act
+        String actual = book.getName();
         // assert
-        Assert.assertEquals(expected, book.getName());
+        Assert.assertEquals(expected, actual);
     }
 
 
