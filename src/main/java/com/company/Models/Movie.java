@@ -7,6 +7,12 @@ public class Movie implements Serializable {
 
     private String title;
     private String category;
+    private String genre;
+    private String format;
+    private String year;
+    private String director;
+    private List<String> writers;
+    private List<String> stars;
 
     public void setTitle(String title) {
         this.title = title;
@@ -36,21 +42,9 @@ public class Movie implements Serializable {
         this.writers = writers;
     }
 
-    public void setStars(List<String> stars) {
-        this.stars = stars;
-    }
+    public void setStars(List<String> stars) { this.stars = stars; }
 
-    private String genre;
-    private String format;
-    private String year;
-    private String director;
-    private List<String> writers;
-    private List<String> stars;
-
-
-    public String getTitle() {
-        return title;
-    }
+    public String getTitle() { return title; }
 
     public String getGenre() {
         return genre;
@@ -72,15 +66,11 @@ public class Movie implements Serializable {
         return writers;
     }
 
-    public List<String> getStars() {
-        return stars;
-    }
+    public List<String> getStars() { return stars; }
+
+    public String getCategory() { return category; }
 
     public Movie(){}
-
-    public String getCategory() {
-        return category;
-    }
 }
 
 
