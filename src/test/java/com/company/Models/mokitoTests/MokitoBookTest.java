@@ -12,6 +12,7 @@ import java.util.List;
 import static org.mockito.Mockito.*;
 
 public class MokitoBookTest {
+
     private static final String BOOK_NAME = "A Design Patterns: Elements of Reusable Object-Oriented Software";
     private static final String CATEGORY = "Books";
     private static final String GENRE = "Tech";
@@ -26,19 +27,20 @@ public class MokitoBookTest {
         AUTHORS.add("Ralph Johnson");
         AUTHORS.add("John Vlissides");
     }
-    //public Book book = mock(Book.class);
 
     @Test
-    public void verifyFakeBookWithRealBook()
+    public void verifySpyBookByName()
     {
         //arrange
-        Book spyBook = spy(new Book()); // this is the spying
+        //spy
+        Book spyBook = spy(new Book());
         spyBook.getName();
         //verify
         verify(spyBook).getName();
         //assert
         Assert.assertEquals(null,spyBook.getName());
     }
+    //Mock Test
     @Test
     public void verifyMockedBookByName() throws IllegalArgumentException{
         // arrange
@@ -56,40 +58,12 @@ public class MokitoBookTest {
     {
         //arrange
         FillInAurthors();
-        Book spyBook = spy(new Book(BOOK_NAME,CATEGORY,GENRE,FORMAT,YEAR,AUTHORS,PUBLISHER,ISBN)); // this is the spying
+        //spy
+        Book spyBook = spy(new Book(BOOK_NAME,CATEGORY,GENRE,FORMAT,YEAR,AUTHORS,PUBLISHER,ISBN));
         spyBook.getName();
-        when(spyBook.getName()).thenReturn(BOOK_NAME); // this is the Stubbing definition above
+        //stub
+        when(spyBook.getName()).thenReturn(BOOK_NAME);
         Assert.assertEquals(BOOK_NAME, spyBook.getName());
     }
 
-    @Test
-    public void shouldGetBookAuthors()
-    {
-        //TODO
-    }
-    @Test
-    public void shouldGetBookByNameAndAuthor()
-    {
-        //TODO
-    }
-    @Test
-    public void isGettingBookByYear()
-    {
-        //TODO
-    }
-    @Test
-    public void isGettingBookByPublisher()
-    {
-        //TODO
-    }
-    @Test
-    public void isGettingBookByGenre()
-    {
-        //TODO
-    }
-    @Test
-    public void isGettingBookByISBN()
-    {
-        //TODO
-    }
 }

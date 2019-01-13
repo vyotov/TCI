@@ -14,6 +14,17 @@ public class Movie implements Serializable {
     private List<String> writers;
     private List<String> stars;
 
+    public Movie(String title, String category, String genre, String format, String year, String director, List<String> writers, List<String> stars) {
+        this.title = title;
+        this.category = category;
+        this.genre = genre;
+        this.format = format;
+        this.year = year;
+        this.director = director;
+        this.writers = writers;
+        this.stars = stars;
+    }
+
     public void setTitle(String title) {
         this.title = title;
     }

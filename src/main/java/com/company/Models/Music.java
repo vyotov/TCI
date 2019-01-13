@@ -6,6 +6,16 @@ public class Music  implements Serializable{
 
     private String name;
     private String category;
+
+    public Music(String name, String category, String genre, String format, String year, String artist) {
+        this.name = name;
+        this.category = category;
+        this.genre = genre;
+        this.format = format;
+        this.year = year;
+        this.artist = artist;
+    }
+
     private String genre;
     private String format;
     private String year;
