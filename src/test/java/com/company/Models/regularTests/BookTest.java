@@ -25,6 +25,7 @@ public class BookTest {
         Assert.assertEquals(expected, book.getName());
     }
 
+
     @org.junit.Test
     public void IsGettingRightGenre() {
         //Arrange
@@ -32,8 +33,9 @@ public class BookTest {
         String expected = "Tech";
         book.setGenre("Tech");
         // act
+        String actual = book.getGenre();
         // assert
-        Assert.assertEquals(expected, book.getGenre());
+        Assert.assertEquals(expected, actual);
     }
 
     @org.junit.Test
