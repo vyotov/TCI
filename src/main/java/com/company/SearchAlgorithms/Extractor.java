@@ -1,15 +1,11 @@
 package com.company.SearchAlgorithms;
 
-import com.company.Models.Book;
 import com.company.Models.Category;
-import com.company.Models.Movie;
-import com.company.Models.Music;
 import com.company.utils.Constants;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
-import com.google.gson.reflect.TypeToken;
 import org.json.simple.JSONObject;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -127,7 +123,7 @@ public class Extractor {
     public JSONObject searchByCategory(String text) throws IOException {
         startTime = System.currentTimeMillis();
         JSONObject jsObject = getAllObjects();
-        JsonObject jsonObject = findJsonForSeachText(jsObject,text);
+        JsonObject jsonObject = findJsonForSearchText(jsObject,text);
         JSONObject result = new JSONObject();
         endTime = System.currentTimeMillis();
         result.put("time", getTimeDuration());
@@ -137,7 +133,7 @@ public class Extractor {
     }
 
 
-    public JsonObject findJsonForSeachText( JSONObject jsObject,String text){
+    public JsonObject findJsonForSearchText(JSONObject jsObject, String text){
         Iterator it = jsObject.entrySet().iterator();
         while (it.hasNext()) {
             Map.Entry entry = (Map.Entry) it.next(); //current entry in a loop
