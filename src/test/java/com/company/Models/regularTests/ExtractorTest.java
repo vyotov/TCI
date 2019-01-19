@@ -40,7 +40,7 @@ public class ExtractorTest {
      * Method to test if SearchById returns the correct Movie model
      */
     @Test
-    public void testSearchByIdForMovieModel() throws IOException {
+    public void testSearchByIdForMovieModel() throws IOException, ClassNotFoundException {
         //Arrange
         Extractor extractor = new Extractor();
         //Act
@@ -68,7 +68,7 @@ public class ExtractorTest {
      * Method to test if SearchById returns the correct Book model
      */
     @Test
-    public void testSearchByIdForBookModel() throws IOException {
+    public void testSearchByIdForBookModel() throws IOException, ClassNotFoundException {
         //Arrange
         Extractor extractor = new Extractor();
 
@@ -95,7 +95,7 @@ public class ExtractorTest {
      * Method to test if SearchById returns the correct Music model
      */
     @Test
-    public void testSearchByIdForMusicModel() throws IOException {
+    public void testSearchByIdForMusicModel() throws IOException, ClassNotFoundException {
         //Arrange
         Extractor extractor = new Extractor();
         extractor.getPageLinks("http://localhost:8888");
@@ -118,7 +118,7 @@ public class ExtractorTest {
      * Method to test if SearchByIdJson returns the correct Json object
      */
     @Test
-    public void testSearchByIdJson() throws IOException {
+    public void testSearchByIdJson() throws IOException, ClassNotFoundException {
         //Arrange
         Extractor extractor = new Extractor();
         extractor.getPageLinks("http://localhost:8888");
@@ -158,7 +158,7 @@ public class ExtractorTest {
      * Method to test if GetJsonForSearchByKeyWord returns the correct JSON object
      */
     @Test
-    public void testGetJsonForSearchByKeyWord() throws IOException {
+    public void testGetJsonForSearchByKeyWord() throws IOException, ClassNotFoundException {
         //Arrange
         Extractor extractor = new Extractor();
         extractor.getPageLinks("http://localhost:8888");
@@ -175,7 +175,7 @@ public class ExtractorTest {
      * Method to test if FindObjectModelForSearchText returns the correct model if search word from Aenre is used
      */
     @Test
-    public void testFindObjectModelForSearchTextByArtist() throws IOException {
+    public void testFindObjectModelForSearchTextByArtist() throws IOException, ClassNotFoundException {
         //Arrange
         Extractor extractor = new Extractor();
         extractor.getPageLinks("http://localhost:8888");
@@ -189,7 +189,7 @@ public class ExtractorTest {
      * Method to test if FindObjectModelForSearchText returns the correct model if search word from Genre is used
      */
     @Test
-    public void testFindObjectModelForSearchTextByGenre() throws IOException {
+    public void testFindObjectModelForSearchTextByGenre() throws IOException, ClassNotFoundException {
         //Arrange
         Extractor extractor = new Extractor();
         extractor.getPageLinks("http://localhost:8888");
@@ -203,7 +203,7 @@ public class ExtractorTest {
      * Method to test if findCategory returns the correct category if id for music is passed.
      */
     @Test
-    public void testFindCategoryForMusic() throws MalformedURLException {
+    public void testFindCategoryForMusic() throws MalformedURLException, ClassNotFoundException {
         //Arrange
         Extractor extractor = new Extractor();
         extractor.getPageLinks("http://localhost:8888");
@@ -217,7 +217,7 @@ public class ExtractorTest {
      * Method to test if findCategory returns the correct category if id for book is passed.
      */
     @Test
-    public void testFindCategoryForBook() throws MalformedURLException {
+    public void testFindCategoryForBook() throws MalformedURLException, ClassNotFoundException {
         //Arrange
         Extractor extractor = new Extractor();
         extractor.getPageLinks("http://localhost:8888");
@@ -231,7 +231,7 @@ public class ExtractorTest {
      * Method to test if findCategory returns the correct category if id for movie is passed.
      */
     @Test
-    public void testFindCategoryForMovie() throws MalformedURLException {
+    public void testFindCategoryForMovie() throws MalformedURLException, ClassNotFoundException {
         //Arrange
         Extractor extractor = new Extractor();
         extractor.getPageLinks("http://localhost:8888");
@@ -242,25 +242,10 @@ public class ExtractorTest {
     }
 
     /**
-     * Method to test if findCategory returns null if empty url is passed.
-     */
-    @Test
-    public void testFindCategoryFoEmptyUrl() throws MalformedURLException {
-        //Arrange
-        Extractor extractor = new Extractor();
-        extractor.getPageLinks("http://localhost:8888");
-        Category actual = extractor.findCategory("");
-        Category expected = null;
-        //Assert
-        Assert.assertEquals(expected, actual);
-    }
-
-
-    /**
      * Method to test if getAllObject returns the correct JSON string.
      */
     @Test
-    public void testGetAllObjects() throws IOException {
+    public void testGetAllObjects() throws IOException, ClassNotFoundException {
         //Arrange
         Extractor extractor = new Extractor();
         extractor.getPageLinks("http://localhost:8888");
@@ -274,7 +259,7 @@ public class ExtractorTest {
 
 
     @Test
-    public void testTimeDurationIfSet() throws IOException {
+    public void testTimeDurationIfSet() throws IOException, ClassNotFoundException {
         //Arrange
         Extractor extractor = new Extractor();
         extractor.getPageLinks("http://localhost:8888");

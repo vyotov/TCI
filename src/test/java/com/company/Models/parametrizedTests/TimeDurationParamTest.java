@@ -34,7 +34,7 @@ public class TimeDurationParamTest {
     }
 
     @Test
-    public void SearchMusicById() throws IOException {
+    public void SearchMusicById() throws IOException, ClassNotFoundException {
         extractor.getAllObjects();
         Long actual = extractor.getTimeDuration();
         //Assert

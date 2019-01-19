@@ -40,7 +40,7 @@ public class FindCategoryTest {
     }
 
     @Test
-    public void SearchMusicById() {
+    public void SearchMusicById() throws ClassNotFoundException {
         String actual = new Gson().toJson(extractor.findCategory(input));
         String expected = new Gson().toJson(outPutCategory);
         //Assert

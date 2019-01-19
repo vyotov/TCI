@@ -22,8 +22,13 @@ public class TestUrlException {
     }
 
     @Test(expected = IllegalArgumentException.class)
-    public void testSearchById() throws IOException {
+    public void testSearchById() throws IOException, ClassNotFoundException {
         extractor.searchById("");
+    }
+
+    @Test(expected = ClassNotFoundException.class)
+    public void testFindCategory() throws ClassNotFoundException {
+        extractor.findCategory("");
     }
 
 

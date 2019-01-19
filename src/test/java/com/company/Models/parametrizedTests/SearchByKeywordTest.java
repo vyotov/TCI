@@ -46,7 +46,7 @@ public class SearchByKeywordTest {
     }
 
     @Test
-    public void TestSearchByKeywordTest() throws IOException {
+    public void TestSearchByKeywordTest() throws IOException, ClassNotFoundException {
         JSONObject actual = extractor.getJsonForSearchByKeyWord(keyWord);
         actual.put("time", 0);
         //Assert
