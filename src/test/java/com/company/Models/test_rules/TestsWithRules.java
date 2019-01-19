@@ -1,12 +1,10 @@
 package com.company.Models.test_rules;
 
-import com.company.Models.Movie;
 import com.company.SearchAlgorithms.Extractor;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
-import org.mockito.internal.matchers.NotNull;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
@@ -42,5 +40,6 @@ public class TestsWithRules {
         rule.expect(NullPointerException.class);
         extractor.searchById(".");
     }
+
 
 }
