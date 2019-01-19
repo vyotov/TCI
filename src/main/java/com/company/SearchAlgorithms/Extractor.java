@@ -44,7 +44,7 @@ public class Extractor {
                 for (Element page : allHyperLinks) {
                     if (links.add(URL)) {
                         //Remove the comment from the line below if you want to see it running on your editor
-                        System.out.println(URL);
+                        //System.out.println(URL);
                     }
                     getPageLinks(page.attr("abs:href"));
                 }

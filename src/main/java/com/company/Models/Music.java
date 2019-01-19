@@ -1,6 +1,7 @@
 package com.company.Models;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 public class Music  implements Serializable{
 
@@ -55,6 +56,24 @@ public class Music  implements Serializable{
 
     public String getGenre() {
         return genre;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Music)) return false;
+        Music music = (Music) o;
+        return Objects.equals(name, music.name) &&
+                Objects.equals(category, music.category) &&
+                Objects.equals(genre, music.genre) &&
+                Objects.equals(format, music.format) &&
+                Objects.equals(year, music.year) &&
+                Objects.equals(artist, music.artist);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, category, genre, format, year, artist);
     }
 
     public String getFormat() {
