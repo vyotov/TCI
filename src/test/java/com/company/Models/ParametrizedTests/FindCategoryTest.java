@@ -1,4 +1,4 @@
-package com.company.Models.parametrizedTests;
+package com.company.Models.ParametrizedTests;
 
 import com.company.Models.Category;
 import com.company.SearchAlgorithms.Extractor;
@@ -40,7 +40,7 @@ public class FindCategoryTest {
     }
 
     @Test
-    public void SearchMusicById() throws ClassNotFoundException {
+    public void isFindingCategory() throws ClassNotFoundException {
         String actual = new Gson().toJson(extractor.findCategory(input));
         String expected = new Gson().toJson(outPutCategory);
         //Assert

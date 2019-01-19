@@ -31,7 +31,7 @@ public class DataExtractor {
      *
      * @return
      */
-    private String getTitle() throws IOException {
+    private String getTitle() {
         return doc.getElementsByTag("h1").last().text();
     }
 

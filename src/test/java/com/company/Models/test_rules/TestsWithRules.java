@@ -12,9 +12,9 @@ import java.net.MalformedURLException;
 public class TestsWithRules {
 
     @Rule
-    public ExpectedException exception = ExpectedException.none();
-
+    public ExpectedException rule = ExpectedException.none();
     private Extractor extractor;
+
 
     @Before
     public void setup() throws MalformedURLException {
@@ -24,8 +24,22 @@ public class TestsWithRules {
 
     @Test
     public void testSearchByIdWithRule() throws IOException, ClassNotFoundException {
-        exception.expect(IllegalArgumentException.class);
+        rule.expect(IllegalArgumentException.class);
         extractor.searchById("");
+
     }
+
+    @Test
+    public void testFindCategoryWithRule() throws ClassNotFoundException {
+        rule.expect(ClassNotFoundException.class);
+        extractor.findCategory("");
+    }
+
+    @Test
+    public void testIfNotNullWithRule() throws NullPointerException, IOException, ClassNotFoundException {
+        rule.expect(NullPointerException.class);
+        extractor.searchById(".");
+    }
+
 
 }

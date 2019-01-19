@@ -1,4 +1,4 @@
-package com.company.Models.parametrizedTests;
+package com.company.Models.ParametrizedTests;
 
 import com.company.SearchAlgorithms.Extractor;
 import org.junit.Assert;
@@ -36,7 +36,7 @@ public class TestStringContainsOnlyNumbersMethod {
     }
 
     @Test
-    public void SearchMusicById() {
+    public void ifContainsOnlyNumbers() {
         boolean actual = extractor.checkIfStringContainsOnlyNumbers(input);
         boolean expected = output;
         //Assert

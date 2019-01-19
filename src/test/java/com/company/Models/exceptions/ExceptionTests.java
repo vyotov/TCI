@@ -17,7 +17,7 @@ public class ExceptionTests {
     }
 
     @Test(expected = MalformedURLException.class)
-    public void testIsValidURL() throws MalformedURLException {
+    public void testIsUrlValid() throws MalformedURLException {
         extractor.getPageLinks("323");
     }
 

@@ -1,4 +1,4 @@
-package com.company.Models.parametrizedTests;
+package com.company.Models.ParametrizedTests;
 
 import com.company.SearchAlgorithms.Extractor;
 import org.junit.Assert;
@@ -13,7 +13,7 @@ import java.util.Arrays;
 import java.util.Collection;
 
 @RunWith(Parameterized.class)
-public class TimeDurationParamTest {
+public class TimeDurationIfReturnsTimeDifferenctThenZeroTest {
     private final Integer expected;
     private Extractor extractor;
 
@@ -23,18 +23,18 @@ public class TimeDurationParamTest {
         extractor.getPageLinks("http://localhost:8888");
     }
 
-    public TimeDurationParamTest( Integer expected) {
+    public TimeDurationIfReturnsTimeDifferenctThenZeroTest(Integer expected) {
         this.expected = expected;
     }
 
     @Parameterized.Parameters
     public static Collection<Object[]> testData() {
-        Object[][] data = new Object[][]{{1}};
+        Object[][] data = new Object[][]{{0},{1000}};
         return Arrays.asList(data);
     }
 
     @Test
-    public void SearchMusicById() throws IOException, ClassNotFoundException {
+    public void testTimeDuration() throws IOException, ClassNotFoundException {
         extractor.getAllObjects();
         Long actual = extractor.getTimeDuration();
         //Assert
