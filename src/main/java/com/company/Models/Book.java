@@ -3,6 +3,7 @@ package com.company.Models;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class Book implements Serializable{
 
@@ -91,5 +92,25 @@ public class Book implements Serializable{
 
     public String getCategory() {
         return  category;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Book)) return false;
+        Book book = (Book) o;
+        return Objects.equals(name, book.name) &&
+                Objects.equals(category, book.category) &&
+                Objects.equals(genre, book.genre) &&
+                Objects.equals(format, book.format) &&
+                Objects.equals(year, book.year) &&
+                Objects.equals(authors, book.authors) &&
+                Objects.equals(publisher, book.publisher) &&
+                Objects.equals(isbn, book.isbn);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, category, genre, format, year, authors, publisher, isbn);
     }
 }
