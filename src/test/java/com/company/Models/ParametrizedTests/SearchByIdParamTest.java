@@ -1,4 +1,4 @@
-package com.company.Models.parametrizedTests;
+package com.company.Models.ParametrizedTests;
 
 import com.company.Models.Book;
 import com.company.Models.Movie;

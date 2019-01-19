@@ -67,7 +67,7 @@ public class Extractor {
     //Tested
     public Object searchById(String searchById) throws IOException, ClassNotFoundException {
         if (searchById.equals("")) {
-            throw new IllegalArgumentException("Emoty search id " + searchById);
+            throw new IllegalArgumentException("Empty search id " + searchById);
         }
         Object object = null;
         //Loop over the list:
@@ -125,6 +125,7 @@ public class Extractor {
 
     //Tested
     public JSONObject getAllObjects() throws IOException, ClassNotFoundException {
+
         startTime = System.currentTimeMillis();
         List<Object> moviesList = new ArrayList<>();
         List<Object> bookList = new ArrayList<>();
@@ -151,12 +152,14 @@ public class Extractor {
         }
 
         JSONObject result = new JSONObject();
+
         endTime = System.currentTimeMillis();
         result.put("time", getTimeDuration());
         result.put("movies", gson.toJsonTree(moviesList));
         result.put("books", gson.toJsonTree(bookList));
         result.put("music", gson.toJsonTree(musicList));
         // System.out.println(result.toString());
+
         return result;
     }
 

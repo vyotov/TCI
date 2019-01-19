@@ -1,4 +1,4 @@
-package com.company.Models.parametrizedTests;
+package com.company.Models.ParametrizedTests;
 
 import com.company.SearchAlgorithms.Extractor;
 import org.junit.Assert;
