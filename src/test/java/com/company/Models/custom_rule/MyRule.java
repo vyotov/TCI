@@ -1,4 +1,4 @@
-package com.company.Models.test_rules;
+package com.company.Models.custom_rule;
 
 import org.junit.rules.TestRule;
 import org.junit.runner.Description;

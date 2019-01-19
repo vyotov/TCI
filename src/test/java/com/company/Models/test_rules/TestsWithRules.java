@@ -27,4 +27,5 @@ public class TestsWithRules {
         exception.expect(IllegalArgumentException.class);
         extractor.searchById("");
     }
+
 }
