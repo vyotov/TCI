@@ -33,7 +33,9 @@ public class FindCategoryTest {
 
     @Parameterized.Parameters
     public static Collection<Object[]> testData() {
-        Object[][] data = new Object[][]{{Category.BOOKS, "http://localhost:8888/sample_site_to_crawl/details.php?id=102"}, {Category.MOVIE, "http://localhost:8888/sample_site_to_crawl/details.php?id=202"}, {Category.MUSIC, "http://localhost:8888/sample_site_to_crawl/details.php?id=301"}};
+        Object[][] data = new Object[][]{{Category.BOOKS, "http://localhost:8888/sample_site_to_crawl/details.php?id=102"},
+                {Category.MOVIE, "http://localhost:8888/sample_site_to_crawl/details.php?id=202"},
+                {Category.MUSIC, "http://localhost:8888/sample_site_to_crawl/details.php?id=301"}};
         return Arrays.asList(data);
     }
 
