@@ -13,6 +13,7 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.util.Arrays;
 import java.util.Collection;
 
@@ -23,7 +24,7 @@ public class ExtractorTest {
      * Method to test if getPageLinks() returns the expected number of hyper-links we are about to crawl.
      */
     @Test
-    public void getPageLinks() {
+    public void getPageLinks() throws MalformedURLException {
         //Arrange
         Extractor extractor = new Extractor();
         //Act
@@ -202,7 +203,7 @@ public class ExtractorTest {
      * Method to test if findCategory returns the correct category if id for music is passed.
      */
     @Test
-    public void testFindCategoryForMusic() {
+    public void testFindCategoryForMusic() throws MalformedURLException {
         //Arrange
         Extractor extractor = new Extractor();
         extractor.getPageLinks("http://localhost:8888");
@@ -216,7 +217,7 @@ public class ExtractorTest {
      * Method to test if findCategory returns the correct category if id for book is passed.
      */
     @Test
-    public void testFindCategoryForBook() {
+    public void testFindCategoryForBook() throws MalformedURLException {
         //Arrange
         Extractor extractor = new Extractor();
         extractor.getPageLinks("http://localhost:8888");
@@ -230,7 +231,7 @@ public class ExtractorTest {
      * Method to test if findCategory returns the correct category if id for movie is passed.
      */
     @Test
-    public void testFindCategoryForMovie() {
+    public void testFindCategoryForMovie() throws MalformedURLException {
         //Arrange
         Extractor extractor = new Extractor();
         extractor.getPageLinks("http://localhost:8888");
@@ -244,7 +245,7 @@ public class ExtractorTest {
      * Method to test if findCategory returns null if empty url is passed.
      */
     @Test
-    public void testFindCategoryFoEmptyUrl() {
+    public void testFindCategoryFoEmptyUrl() throws MalformedURLException {
         //Arrange
         Extractor extractor = new Extractor();
         extractor.getPageLinks("http://localhost:8888");

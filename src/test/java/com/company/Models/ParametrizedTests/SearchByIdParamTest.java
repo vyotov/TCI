@@ -12,6 +12,7 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.util.Arrays;
 import java.util.Collection;
 
@@ -75,7 +76,7 @@ public class SearchByIdParamTest {
     }
 
     @Before
-    public void setup() {
+    public void setup() throws MalformedURLException {
         extractor = new Extractor();
         extractor.getPageLinks("http://localhost:8888");
     }

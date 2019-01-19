@@ -16,6 +16,8 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.*;
 
 public class Extractor {
@@ -32,7 +34,11 @@ public class Extractor {
     }
 
     //Tested
-    public void getPageLinks(String URL) {
+    public void getPageLinks(String URL) throws MalformedURLException {
+        if(URL.isEmpty() || !isValidURL(URL)){
+            throw new MalformedURLException();
+
+        }
         if (!links.contains(URL) && !URL.contains("twitter") && !URL.contains("facebook")) {
             try {
                 //Set the start time
@@ -47,6 +53,16 @@ public class Extractor {
             } catch (IOException e) {
                 System.err.println(e.getMessage());
             }
+        }
+    }
+
+    public boolean isValidURL(String urlStr) {
+        try {
+            URL url = new URL(urlStr);
+            return true;
+        }
+        catch (MalformedURLException e) {
+            return false;
         }
     }
 

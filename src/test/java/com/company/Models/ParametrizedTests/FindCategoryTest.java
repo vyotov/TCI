@@ -9,6 +9,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 
+import java.net.MalformedURLException;
 import java.util.Arrays;
 import java.util.Collection;
 
@@ -20,13 +21,12 @@ public class FindCategoryTest {
     private Extractor extractor;
 
     @Before
-    public void setup() {
+    public void setup() throws MalformedURLException {
         extractor = new Extractor();
         extractor.getPageLinks("http://localhost:8888");
     }
 
     public FindCategoryTest(Category outPutCategory, String input) {
-
         this.outPutCategory = outPutCategory;
         this.input = input;
     }
