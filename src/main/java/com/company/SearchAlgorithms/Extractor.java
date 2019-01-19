@@ -67,7 +67,7 @@ public class Extractor {
     //Tested
     public Object searchById(String searchById) throws IOException, ClassNotFoundException {
         if (searchById.equals("")) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("Emoty search id " + searchById);
         }
         Object object = null;
         //Loop over the list:

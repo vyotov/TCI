@@ -7,7 +7,7 @@ import org.junit.Test;
 import java.io.IOException;
 import java.net.MalformedURLException;
 
-public class TestUrlException {
+public class ExceptionTests {
 
     private Extractor extractor;
 
