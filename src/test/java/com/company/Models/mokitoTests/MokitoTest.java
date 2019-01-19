@@ -55,6 +55,12 @@ public class MokitoTest {
         JSONObject actual = extractor.getAllObjects();
         when(mockedExtractor.getAllObjects()).thenReturn(actual);
         JSONObject expected = mockedExtractor.getAllObjects();
+        //        Indirect Input
+        //        Object stub = extractor.findObjectModelForSearchText(expected,"Tech");
+        //        Object actuall = extractor.findObjectModelForSearchText(actual,"Tech");
+        //        //assert
+        //        Assert.assertEquals(stub,actuall);
+
         //assert
         Assert.assertEquals(expected,actual);
         verify(mockedExtractor).getAllObjects();

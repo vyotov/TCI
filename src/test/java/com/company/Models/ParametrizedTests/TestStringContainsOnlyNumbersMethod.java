@@ -36,7 +36,7 @@ public class TestStringContainsOnlyNumbersMethod {
     }
 
     @Test
-    public void SearchMusicById() {
+    public void ifContainsOnlyNumbers() {
         boolean actual = extractor.checkIfStringContainsOnlyNumbers(input);
         boolean expected = output;
         //Assert

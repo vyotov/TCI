@@ -34,7 +34,7 @@ public class TimeDurationIfReturnsTimeDifferenctThenZeroTest {
     }
 
     @Test
-    public void SearchMusicById() throws IOException, ClassNotFoundException {
+    public void testTimeDuration() throws IOException, ClassNotFoundException {
         extractor.getAllObjects();
         Long actual = extractor.getTimeDuration();
         //Assert

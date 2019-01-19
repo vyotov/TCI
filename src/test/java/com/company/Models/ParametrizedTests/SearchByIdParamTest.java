@@ -81,7 +81,7 @@ public class SearchByIdParamTest {
     }
 
     @Test
-    public void SearchMusicById() throws IOException, ClassNotFoundException {
+    public void SearchById() throws IOException, ClassNotFoundException {
         String actual = new Gson().toJson(extractor.searchById(expectedInput));
         String expected = new Gson().toJson(expectedObject);
         //Assert
