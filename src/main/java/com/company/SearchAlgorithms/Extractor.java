@@ -35,7 +35,7 @@ public class Extractor {
 
     //Tested
     public void getPageLinks(String URL) throws MalformedURLException {
-        if(URL.isEmpty() || !isValidURL(URL)){
+        if (URL.isEmpty() || !isValidURL(URL)) {
             throw new MalformedURLException();
 
         }
@@ -60,14 +60,16 @@ public class Extractor {
         try {
             URL url = new URL(urlStr);
             return true;
-        }
-        catch (MalformedURLException e) {
+        } catch (MalformedURLException e) {
             return false;
         }
     }
 
     //Tested
     public Object searchById(String searchById) throws IOException {
+        if (searchById.equals("")) {
+            throw new IllegalArgumentException();
+        }
         Object object = null;
         //Loop over the list:
         for (String url : links) {

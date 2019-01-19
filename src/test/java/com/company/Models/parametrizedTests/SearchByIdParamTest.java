@@ -1,4 +1,4 @@
-package com.company.Models.ParametrizedTests;
+package com.company.Models.parametrizedTests;
 
 import com.company.Models.Book;
 import com.company.Models.Movie;
@@ -28,7 +28,6 @@ public class SearchByIdParamTest {
         this.expectedObject = object;
         this.expectedInput = input;
     }
-
 
     @Parameterized.Parameters
     public static Collection<Object[]> testData() {
