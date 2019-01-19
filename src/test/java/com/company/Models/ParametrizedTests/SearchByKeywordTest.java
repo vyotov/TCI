@@ -54,4 +54,11 @@ public class SearchByKeywordTest {
         //Assert
         Assert.assertEquals(expected, actual.toString());
     }
+    @Test
+    public void SearchByKeywordTest() throws IOException {
+        JSONObject actual = extractor.getJsonForSearchByKeyWord(keyWord);
+        actual.put("time", 0);
+        //Assert
+        Assert.assertEquals(expected, actual.toString());
+    }
 }
