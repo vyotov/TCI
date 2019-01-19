@@ -16,6 +16,8 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.*;
 
 public class Extractor {
@@ -32,7 +34,10 @@ public class Extractor {
     }
 
     //Tested
-    public void getPageLinks(String URL) {
+    public void getPageLinks(String URL) throws MalformedURLException {
+        if (!isValidURL(URL)) {
+            throw new MalformedURLException();
+        }
         if (!links.contains(URL) && !URL.contains("twitter") && !URL.contains("facebook")) {
             try {
                 //Set the start time
@@ -50,8 +55,20 @@ public class Extractor {
         }
     }
 
+    public boolean isValidURL(String urlStr) {
+        try {
+            new URL(urlStr);
+            return true;
+        } catch (MalformedURLException e) {
+            return false;
+        }
+    }
+
     //Tested
-    public Object searchById(String searchById) throws IOException {
+    public Object searchById(String searchById) throws IOException, ClassNotFoundException {
+        if (searchById.equals("")) {
+            throw new IllegalArgumentException("Emoty search id " + searchById);
+        }
         Object object = null;
         //Loop over the list:
         for (String url : links) {
@@ -79,7 +96,7 @@ public class Extractor {
     }
 
     //Tested
-    public JSONObject getJsonResultForSearchById(String searchById) throws IOException {
+    public JSONObject getJsonResultForSearchById(String searchById) throws IOException, ClassNotFoundException {
         JSONObject result = new JSONObject();
         startTime = System.currentTimeMillis();
         result.put("id", searchById);
@@ -95,7 +112,7 @@ public class Extractor {
     }
 
     //Tested
-    public JSONObject getJsonForSearchByKeyWord(String text) throws IOException {
+    public JSONObject getJsonForSearchByKeyWord(String text) throws IOException, ClassNotFoundException {
         startTime = System.currentTimeMillis();
         JSONObject result = new JSONObject();
         result.put("filter", text);
@@ -107,7 +124,7 @@ public class Extractor {
     }
 
     //Tested
-    public JSONObject getAllObjects() throws IOException {
+    public JSONObject getAllObjects() throws IOException, ClassNotFoundException {
         startTime = System.currentTimeMillis();
         List<Object> moviesList = new ArrayList<>();
         List<Object> bookList = new ArrayList<>();
@@ -250,9 +267,9 @@ public class Extractor {
     }
 
 
-    public Category findCategory(String url) {
+    public Category findCategory(String url) throws ClassNotFoundException {
         if (url.equals("")) {
-            return null;
+            throw new ClassNotFoundException();
         }
         Document doc = null;
         try {

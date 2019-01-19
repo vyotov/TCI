@@ -1,7 +1,6 @@
-package com.company.Models.ParametrizedTests;
+package com.company.Models.parametrizedTests;
 
 import com.company.SearchAlgorithms.Extractor;
-import com.google.gson.Gson;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -9,6 +8,7 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.util.Arrays;
 import java.util.Collection;
 
@@ -18,7 +18,7 @@ public class TimeDurationIfReturnsTimeDifferenctThenZeroTest {
     private Extractor extractor;
 
     @Before
-    public void setup() {
+    public void setup() throws MalformedURLException {
         extractor = new Extractor();
         extractor.getPageLinks("http://localhost:8888");
     }
@@ -34,7 +34,7 @@ public class TimeDurationIfReturnsTimeDifferenctThenZeroTest {
     }
 
     @Test
-    public void SearchMusicById() throws IOException {
+    public void SearchMusicById() throws IOException, ClassNotFoundException {
         extractor.getAllObjects();
         Long actual = extractor.getTimeDuration();
         //Assert

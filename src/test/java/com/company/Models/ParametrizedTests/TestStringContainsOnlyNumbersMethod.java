@@ -1,8 +1,6 @@
 package com.company.Models.parametrizedTests;
 
-import com.company.Models.Category;
 import com.company.SearchAlgorithms.Extractor;
-import com.google.gson.Gson;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -14,9 +12,9 @@ import java.util.Arrays;
 import java.util.Collection;
 
 @RunWith(Parameterized.class)
-public class FindCategoryTest {
+public class TestStringContainsOnlyNumbersMethod {
 
-    private final Category outPutCategory;
+    private final boolean output;
     private final String input;
     private Extractor extractor;
 
@@ -26,23 +24,21 @@ public class FindCategoryTest {
         extractor.getPageLinks("http://localhost:8888");
     }
 
-    public FindCategoryTest(Category outPutCategory, String input) {
-        this.outPutCategory = outPutCategory;
+    public TestStringContainsOnlyNumbersMethod(boolean output, String input) {
+        this.output = output;
         this.input = input;
     }
 
     @Parameterized.Parameters
     public static Collection<Object[]> testData() {
-        Object[][] data = new Object[][]{{Category.BOOKS, "http://localhost:8888/sample_site_to_crawl/details.php?id=102"},
-                {Category.MOVIE, "http://localhost:8888/sample_site_to_crawl/details.php?id=202"},
-                {Category.MUSIC, "http://localhost:8888/sample_site_to_crawl/details.php?id=301"}};
+        Object[][] data = new Object[][]{{false, "cat=Movies"}, {true, "203"}, {false, ""}, {true, "0"}, {true, "23273273843"}, {false, "3282d3323"}};
         return Arrays.asList(data);
     }
 
     @Test
-    public void SearchMusicById() throws ClassNotFoundException {
-        String actual = new Gson().toJson(extractor.findCategory(input));
-        String expected = new Gson().toJson(outPutCategory);
+    public void SearchMusicById() {
+        boolean actual = extractor.checkIfStringContainsOnlyNumbers(input);
+        boolean expected = output;
         //Assert
         Assert.assertEquals(expected, actual);
     }

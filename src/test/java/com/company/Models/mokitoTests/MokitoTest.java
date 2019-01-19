@@ -1,6 +1,5 @@
 package com.company.Models.mokitoTests;
 
-import com.company.Models.Book;
 import com.company.SearchAlgorithms.Extractor;
 import com.google.gson.Gson;
 import org.junit.Assert;
@@ -18,7 +17,7 @@ public class MokitoTest {
     private Extractor mockedExtractor;
 
     @Test
-    public void verifySearchById() throws IOException {
+    public void verifySearchById() throws IOException, ClassNotFoundException {
         //arrange
         Extractor extractor = new Extractor();
         extractor.getPageLinks("http://localhost:8888");

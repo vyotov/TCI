@@ -1,4 +1,4 @@
-package com.company.Models.ParametrizedTests;
+package com.company.Models.parametrizedTests;
 
 import com.company.Models.Book;
 import com.company.Models.Movie;
@@ -12,6 +12,7 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.util.Arrays;
 import java.util.Collection;
 
@@ -27,7 +28,6 @@ public class SearchByIdParamTest {
         this.expectedObject = object;
         this.expectedInput = input;
     }
-
 
     @Parameterized.Parameters
     public static Collection<Object[]> testData() {
@@ -75,13 +75,13 @@ public class SearchByIdParamTest {
     }
 
     @Before
-    public void setup() {
+    public void setup() throws MalformedURLException {
         extractor = new Extractor();
         extractor.getPageLinks("http://localhost:8888");
     }
 
     @Test
-    public void SearchMusicById() throws IOException {
+    public void SearchMusicById() throws IOException, ClassNotFoundException {
         String actual = new Gson().toJson(extractor.searchById(expectedInput));
         String expected = new Gson().toJson(expectedObject);
         //Assert

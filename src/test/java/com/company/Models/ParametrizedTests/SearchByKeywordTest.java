@@ -1,9 +1,6 @@
-package com.company.Models.ParametrizedTests;
+package com.company.Models.parametrizedTests;
 
-import com.company.Models.Book;
-import com.company.Models.Category;
 import com.company.SearchAlgorithms.Extractor;
-import com.google.gson.Gson;
 import org.json.simple.JSONObject;
 import org.junit.Assert;
 import org.junit.Before;
@@ -12,6 +9,7 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.util.Arrays;
 import java.util.Collection;
 
@@ -22,7 +20,7 @@ public class SearchByKeywordTest {
     private Extractor extractor;
 
     @Before
-    public void setup() {
+    public void setup() throws MalformedURLException {
         extractor = new Extractor();
         extractor.getPageLinks("http://localhost:8888");
 
@@ -48,7 +46,7 @@ public class SearchByKeywordTest {
     }
 
     @Test
-    public void TestSearchByKeywordTest() throws IOException {
+    public void TestSearchByKeywordTest() throws IOException, ClassNotFoundException {
         JSONObject actual = extractor.getJsonForSearchByKeyWord(keyWord);
         actual.put("time", 0);
         //Assert
