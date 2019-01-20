@@ -131,8 +131,11 @@ public class Extractor {
     }
 
     //Tested
-    public boolean checkIfStringContainsOnlyNumbers(String string) {
-        return string.matches("\\d+");
+    public boolean checkIfStringContainsOnlyNumbers(String text) {
+        if(text == null){
+            throw new RuntimeException("Parameter text should not be called with null value");
+        }
+        return text.matches("\\d+");
     }
 
     //Tested
@@ -313,21 +316,23 @@ public class Extractor {
         //Find the media details tag on the right of the page
         Elements results = doc.getElementsByClass(Constants.media_detail);
         //Table
-        table = results.select("table").first();
-        Elements th = table.getElementsByTag("th");
-        Elements td = table.getElementsByTag("td");
-        for (int i = 0, l = th.size(); i < l; i++) {
-            String key = th.get(i).text();
-            String value = td.get(i).text();
-            //Check which category:
-            if (key.equals(Constants.category)) {
-                switch (value) {
-                    case Constants.music:
-                        return Category.MUSIC;
-                    case Constants.movies:
-                        return Category.MOVIE;
-                    case Constants.books:
-                        return Category.BOOKS;
+        if(results !=null) {
+            table = results.select("table").first();
+            Elements th = table.getElementsByTag("th");
+            Elements td = table.getElementsByTag("td");
+            for (int i = 0, l = th.size(); i < l; i++) {
+                String key = th.get(i).text();
+                String value = td.get(i).text();
+                //Check which category:
+                if (key.equals(Constants.category)) {
+                    switch (value) {
+                        case Constants.music:
+                            return Category.MUSIC;
+                        case Constants.movies:
+                            return Category.MOVIE;
+                        case Constants.books:
+                            return Category.BOOKS;
+                    }
                 }
             }
         }

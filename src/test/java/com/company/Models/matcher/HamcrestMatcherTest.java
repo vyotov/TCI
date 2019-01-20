@@ -1,5 +1,4 @@
 package com.company.Models.matcher;
-
 import com.company.Models.Book;
 import com.company.Models.Movie;
 import com.company.Models.Music;
@@ -8,12 +7,10 @@ import com.company.SearchAlgorithms.Extractor;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
-
 import java.io.IOException;
 import java.net.MalformedURLException;
-
 import static org.hamcrest.MatcherAssert.assertThat;
-    import static org.hamcrest.Matchers.*;
+import static org.hamcrest.Matchers.*;
 
 public class HamcrestMatcherTest {
 
