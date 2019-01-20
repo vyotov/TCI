@@ -38,5 +38,28 @@ public class TestsWithCustomRule {
 
     }
 
+    @Test
+    public void testSearchByKeyWord() throws IOException, ClassNotFoundException {
+        //Act
+        Book book = new Book();
+        book.setCategory("Books");
+        book.setName("Clean Code: A Handbook of Agile Software Craftsmanship");
+        book.setGenre("Tech");
+        book.setFormat("Ebook");
+        book.setYear("2008");
+        book.setAuthors(Arrays.asList("Robert C. Martin"));
+        book.setPublisher("Prentice Hall");
+        book.setIsbn("978-0132350884");
+        String actual = new Gson().toJson(extractor.getJsonForSearchByKeyWord("mokito"));
+
+        String expected = new Gson().toJson(book);
+
+        System.out.println(actual);
+        System.out.println(expected);
+        //Assert
+        Assert.assertEquals(expected, actual);
+
+    }
+
 
 }

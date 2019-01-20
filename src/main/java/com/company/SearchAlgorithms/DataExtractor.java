@@ -1,10 +1,8 @@
 package com.company.SearchAlgorithms;
 
 import com.company.Models.Book;
-import com.company.Models.Category;
 import com.company.Models.Movie;
 import com.company.Models.Music;
-import com.company.utils.Constants;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -37,6 +35,10 @@ public class DataExtractor {
 
 
     public Music parseMusic(Element table) throws IOException {
+        if (url.equals("") || url == null) {
+            throw new RuntimeException("method set url must be called");
+        }
+
         this.doc = Jsoup.connect(url).get();
         Elements th = table.getElementsByTag("th");
         Elements td = table.getElementsByTag("td");
@@ -65,6 +67,8 @@ public class DataExtractor {
     }
 
     public Movie parseMovie(Element table) throws IOException {
+
+
         this.doc = Jsoup.connect(url).get();
 
         Elements th = table.getElementsByTag("th");
@@ -93,7 +97,7 @@ public class DataExtractor {
                 movie.setDirector(value);
             }
             if (key.equals("Writers")) {
-                List<String> writters = Arrays.asList(value.split(","));
+                String[] writters = value.split(",");
                 List<String> result = new ArrayList();
                 for (String w : writters) {
                     result.add(w.trim());
@@ -101,7 +105,7 @@ public class DataExtractor {
                 movie.setWriters(result);
             }
             if (key.equals("Stars")) {
-                List<String> stars = Arrays.asList(value.split(","));
+                String[] stars = value.split(",");
                 List<String> result = new ArrayList();
                 for (String w : stars) {
                     result.add(w.trim());
@@ -113,6 +117,9 @@ public class DataExtractor {
     }
 
     public Book parseBook(Element table) throws IOException {
+        if (url.equals("") || url == null) {
+            throw new RuntimeException("method set url must be called");
+        }
         this.doc = Jsoup.connect(url).get();
 
         Elements th = table.getElementsByTag("th");

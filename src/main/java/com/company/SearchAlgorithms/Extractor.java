@@ -138,6 +138,10 @@ public class Extractor {
 
     //Tested
     public JSONObject getJsonForSearchByKeyWord(String text) throws IOException, ClassNotFoundException {
+
+        if (text.equals("")) {
+            throw new NullPointerException("Empty search keyword" + text);
+        }
         startTime = System.currentTimeMillis();
         JSONObject result = new JSONObject();
         result.put("filter", text);
@@ -154,6 +158,7 @@ public class Extractor {
         List<Object> moviesList = new ArrayList<>();
         List<Object> bookList = new ArrayList<>();
         List<Object> musicList = new ArrayList<>();
+
         for (String url : links) {
             String number = url.substring(url.lastIndexOf("=") + 1);
             if (!number.equals("") && checkIfStringContainsOnlyNumbers(number)) {
@@ -176,7 +181,9 @@ public class Extractor {
         }
 
         JSONObject result = new JSONObject();
-
+        if (musicList.isEmpty() || bookList.isEmpty() || moviesList.isEmpty()) {
+            throw new ArrayIndexOutOfBoundsException("Empty objects");
+        }
         endTime = System.currentTimeMillis();
         result.put("time", getTimeDuration());
         result.put("movies", gson.toJsonTree(moviesList));

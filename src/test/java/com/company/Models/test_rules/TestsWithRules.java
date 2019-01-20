@@ -36,6 +36,6 @@ public class TestsWithRules {
     @Test
     public void testIfNotNullWithRule() throws NullPointerException, IOException, ClassNotFoundException {
         rule.expect(NullPointerException.class);
-        extractor.searchById(".");
+        extractor.searchById("a");
     }
 }
