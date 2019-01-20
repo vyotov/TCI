@@ -15,6 +15,7 @@ public class TestsWithRules {
     @Rule
     public ExpectedException rule = ExpectedException.none();
     private Extractor extractor;
+
     private DataExtractor dataExtractor;
 
     @Before
@@ -41,4 +42,6 @@ public class TestsWithRules {
         rule.expect(NullPointerException.class);
         extractor.searchById("a");
     }
+
+
 }

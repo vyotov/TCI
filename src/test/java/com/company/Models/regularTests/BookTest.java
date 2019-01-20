@@ -1,16 +1,10 @@
 package com.company.Models.regularTests;
 
 import com.company.Models.Book;
-import junitparams.Parameters;
 import org.junit.Assert;
-import org.junit.Test;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotEquals;
 
 public class BookTest {
 

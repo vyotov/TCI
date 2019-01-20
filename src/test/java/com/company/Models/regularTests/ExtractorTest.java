@@ -9,13 +9,10 @@ import com.google.gson.Gson;
 import org.json.simple.JSONObject;
 import org.junit.Assert;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.Parameterized;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.util.Arrays;
-import java.util.Collection;
 
 public class ExtractorTest {
 

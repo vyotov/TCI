@@ -17,11 +17,6 @@ public class TimeDurationIfReturnsTimeDifferenceThenZeroTest {
     private final Integer expected;
     private Extractor extractor;
 
-    @Before
-    public void setup() throws MalformedURLException {
-        extractor = new Extractor("http://localhost:8888");
-    }
-
     public TimeDurationIfReturnsTimeDifferenceThenZeroTest(Integer expected) {
         this.expected = expected;
     }
@@ -30,6 +25,11 @@ public class TimeDurationIfReturnsTimeDifferenceThenZeroTest {
     public static Collection<Object[]> testData() {
         Object[][] data = new Object[][]{{0}, {1000}};
         return Arrays.asList(data);
+    }
+
+    @Before
+    public void setup() throws MalformedURLException {
+        extractor = new Extractor("http://localhost:8888");
     }
 
     @Test

@@ -24,14 +24,14 @@ public class SearchByIdParamTest {
     private String expectedInput;
 
 
-    public SearchByIdParamTest(Object object,String input) {
+    public SearchByIdParamTest(Object object, String input) {
         this.expectedObject = object;
         this.expectedInput = input;
     }
 
     @Parameterized.Parameters
     public static Collection<Object[]> testData() {
-        Object[][] data = new Object[][]{{getBook(),"102"}, {getMovie(),"202"}, {getMusic(),"302"}};
+        Object[][] data = new Object[][]{{getBook(), "102"}, {getMovie(), "202"}, {getMusic(), "302"}};
         return Arrays.asList(data);
     }
 

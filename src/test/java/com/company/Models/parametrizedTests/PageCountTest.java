@@ -13,8 +13,8 @@ import java.util.Collection;
 @RunWith(Parameterized.class)
 public class PageCountTest {
 
-    private Extractor extractor;
     private final int expected;
+    private Extractor extractor;
     private String inputUrl;
 
 

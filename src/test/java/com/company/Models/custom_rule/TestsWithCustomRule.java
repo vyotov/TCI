@@ -3,9 +3,9 @@ package com.company.Models.custom_rule;
 import com.company.Models.Book;
 import com.company.SearchAlgorithms.Extractor;
 import com.google.gson.Gson;
-import com.google.gson.JsonObject;
 import org.json.simple.JSONObject;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 
@@ -15,15 +15,14 @@ import java.util.Arrays;
 
 public class TestsWithCustomRule {
 
-    private Extractor extractor = new Extractor("http://localhost:8888");
-
-
-    @Rule
-    public InitializationRule rule = new InitializationRule();
-
     @Rule
     public LoggerRule performanceLogger = new LoggerRule();
-    public TestsWithCustomRule() throws MalformedURLException {
+    private Extractor extractor;
+
+    @Before
+    public void setup() throws MalformedURLException {
+        extractor = new Extractor("http://localhost:8888");
+
     }
 
     @Test
@@ -50,10 +49,19 @@ public class TestsWithCustomRule {
     @Test
     public void testSearchByKeyWord() throws IOException, ClassNotFoundException {
         //Act
-        //Reset time
-        JSONObject actual = extractor.getJsonForSearchByKeyWord("Mike Judge");
-        actual.put("time", 0);
-        String expected = "{\"filter\":\"Mike Judge\",\"result\":{\"title\":\"Office Space\",\"category\":\"Movies\",\"genre\":\"Comedy\",\"format\":\"Blu-ray\",\"year\":\"1999\",\"director\":\"Mike Judge\",\"writers\":[\"William Goldman\"],\"stars\":[\"Ron Livingston\",\"Jennifer Aniston\",\"David Herman\",\"Ajay Naidu\",\"Diedrich Bader\",\"Stephen Root\"]},\"time\":0}";
+        Book book = new Book();
+        book.setCategory("Books");
+        book.setName("Clean Code: A Handbook of Agile Software Craftsmanship");
+        book.setGenre("Tech");
+        book.setFormat("Ebook");
+        book.setYear("2008");
+        book.setAuthors(Arrays.asList("Robert C. Martin"));
+        book.setPublisher("Prentice Hall");
+        book.setIsbn("978-0132350884");
+        JSONObject actual = extractor.getJsonForSearchByKeyWord("978-0132350884");
+
+        String expected = new Gson().toJson(book);
+
         //Assert
         Assert.assertEquals(expected, actual.toString());
 

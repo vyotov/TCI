@@ -8,8 +8,11 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
+
 import java.io.IOException;
-import static org.mockito.Mockito.*;
+
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
 public class MokitoTest {
@@ -27,9 +30,10 @@ public class MokitoTest {
         when(new Gson().toJson(mockedExtractor.searchById("201"))).thenReturn(actual);
         Object expected = mockedExtractor.searchById("201");
         //assert
-        Assert.assertEquals(expected.toString(),actual);
+        Assert.assertEquals(expected.toString(), actual);
         verify(mockedExtractor).searchById("201");
     }
+
     @Test
     public void verifySearchByKeyWord() throws IOException, ClassNotFoundException {
         //arrange
@@ -40,9 +44,10 @@ public class MokitoTest {
         when(mockedExtractor.getJsonForSearchByKeyWord("Tech")).thenReturn(actual);
         JSONObject expected = mockedExtractor.getJsonForSearchByKeyWord("Tech");
         //assert
-        Assert.assertEquals(expected,actual);
+        Assert.assertEquals(expected, actual);
         verify(mockedExtractor).getJsonForSearchByKeyWord("Tech");
     }
+
     @Test
     public void verifyGetAllObjects() throws IOException, ClassNotFoundException {
         //arrange
@@ -59,7 +64,7 @@ public class MokitoTest {
         //        Assert.assertEquals(stub,actuall);
 
         //assert
-        Assert.assertEquals(expected,actual);
+        Assert.assertEquals(expected, actual);
         verify(mockedExtractor).getAllObjects();
     }
 
@@ -71,13 +76,13 @@ public class MokitoTest {
         mockedExtractor.getPageLinks("http://localhost:8888");
 
         //act
-        Object actual = extractor.findObjectModelForSearchText( extractor.getAllObjects(),"Tech");
+        Object actual = extractor.findObjectModelForSearchText(extractor.getAllObjects(), "Tech");
         when(mockedExtractor.getAllObjects()).thenReturn(extractor.getAllObjects());
         //when(mockedExtractor.findObjectModelForSearchText(mockedExtractor.getAllObjects(),"Tech")).thenReturn(actual);
-        Object expected = extractor.findObjectModelForSearchText( mockedExtractor.getAllObjects(),"Tech");
+        Object expected = extractor.findObjectModelForSearchText(mockedExtractor.getAllObjects(), "Tech");
 
         //assert
-        Assert.assertEquals(expected,actual);
+        Assert.assertEquals(expected, actual);
         verify(mockedExtractor).getAllObjects();
     }
 }

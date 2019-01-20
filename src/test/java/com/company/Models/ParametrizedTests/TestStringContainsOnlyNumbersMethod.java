@@ -18,11 +18,6 @@ public class TestStringContainsOnlyNumbersMethod {
     private final String input;
     private Extractor extractor;
 
-    @Before
-    public void setup() throws MalformedURLException {
-        extractor = new Extractor("http://localhost:8888");
-    }
-
     public TestStringContainsOnlyNumbersMethod(boolean output, String input) {
         this.output = output;
         this.input = input;
@@ -32,6 +27,11 @@ public class TestStringContainsOnlyNumbersMethod {
     public static Collection<Object[]> testData() {
         Object[][] data = new Object[][]{{false, "cat=Movies"}, {true, "203"}, {false, ""}, {true, "0"}, {true, "23273273843"}, {false, "3282d3323"}};
         return Arrays.asList(data);
+    }
+
+    @Before
+    public void setup() throws MalformedURLException {
+        extractor = new Extractor("http://localhost:8888");
     }
 
     @Test
