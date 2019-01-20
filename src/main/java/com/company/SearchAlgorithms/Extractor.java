@@ -18,6 +18,7 @@ import org.jsoup.select.Elements;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.net.URLConnection;
 import java.util.*;
 
 public class Extractor {
@@ -28,18 +29,41 @@ public class Extractor {
     private Gson gson = new Gson();
     private DataExtractor dataExtractor = new DataExtractor();
     private Element table = null;
+    private String URL;
 
     public Extractor(String URL) throws MalformedURLException {
+        this.URL = URL;
         links = new HashSet<>();
+
         getPageLinks(URL);
     }
 
+    public boolean canConnectToUrl(String URL) {
+        try {
+            URL myURL = new URL(URL);
+            // also you can put a port
+            //  URL myURL = new URL("http://localhost:8080");
+            URLConnection myURLConnection = myURL.openConnection();
+            myURLConnection.connect();
+        } catch (MalformedURLException e) {
+            // new URL() failed
+            // ...
+            return false;
+        } catch (IOException e) {
+            // openConnection() failed
+            // ...
+            return false;
+        }
+        return true;
+    }
+
+
     //Tested
     public void getPageLinks(String URL) throws MalformedURLException {
-        if (!isValidURL(URL)) {
+        if (!isValidURL(URL) && !canConnectToUrl(URL)) {
             throw new MalformedURLException();
         }
-        if (!links.contains(URL) && !URL.contains("twitter") && !URL.contains("facebook")) {
+        if (!links.contains(URL) && !URL.contains("twitter") && !URL.contains("facebook")  && URL.contains("localhost:8888")) {
             try {
                 //Set the start time
                 // startTime = System.currentTimeMillis();
@@ -126,7 +150,6 @@ public class Extractor {
 
     //Tested
     public JSONObject getAllObjects() throws IOException, ClassNotFoundException {
-
         startTime = System.currentTimeMillis();
         List<Object> moviesList = new ArrayList<>();
         List<Object> bookList = new ArrayList<>();
