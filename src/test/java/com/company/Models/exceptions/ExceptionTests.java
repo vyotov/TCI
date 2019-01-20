@@ -12,8 +12,8 @@ public class ExceptionTests {
     private Extractor extractor;
 
     @Before
-    public void before() {
-        extractor = new Extractor();
+    public void before() throws MalformedURLException {
+        extractor = new Extractor("http://localhost:8888");
     }
 
     @Test(expected = MalformedURLException.class)

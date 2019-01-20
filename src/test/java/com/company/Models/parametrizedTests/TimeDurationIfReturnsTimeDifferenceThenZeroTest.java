@@ -19,8 +19,7 @@ public class TimeDurationIfReturnsTimeDifferenceThenZeroTest {
 
     @Before
     public void setup() throws MalformedURLException {
-        extractor = new Extractor();
-        extractor.getPageLinks("http://localhost:8888");
+        extractor = new Extractor("http://localhost:8888");
     }
 
     public TimeDurationIfReturnsTimeDifferenceThenZeroTest(Integer expected) {

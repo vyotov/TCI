@@ -21,9 +21,7 @@ public class SearchByKeywordTest {
 
     @Before
     public void setup() throws MalformedURLException {
-        extractor = new Extractor();
-        extractor.getPageLinks("http://localhost:8888");
-
+        extractor = new Extractor("http://localhost:8888");
     }
 
     public SearchByKeywordTest(String keyWord, String expected) {
@@ -38,9 +36,9 @@ public class SearchByKeywordTest {
                 //movie
                 {"Mike Judge", "{\"filter\":\"Mike Judge\",\"result\":{\"title\":\"Office Space\",\"category\":\"Movies\",\"genre\":\"Comedy\",\"format\":\"Blu-ray\",\"year\":\"1999\",\"director\":\"Mike Judge\",\"writers\":[\"William Goldman\"],\"stars\":[\"Ron Livingston\",\"Jennifer Aniston\",\"David Herman\",\"Ajay Naidu\",\"Diedrich Bader\",\"Stephen Root\"]},\"time\":0}"}
                 //music
-                ,{"Elvis Forever","{\"filter\":\"Elvis Forever\",\"result\":{\"name\":\"Elvis Forever\",\"category\":\"Music\",\"genre\":\"Rock\",\"format\":\"Vinyl\",\"year\":\"2015\",\"artist\":\"Elvis Presley\"},\"time\":0}"}
+                , {"Elvis Forever", "{\"filter\":\"Elvis Forever\",\"result\":{\"name\":\"Elvis Forever\",\"category\":\"Music\",\"genre\":\"Rock\",\"format\":\"Vinyl\",\"year\":\"2015\",\"artist\":\"Elvis Presley\"},\"time\":0}"}
                 //book
-                ,{"Refactoring: Improving the Design of Existing Code","{\"filter\":\"Refactoring: Improving the Design of Existing Code\",\"result\":{\"name\":\"Refactoring: Improving the Design of Existing Code\",\"category\":\"Books\",\"genre\":\"Tech\",\"format\":\"Hardcover\",\"year\":\"1999\",\"authors\":[\"Martin Fowler\",\" Kent Beck\",\" John Brant\",\" William Opdyke\",\" Don Roberts\"],\"publisher\":\"Addison-Wesley Professional\",\"isbn\":\"978-0201485677\"},\"time\":0}"}
+                , {"Refactoring: Improving the Design of Existing Code", "{\"filter\":\"Refactoring: Improving the Design of Existing Code\",\"result\":{\"name\":\"Refactoring: Improving the Design of Existing Code\",\"category\":\"Books\",\"genre\":\"Tech\",\"format\":\"Hardcover\",\"year\":\"1999\",\"authors\":[\"Martin Fowler\",\" Kent Beck\",\" John Brant\",\" William Opdyke\",\" Don Roberts\"],\"publisher\":\"Addison-Wesley Professional\",\"isbn\":\"978-0201485677\"},\"time\":0}"}
         };
         return Arrays.asList(data);
     }
