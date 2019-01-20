@@ -1,4 +1,4 @@
-package com.company.Models.parametrizedTests;
+package com.company.Models.ParametrizedTests;
 
 import com.company.Models.Book;
 import com.company.Models.Movie;
@@ -80,10 +80,18 @@ public class SearchByIdParamTest {
     }
 
     @Test
-    public void SearchById() throws IOException, ClassNotFoundException {
+    public void shouldPassSearchById() throws IOException, ClassNotFoundException {
         String actual = new Gson().toJson(extractor.searchById(expectedInput));
         String expected = new Gson().toJson(expectedObject);
         //Assert
         Assert.assertEquals(expected, actual);
     }
+    @Test
+    public void shouldFailSearchById() throws IOException, ClassNotFoundException {
+        //arrange
+        String actual = new Gson().toJson(extractor.searchById(expectedInput));
+        //Assert
+        Assert.assertNotEquals(null, actual);
+    }
+
 }

@@ -17,7 +17,7 @@ public class BookTest {
         // act
         String actual = book.getName();
         // assert
-        Assert.assertEquals(expected, actual);
+        Assert.assertEquals("The book is not set correctly or the expect value is wrong",expected, actual);
     }
 
 
@@ -30,7 +30,7 @@ public class BookTest {
         // act
         String actual = book.getGenre();
         // assert
-        Assert.assertEquals(expected, actual);
+        Assert.assertEquals("The genre is not set correctly or the expect value is wrong",expected, actual);
     }
 
     @org.junit.Test
@@ -42,7 +42,7 @@ public class BookTest {
         // act
         String actual = book.getFormat();
         // assert
-        Assert.assertEquals(expected, actual);
+        Assert.assertEquals("The format is not set correctly or the expect value is wrong",expected, actual);
     }
 
     @org.junit.Test
@@ -54,7 +54,7 @@ public class BookTest {
         // act
         String actual = book.getYear();
         // assert
-        Assert.assertEquals(expected, actual);
+        Assert.assertEquals("The year is not set correctly or the expect value is wrong",expected, actual);
     }
 
     @org.junit.Test
@@ -70,7 +70,7 @@ public class BookTest {
         // act
         List<String> actual = book.getAuthors();
         // assert
-        Assert.assertEquals(expectedAuthors, actual);
+        Assert.assertEquals("The authors are not set correctly or the expect value is wrong",expectedAuthors, actual);
     }
 
     @org.junit.Test
@@ -83,7 +83,7 @@ public class BookTest {
         // act
         List<String> actual = book.getAuthors();
         // assert
-        Assert.assertEquals(expectedAuthors, actual);
+        Assert.assertEquals("The list is empty",expectedAuthors, actual);
     }
 
 
@@ -96,7 +96,7 @@ public class BookTest {
         // act
         String actual = book.getPublisher();
         // assert
-        Assert.assertEquals(expected, actual);
+        Assert.assertEquals("The publisher is not set correctly or the expect value is wrong",expected, actual);
     }
 
     @org.junit.Test
@@ -108,7 +108,7 @@ public class BookTest {
         // act
         String actual = book.getIsbn();
         // assert
-        Assert.assertEquals(expected, actual);
+        Assert.assertEquals("The ISBN is not set correctly or the expect value is wrong",expected, actual);
     }
 
     @org.junit.Test
@@ -120,7 +120,7 @@ public class BookTest {
         // act
         String actual = book.getCategory();
         // assert
-        Assert.assertEquals(expected, actual);
+        Assert.assertEquals("The category is not set correctly or the expect value is wrong",expected, actual);
     }
 
 

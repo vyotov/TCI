@@ -42,4 +42,14 @@ public class PageCountTest {
         Assert.assertEquals(expected, actual);
 
     }
+    @Test
+    public void ifPageCountNotValid() throws MalformedURLException {
+        //Arrange
+        extractor = new Extractor(inputUrl);
+        //Act
+        int actual = extractor.getPageCount();
+        //Assert
+        Assert.assertNotEquals("", actual);
+
+    }
 }

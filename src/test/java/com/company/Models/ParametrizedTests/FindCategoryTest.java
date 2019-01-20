@@ -1,4 +1,4 @@
-package com.company.Models.parametrizedTests;
+package com.company.Models.ParametrizedTests;
 
 import com.company.Models.Category;
 import com.company.SearchAlgorithms.Extractor;
@@ -39,11 +39,17 @@ public class FindCategoryTest {
     }
 
     @Test
-    public void isFindingCategory() throws ClassNotFoundException {
+    public void shouldPassisFindingCategory() throws ClassNotFoundException {
         String actual = new Gson().toJson(extractor.findCategory(input));
         String expected = new Gson().toJson(outPutCategory);
         //Assert
         Assert.assertEquals(expected, actual);
+    }
+    @Test
+    public void shouldFailisFindingCategory() throws ClassNotFoundException {
+        String actual = new Gson().toJson(extractor.findCategory(input));
+        //Assert
+        Assert.assertNotEquals(null, actual);
     }
 
 

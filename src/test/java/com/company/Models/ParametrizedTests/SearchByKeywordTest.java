@@ -1,4 +1,4 @@
-package com.company.Models.parametrizedTests;
+package com.company.Models.ParametrizedTests;
 
 import com.company.SearchAlgorithms.Extractor;
 import org.json.simple.JSONObject;
@@ -44,7 +44,15 @@ public class SearchByKeywordTest {
     }
 
     @Test
-    public void TestSearchByKeywordTest() throws IOException, ClassNotFoundException {
+    public void shouldPassTestSearchByKeywordTest() throws IOException, ClassNotFoundException {
+        JSONObject actual = extractor.getJsonForSearchByKeyWord(keyWord);
+        actual.put("time", 0);
+        //Assert
+        Assert.assertEquals(expected, actual.toString());
+    }
+
+    @Test
+    public void shouldFailTestSearchByKeywordTest() throws IOException, ClassNotFoundException {
         JSONObject actual = extractor.getJsonForSearchByKeyWord(keyWord);
         actual.put("time", 0);
         //Assert
