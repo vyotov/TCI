@@ -7,14 +7,14 @@ import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeMatcher;
 
 import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
 
-
-public class ValidateJsonString extends TypeSafeMatcher<Boolean> {
-
+public class IsValidUrl extends TypeSafeMatcher<Boolean> {
 
     private String value;
 
-    public ValidateJsonString(String value) {
+    public IsValidUrl(String value) {
         this.value = value;
     }
 
@@ -25,22 +25,21 @@ public class ValidateJsonString extends TypeSafeMatcher<Boolean> {
 
     @Override
     protected boolean matchesSafely(Boolean expected) {
-        return isJSONValid(value) || (isJSONValid(value) == expected);
+        return isValidURL(value) || (isValidURL(value) == expected);
     }
 
-    private boolean isJSONValid(String jsonInString) {
+    public boolean isValidURL(String urlStr) {
         try {
-            final ObjectMapper mapper = new ObjectMapper();
-            mapper.readTree(jsonInString);
+            new URL(urlStr);
             return true;
-        } catch (IOException e) {
+        } catch (MalformedURLException e) {
             return false;
         }
     }
-
+    
     @Factory
-    public static Matcher isValidJson(String value) {
-        return new ValidateJsonString(value);
+    public static Matcher IsValidUrl(String value) {
+        return new IsValidUrl(value);
     }
 
 }
