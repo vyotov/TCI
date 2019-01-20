@@ -8,12 +8,11 @@ import org.junit.Test;
 
 import java.net.MalformedURLException;
 
-import static com.company.Models.matcher.ValidateJsonString.isValidJson;
-import static com.company.Models.matcher.IsPage.page;
+import static com.company.Models.matcher.custom.IsPage.page;
+import static com.company.Models.matcher.custom.ValidateJsonString.isValidJson;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.not;
 import static org.hamcrest.MatcherAssert.assertThat;
-
 
 public class CustomMatcherTest {
     @Rule
@@ -42,12 +41,10 @@ public class CustomMatcherTest {
         assertThat(0, is(not(page())));
     }
 
-
     @Test
     public void checkIsValidJsonStringWithCustomMatcherShouldFail() {
         assertThat(false, isValidJson("dsadsada"));
     }
-
 
     @Test
     public void checkIsValidJsonStringWithCustomMatcherShouldPass() {

@@ -1,4 +1,4 @@
-package com.company.Models.matcher;
+package com.company.Models.matcher.custom;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.hamcrest.Description;

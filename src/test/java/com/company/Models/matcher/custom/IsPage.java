@@ -1,9 +1,8 @@
-package com.company.Models.matcher;
+package com.company.Models.matcher.custom;
 
 import com.company.SearchAlgorithms.Extractor;
 import org.hamcrest.*;
 
-import java.io.IOException;
 import java.net.MalformedURLException;
 
 public class IsPage extends TypeSafeMatcher {
