@@ -26,9 +26,8 @@ public class ExtractorTest {
     @Test
     public void getPageLinks() throws MalformedURLException {
         //Arrange
-        Extractor extractor = new Extractor();
+        Extractor extractor = new Extractor("http://localhost:8888");
         //Act
-        extractor.getPageLinks("http://localhost:8888");
         int expected = 22;
         int actual = extractor.getPageCount();
         //Assert
@@ -42,9 +41,8 @@ public class ExtractorTest {
     @Test
     public void testSearchByIdForMovieModel() throws IOException, ClassNotFoundException {
         //Arrange
-        Extractor extractor = new Extractor();
-        //Act
-        extractor.getPageLinks("http://localhost:8888");
+        Extractor extractor = new Extractor("http://localhost:8888");
+
         //Act
         Movie movie = new Movie();
         movie.setCategory("Movies");
@@ -70,9 +68,8 @@ public class ExtractorTest {
     @Test
     public void testSearchByIdForBookModel() throws IOException, ClassNotFoundException {
         //Arrange
-        Extractor extractor = new Extractor();
+        Extractor extractor = new Extractor("http://localhost:8888");
 
-        extractor.getPageLinks("http://localhost:8888");
         //Act
         Book book = new Book();
         book.setCategory("Books");
@@ -97,8 +94,8 @@ public class ExtractorTest {
     @Test
     public void testSearchByIdForMusicModel() throws IOException, ClassNotFoundException {
         //Arrange
-        Extractor extractor = new Extractor();
-        extractor.getPageLinks("http://localhost:8888");
+        Extractor extractor = new Extractor("http://localhost:8888");
+
         //Act
         Music book = new Music();
         book.setName("Elvis Forever");
@@ -120,8 +117,8 @@ public class ExtractorTest {
     @Test
     public void testSearchByIdJson() throws IOException, ClassNotFoundException {
         //Arrange
-        Extractor extractor = new Extractor();
-        extractor.getPageLinks("http://localhost:8888");
+        Extractor extractor = new Extractor("http://localhost:8888");
+
         //Act
         JSONObject actual = extractor.getJsonResultForSearchById("203");
         actual.put("time", 0);
@@ -134,9 +131,10 @@ public class ExtractorTest {
      * Method to test if StringContainsOnlyNumbers returns the true if a string with only numbers is passed
      */
     @Test
-    public void testIfStringContainsOnlyNumbersMethodReturnsCorrect() {
+    public void testIfStringContainsOnlyNumbersMethodReturnsCorrect() throws MalformedURLException {
         //Arrange
-        Extractor extractor = new Extractor();
+        Extractor extractor = new Extractor("http://localhost:8888");
+
         //Assert
         Assert.assertEquals(true, extractor.checkIfStringContainsOnlyNumbers("203"));
         Assert.assertTrue(extractor.checkIfStringContainsOnlyNumbers("203"));
@@ -146,9 +144,10 @@ public class ExtractorTest {
      * Method to test if StringContainsOnlyNumbers returns the false if a string with not only numbers is passed
      */
     @Test
-    public void testIfStringContainsOnlyNumbersMethodReturnsError() {
+    public void testIfStringContainsOnlyNumbersMethodReturnsError() throws MalformedURLException {
         //Arrange
-        Extractor extractor = new Extractor();
+        Extractor extractor = new Extractor("http://localhost:8888");
+
         //Assert
         Assert.assertNotEquals(true, extractor.checkIfStringContainsOnlyNumbers("cat=Movies"));
         Assert.assertFalse(extractor.checkIfStringContainsOnlyNumbers("cat=Movies"));
@@ -160,8 +159,8 @@ public class ExtractorTest {
     @Test
     public void testGetJsonForSearchByKeyWord() throws IOException, ClassNotFoundException {
         //Arrange
-        Extractor extractor = new Extractor();
-        extractor.getPageLinks("http://localhost:8888");
+        Extractor extractor = new Extractor("http://localhost:8888");
+
         //Act
         //Reset time
         JSONObject actual = extractor.getJsonForSearchByKeyWord("Mike Judge");
@@ -177,8 +176,8 @@ public class ExtractorTest {
     @Test
     public void testFindObjectModelForSearchTextByArtist() throws IOException, ClassNotFoundException {
         //Arrange
-        Extractor extractor = new Extractor();
-        extractor.getPageLinks("http://localhost:8888");
+        Extractor extractor = new Extractor("http://localhost:8888");
+
         String actual = new Gson().toJson(extractor.findObjectModelForSearchText(extractor.getAllObjects(), "Elvis Presley"));
         String expected = "{\"name\":\"Elvis Forever\",\"category\":\"Music\",\"genre\":\"Rock\",\"format\":\"Vinyl\",\"year\":\"2015\",\"artist\":\"Elvis Presley\"}";
         //Assert
@@ -191,8 +190,8 @@ public class ExtractorTest {
     @Test
     public void testFindObjectModelForSearchTextByGenre() throws IOException, ClassNotFoundException {
         //Arrange
-        Extractor extractor = new Extractor();
-        extractor.getPageLinks("http://localhost:8888");
+        Extractor extractor = new Extractor("http://localhost:8888");
+
         String actual = new Gson().toJson(extractor.findObjectModelForSearchText(extractor.getAllObjects(), "Vinyl"));
         String expected = "{\"name\":\"Elvis Forever\",\"category\":\"Music\",\"genre\":\"Rock\",\"format\":\"Vinyl\",\"year\":\"2015\",\"artist\":\"Elvis Presley\"}";
         //Assert
@@ -205,8 +204,8 @@ public class ExtractorTest {
     @Test
     public void testFindCategoryForMusic() throws MalformedURLException, ClassNotFoundException {
         //Arrange
-        Extractor extractor = new Extractor();
-        extractor.getPageLinks("http://localhost:8888");
+        Extractor extractor = new Extractor("http://localhost:8888");
+
         Category actual = extractor.findCategory("http://localhost:8888/sample_site_to_crawl/details.php?id=301");
         Category expected = Category.MUSIC;
         //Assert
@@ -219,8 +218,8 @@ public class ExtractorTest {
     @Test
     public void testFindCategoryForBook() throws MalformedURLException, ClassNotFoundException {
         //Arrange
-        Extractor extractor = new Extractor();
-        extractor.getPageLinks("http://localhost:8888");
+        Extractor extractor = new Extractor("http://localhost:8888");
+
         Category actual = extractor.findCategory("http://localhost:8888/sample_site_to_crawl/details.php?id=102");
         Category expected = Category.BOOKS;
         //Assert
@@ -233,8 +232,8 @@ public class ExtractorTest {
     @Test
     public void testFindCategoryForMovie() throws MalformedURLException, ClassNotFoundException {
         //Arrange
-        Extractor extractor = new Extractor();
-        extractor.getPageLinks("http://localhost:8888");
+        Extractor extractor = new Extractor("http://localhost:8888");
+
         Category actual = extractor.findCategory("http://localhost:8888/sample_site_to_crawl/details.php?id=202");
         Category expected = Category.MOVIE;
         //Assert
@@ -247,8 +246,8 @@ public class ExtractorTest {
     @Test
     public void testGetAllObjects() throws IOException, ClassNotFoundException {
         //Arrange
-        Extractor extractor = new Extractor();
-        extractor.getPageLinks("http://localhost:8888");
+        Extractor extractor = new Extractor("http://localhost:8888");
+
         JSONObject actual = extractor.getAllObjects();
         //Reset time
         actual.put("time", 0);
@@ -261,8 +260,8 @@ public class ExtractorTest {
     @Test
     public void testTimeDurationIfSet() throws IOException, ClassNotFoundException {
         //Arrange
-        Extractor extractor = new Extractor();
-        extractor.getPageLinks("http://localhost:8888");
+        Extractor extractor = new Extractor("http://localhost:8888");
+
         extractor.getAllObjects();
         Long actual = extractor.getTimeDuration();
         //Assert

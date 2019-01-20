@@ -20,9 +20,8 @@ public class InitializationRule implements TestRule {
         return new Statement() {
             @Override
             public void evaluate() throws Throwable {
-                extractor = new Extractor();
-                extractor.getPageLinks("http://localhost:8888");
-                base.evaluate();
+                extractor = new Extractor("http://localhost:8888");
+
             }
         };
     }

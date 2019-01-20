@@ -1,4 +1,4 @@
-package com.company.Models.ParametrizedTests;
+package com.company.Models.parametrizedTests;
 
 import com.company.Models.Book;
 import com.company.Models.Movie;
@@ -76,8 +76,7 @@ public class SearchByIdParamTest {
 
     @Before
     public void setup() throws MalformedURLException {
-        extractor = new Extractor();
-        extractor.getPageLinks("http://localhost:8888");
+        extractor = new Extractor("http://localhost:8888");
     }
 
     @Test

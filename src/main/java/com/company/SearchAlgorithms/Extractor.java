@@ -29,8 +29,9 @@ public class Extractor {
     private DataExtractor dataExtractor = new DataExtractor();
     private Element table = null;
 
-    public Extractor() {
+    public Extractor(String URL) throws MalformedURLException {
         links = new HashSet<>();
+        getPageLinks(URL);
     }
 
     //Tested

@@ -1,4 +1,4 @@
-package com.company.Models.ParametrizedTests;
+package com.company.Models.parametrizedTests;
 
 import com.company.Models.Category;
 import com.company.SearchAlgorithms.Extractor;
@@ -22,8 +22,7 @@ public class FindCategoryTest {
 
     @Before
     public void setup() throws MalformedURLException {
-        extractor = new Extractor();
-        extractor.getPageLinks("http://localhost:8888");
+        extractor = new Extractor("http://localhost:8888");
     }
 
     public FindCategoryTest(Category outPutCategory, String input) {

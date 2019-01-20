@@ -20,8 +20,7 @@ public class MokitoTest {
     @Test
     public void verifySearchById() throws IOException, ClassNotFoundException {
         //arrange
-        Extractor extractor = new Extractor();
-        extractor.getPageLinks("http://localhost:8888");
+        Extractor extractor = new Extractor("http://localhost:8888");
         mockedExtractor.getPageLinks("http://localhost:8888");
         //act
         String actual = new Gson().toJson(extractor.searchById("201"));
@@ -34,8 +33,7 @@ public class MokitoTest {
     @Test
     public void verifySearchByKeyWord() throws IOException, ClassNotFoundException {
         //arrange
-        Extractor extractor = new Extractor();
-        extractor.getPageLinks("http://localhost:8888");
+        Extractor extractor = new Extractor("http://localhost:8888");
         mockedExtractor.getPageLinks("http://localhost:8888");
         //act
         JSONObject actual = extractor.getJsonForSearchByKeyWord("Tech");
@@ -48,8 +46,7 @@ public class MokitoTest {
     @Test
     public void verifyGetAllObjects() throws IOException, ClassNotFoundException {
         //arrange
-        Extractor extractor = new Extractor();
-        extractor.getPageLinks("http://localhost:8888");
+        Extractor extractor = new Extractor("http://localhost:8888");
         mockedExtractor.getPageLinks("http://localhost:8888");
         //act
         JSONObject actual = extractor.getAllObjects();
