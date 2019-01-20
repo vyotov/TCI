@@ -19,11 +19,6 @@ public class SearchByKeywordTest {
     private final String expected;
     private Extractor extractor;
 
-    @Before
-    public void setup() throws MalformedURLException {
-        extractor = new Extractor("http://localhost:8888");
-    }
-
     public SearchByKeywordTest(String keyWord, String expected) {
 
         this.keyWord = keyWord;
@@ -41,6 +36,11 @@ public class SearchByKeywordTest {
                 , {"Refactoring: Improving the Design of Existing Code", "{\"filter\":\"Refactoring: Improving the Design of Existing Code\",\"result\":{\"name\":\"Refactoring: Improving the Design of Existing Code\",\"category\":\"Books\",\"genre\":\"Tech\",\"format\":\"Hardcover\",\"year\":\"1999\",\"authors\":[\"Martin Fowler\",\" Kent Beck\",\" John Brant\",\" William Opdyke\",\" Don Roberts\"],\"publisher\":\"Addison-Wesley Professional\",\"isbn\":\"978-0201485677\"},\"time\":0}"}
         };
         return Arrays.asList(data);
+    }
+
+    @Before
+    public void setup() throws MalformedURLException {
+        extractor = new Extractor("http://localhost:8888");
     }
 
     @Test

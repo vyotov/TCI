@@ -20,11 +20,6 @@ public class FindCategoryTest {
     private final String input;
     private Extractor extractor;
 
-    @Before
-    public void setup() throws MalformedURLException {
-        extractor = new Extractor("http://localhost:8888");
-    }
-
     public FindCategoryTest(Category outPutCategory, String input) {
         this.outPutCategory = outPutCategory;
         this.input = input;
@@ -36,6 +31,11 @@ public class FindCategoryTest {
                 {Category.MOVIE, "http://localhost:8888/sample_site_to_crawl/details.php?id=202"},
                 {Category.MUSIC, "http://localhost:8888/sample_site_to_crawl/details.php?id=301"}};
         return Arrays.asList(data);
+    }
+
+    @Before
+    public void setup() throws MalformedURLException {
+        extractor = new Extractor("http://localhost:8888");
     }
 
     @Test

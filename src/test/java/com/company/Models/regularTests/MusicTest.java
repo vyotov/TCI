@@ -1,15 +1,10 @@
 package com.company.Models.regularTests;
-import com.company.Models.Movie;
+
 import com.company.Models.Music;
-import org.junit.Before;
-import junitparams.Parameters;
 import org.junit.Assert;
 import org.junit.Test;
-import java.util.Arrays;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotEquals;
 
-public class MusicTest{
+public class MusicTest {
 
     @Test
     public void IsGettingRightName() {
@@ -20,8 +15,9 @@ public class MusicTest{
         //Act
         String actual = music.getName();
         //Assert
-        Assert.assertEquals(expected,actual);
+        Assert.assertEquals(expected, actual);
     }
+
     @Test
     public void IsGettingRgihtCategory() {
         //Arrange
@@ -31,8 +27,9 @@ public class MusicTest{
         //Act
         String actual = music.getCategory();
         //Assert
-        Assert.assertEquals(expected,actual);
+        Assert.assertEquals(expected, actual);
     }
+
     @Test
     public void IsGettingRightGenre() {
         //Arrange
@@ -42,8 +39,9 @@ public class MusicTest{
         //Act
         String actual = music.getGenre();
         //Assert
-        Assert.assertEquals(expected,actual);
+        Assert.assertEquals(expected, actual);
     }
+
     @Test
     public void IsGettingRightFormat() {
         //Arrange
@@ -53,8 +51,9 @@ public class MusicTest{
         //Act
         String actual = music.getFormat();
         //Assert
-        Assert.assertEquals(expected,actual);
+        Assert.assertEquals(expected, actual);
     }
+
     @Test
     public void IsGettingRightYear() {
         //Arrange
@@ -64,8 +63,9 @@ public class MusicTest{
         //Act
         String actual = music.getYear();
         //Assert
-        Assert.assertEquals(expected,actual);
+        Assert.assertEquals(expected, actual);
     }
+
     @Test
     public void IsGettingRightArtist() {
         //Arrange
@@ -75,6 +75,6 @@ public class MusicTest{
         //Act
         String actual = music.getArtist();
         //Assert
-        Assert.assertEquals(expected,actual);
+        Assert.assertEquals(expected, actual);
     }
 }

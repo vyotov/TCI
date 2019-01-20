@@ -20,13 +20,13 @@ public class MovieTest {
     @Test
     public void getTitle() {
         //Arrange
-    Movie movie = new Movie();
-    movie.setTitle("Office Space");
-    String expected = "Office Space";
+        Movie movie = new Movie();
+        movie.setTitle("Office Space");
+        String expected = "Office Space";
         //Act
-    String actual = movie.getTitle();
+        String actual = movie.getTitle();
         //Assert
-        Assert.assertEquals(expected,actual);
+        Assert.assertEquals(expected, actual);
     }
 
     /*** Method to test if getGenre return the correct Title for a given movie.*/
@@ -39,7 +39,7 @@ public class MovieTest {
         //Act
         String actual = movie.getGenre();
         //Assert
-        Assert.assertEquals(expected,actual);
+        Assert.assertEquals(expected, actual);
     }
 
     /*** Method to test if getFormat return the correct Title for a given movie.*/
@@ -52,7 +52,7 @@ public class MovieTest {
         //Act
         String actual = movie.getFormat();
         //Assert
-        Assert.assertEquals(expected,actual);
+        Assert.assertEquals(expected, actual);
     }
 
     /*** Method to test if getYear return the correct Title for a given movie.*/
@@ -65,7 +65,7 @@ public class MovieTest {
         //Act
         String actual = movie.getYear();
         //Assert
-        Assert.assertEquals(expected,actual);
+        Assert.assertEquals(expected, actual);
     }
 
     /*** Method to test if getDirector return the correct Title for a given movie.*/
@@ -78,7 +78,7 @@ public class MovieTest {
         //Act
         String actual = movie.getDirector();
         //Assert
-        Assert.assertEquals(expected,actual);
+        Assert.assertEquals(expected, actual);
     }
 
     /*** Method to test if getWriters return the correct Title for a given movie.*/
@@ -92,7 +92,7 @@ public class MovieTest {
         //Act
         List<String> actual = movie.getWriters();
         //Assert
-        Assert.assertEquals(actual,expected);
+        Assert.assertEquals(actual, expected);
     }
 
     /*** Method to test if getStars return the correct Title for a given movie.*/
@@ -111,7 +111,7 @@ public class MovieTest {
         //Act
         List<String> actual = movie.getStars();
         //Assert
-        Assert.assertEquals(actual,expected);
+        Assert.assertEquals(actual, expected);
 
     }
 
@@ -125,6 +125,6 @@ public class MovieTest {
         //Act
         String actual = movie.getCategory();
         //Assert
-        Assert.assertEquals(expected,actual);
+        Assert.assertEquals(expected, actual);
     }
 }

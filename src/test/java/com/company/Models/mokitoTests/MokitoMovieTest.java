@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.mockito.Mockito.*;
-import static org.mockito.Mockito.when;
 
 public class MokitoMovieTest {
 
@@ -20,7 +19,8 @@ public class MokitoMovieTest {
     private static final String DIRECTOR = "Peter Jackson";
     private static final List<String> WRITERS = new ArrayList<>();
     private static final List<String> STARS = new ArrayList<>();
-    private void FillInWritersAndStars(){
+
+    private void FillInWritersAndStars() {
         WRITERS.add("J.R.R. Tolkien");
         WRITERS.add("Fran Walsh");
         WRITERS.add("Philippa Boyens");
@@ -35,8 +35,7 @@ public class MokitoMovieTest {
     }
 
     @Test
-    public void verifySpyMovieByTitle()
-    {
+    public void verifySpyMovieByTitle() {
         //arrange
         //spy
         Movie spyMovie = spy(new Movie());
@@ -44,28 +43,29 @@ public class MokitoMovieTest {
         //verify
         verify(spyMovie).getTitle();
         //assert
-        Assert.assertEquals(null,spyMovie.getTitle());
+        Assert.assertEquals(null, spyMovie.getTitle());
     }
+
     //Mock Test
     @Test
-    public void verifyMockedMovieByTitle() throws IllegalArgumentException{
+    public void verifyMockedMovieByTitle() throws IllegalArgumentException {
         // arrange
         Movie movie = mock(Movie.class);
         //act
         movie.getTitle();
         //assert
         verify(movie).getTitle();
-        Assert.assertEquals(null,movie.getTitle());
+        Assert.assertEquals(null, movie.getTitle());
 
     }
+
     //Stub Test
     @Test
-    public void shouldStubFakeObj()
-    {
+    public void shouldStubFakeObj() {
         //arrange
         FillInWritersAndStars();
         //spy
-        Movie spyMovie = spy(new Movie(MOVIE_NAME,CATEGORY,GENRE,FORMAT,YEAR,DIRECTOR,WRITERS,STARS));
+        Movie spyMovie = spy(new Movie(MOVIE_NAME, CATEGORY, GENRE, FORMAT, YEAR, DIRECTOR, WRITERS, STARS));
         spyMovie.getTitle();
         //stub
         when(spyMovie.getTitle()).thenReturn(MOVIE_NAME);

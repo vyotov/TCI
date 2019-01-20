@@ -2,14 +2,9 @@ package com.company.Models.exceptions;
 
 import com.company.SearchAlgorithms.DataExtractor;
 import com.company.SearchAlgorithms.Extractor;
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
-import org.jsoup.select.Elements;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
 

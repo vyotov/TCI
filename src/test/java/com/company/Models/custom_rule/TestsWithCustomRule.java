@@ -3,9 +3,9 @@ package com.company.Models.custom_rule;
 import com.company.Models.Book;
 import com.company.SearchAlgorithms.Extractor;
 import com.google.gson.Gson;
-import com.google.gson.JsonObject;
 import org.json.simple.JSONObject;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 
@@ -15,15 +15,14 @@ import java.util.Arrays;
 
 public class TestsWithCustomRule {
 
-    private Extractor extractor = new Extractor("http://localhost:8888");
-
-
-    @Rule
-    public InitializationRule rule = new InitializationRule();
-
     @Rule
     public LoggerRule performanceLogger = new LoggerRule();
-    public TestsWithCustomRule() throws MalformedURLException {
+    private Extractor extractor;
+
+    @Before
+    public void setup() throws MalformedURLException {
+        extractor = new Extractor("http://localhost:8888");
+
     }
 
     @Test
@@ -62,7 +61,6 @@ public class TestsWithCustomRule {
         JSONObject actual = extractor.getJsonForSearchByKeyWord("978-0132350884");
 
         String expected = new Gson().toJson(book);
-
 
         //Assert
         Assert.assertEquals(expected, actual.toString());
