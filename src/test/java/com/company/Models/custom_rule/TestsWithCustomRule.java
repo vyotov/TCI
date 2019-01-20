@@ -3,26 +3,35 @@ package com.company.Models.custom_rule;
 import com.company.Models.Book;
 import com.company.SearchAlgorithms.Extractor;
 import com.google.gson.Gson;
+import com.google.gson.JsonObject;
+import org.json.simple.JSONObject;
 import org.junit.Assert;
 import org.junit.Rule;
 import org.junit.Test;
 
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.util.Arrays;
 
 public class TestsWithCustomRule {
 
-    private Extractor extractor;
+    private Extractor extractor = new Extractor("http://localhost:8888");
+
 
     @Rule
-    public InitializationRule rule = new InitializationRule(extractor);
+    public InitializationRule rule = new InitializationRule();
+
+    @Rule
+    public LoggerRule performanceLogger = new LoggerRule();
+    public TestsWithCustomRule() throws MalformedURLException {
+    }
 
     @Test
     public void testSearchById() throws IOException, ClassNotFoundException {
         //Act
         Book book = new Book();
         book.setCategory("Books");
-        book.setName("Ccclean Code: A Handbook of Agile Software Craftsmanship");
+        book.setName("Clean Code: A Handbook of Agile Software Craftsmanship");
         book.setGenre("Tech");
         book.setFormat("Ebook");
         book.setYear("2008");
@@ -50,14 +59,13 @@ public class TestsWithCustomRule {
         book.setAuthors(Arrays.asList("Robert C. Martin"));
         book.setPublisher("Prentice Hall");
         book.setIsbn("978-0132350884");
-        String actual = new Gson().toJson(extractor.getJsonForSearchByKeyWord("mokito"));
+        JSONObject actual = extractor.getJsonForSearchByKeyWord("978-0132350884");
 
         String expected = new Gson().toJson(book);
 
-        System.out.println(actual);
-        System.out.println(expected);
+
         //Assert
-        Assert.assertEquals(expected, actual);
+        Assert.assertEquals(expected, actual.toString());
 
     }
 

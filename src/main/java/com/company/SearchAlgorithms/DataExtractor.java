@@ -35,7 +35,7 @@ public class DataExtractor {
 
 
     public Music parseMusic(Element table) throws IOException {
-        if (url.equals("") || url == null) {
+        if (url.equals("") && table == null) {
             throw new RuntimeException("method set url must be called");
         }
 
@@ -67,8 +67,6 @@ public class DataExtractor {
     }
 
     public Movie parseMovie(Element table) throws IOException {
-
-
         this.doc = Jsoup.connect(url).get();
 
         Elements th = table.getElementsByTag("th");

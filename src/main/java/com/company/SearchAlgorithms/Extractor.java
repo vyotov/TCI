@@ -34,7 +34,6 @@ public class Extractor {
     public Extractor(String URL) throws MalformedURLException {
         this.URL = URL;
         links = new HashSet<>();
-
         getPageLinks(URL);
     }
 

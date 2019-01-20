@@ -41,10 +41,4 @@ public class TestsWithRules {
         rule.expect(NullPointerException.class);
         extractor.searchById("a");
     }
-    @Test
-    public void testRuntimeExcetionWithRule() throws RuntimeException, IOException, ClassNotFoundException {
-        rule.expect(RuntimeException.class);
-        //dataExtractor.parseMovie("Tag");
-    }
-
 }
