@@ -11,7 +11,6 @@ public class Main {
 
     public static void main(String[] args) throws IOException, ClassNotFoundException {
         Extractor extractor = new Extractor("http://localhost:8888");
-
         String actual = new Gson().toJson(extractor.findObjectModelForSearchText(extractor.getAllObjects(), "Elvis Presley"));
         System.out.println(actual);
     }
