@@ -28,6 +28,11 @@ public class Extractor {
     private Long endTime;
     private Gson gson = new Gson();
     private DataExtractor dataExtractor = new DataExtractor();
+
+    public Element getTable() {
+        return table;
+    }
+
     private Element table = null;
     private String URL;
 
