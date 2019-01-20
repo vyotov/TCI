@@ -62,4 +62,22 @@ public class MokitoTest {
         Assert.assertEquals(expected,actual);
         verify(mockedExtractor).getAllObjects();
     }
+
+    //INDIRECT INPUT
+    @Test
+    public void verifyFindObjectModelForSearchText() throws IOException, ClassNotFoundException {
+        //arrange
+        Extractor extractor = new Extractor("http://localhost:8888");
+        mockedExtractor.getPageLinks("http://localhost:8888");
+
+        //act
+        Object actual = extractor.findObjectModelForSearchText( extractor.getAllObjects(),"Tech");
+        when(mockedExtractor.getAllObjects()).thenReturn(extractor.getAllObjects());
+        //when(mockedExtractor.findObjectModelForSearchText(mockedExtractor.getAllObjects(),"Tech")).thenReturn(actual);
+        Object expected = extractor.findObjectModelForSearchText( mockedExtractor.getAllObjects(),"Tech");
+
+        //assert
+        Assert.assertEquals(expected,actual);
+        verify(mockedExtractor).getAllObjects();
+    }
 }

@@ -42,7 +42,6 @@ public class ExceptionTests {
     @Test(expected = RuntimeException.class)
     public void testIndexOutOfBoundsException() throws  IOException {
         dataExtractor.parseMovie(new Element("Tag"));
-
     }
 
 

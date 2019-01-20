@@ -1,5 +1,6 @@
 package com.company.Models.test_rules;
 
+import com.company.SearchAlgorithms.DataExtractor;
 import com.company.SearchAlgorithms.Extractor;
 import org.junit.Before;
 import org.junit.Rule;
@@ -14,9 +15,11 @@ public class TestsWithRules {
     @Rule
     public ExpectedException rule = ExpectedException.none();
     private Extractor extractor;
+    private DataExtractor dataExtractor;
 
     @Before
     public void setup() throws MalformedURLException {
+        dataExtractor = new DataExtractor();
         extractor = new Extractor("http://localhost:8888");
 
     }
@@ -38,4 +41,10 @@ public class TestsWithRules {
         rule.expect(NullPointerException.class);
         extractor.searchById("a");
     }
+    @Test
+    public void testRuntimeExcetionWithRule() throws RuntimeException, IOException, ClassNotFoundException {
+        rule.expect(RuntimeException.class);
+        //dataExtractor.parseMovie("Tag");
+    }
+
 }
