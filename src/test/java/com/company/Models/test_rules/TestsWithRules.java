@@ -15,7 +15,6 @@ public class TestsWithRules {
     public ExpectedException rule = ExpectedException.none();
     private Extractor extractor;
 
-
     @Before
     public void setup() throws MalformedURLException {
         extractor = new Extractor();
@@ -26,7 +25,6 @@ public class TestsWithRules {
     public void testSearchByIdWithRule() throws IOException, ClassNotFoundException {
         rule.expect(IllegalArgumentException.class);
         extractor.searchById("");
-
     }
 
     @Test
@@ -40,6 +38,4 @@ public class TestsWithRules {
         rule.expect(NullPointerException.class);
         extractor.searchById(".");
     }
-
-
 }

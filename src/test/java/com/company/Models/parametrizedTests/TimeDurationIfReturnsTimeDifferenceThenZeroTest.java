@@ -1,4 +1,4 @@
-package com.company.Models.ParametrizedTests;
+package com.company.Models.parametrizedTests;
 
 import com.company.SearchAlgorithms.Extractor;
 import org.junit.Assert;
@@ -13,7 +13,7 @@ import java.util.Arrays;
 import java.util.Collection;
 
 @RunWith(Parameterized.class)
-public class TimeDurationIfReturnsTimeDifferenctThenZeroTest {
+public class TimeDurationIfReturnsTimeDifferenceThenZeroTest {
     private final Integer expected;
     private Extractor extractor;
 
@@ -23,13 +23,13 @@ public class TimeDurationIfReturnsTimeDifferenctThenZeroTest {
         extractor.getPageLinks("http://localhost:8888");
     }
 
-    public TimeDurationIfReturnsTimeDifferenctThenZeroTest(Integer expected) {
+    public TimeDurationIfReturnsTimeDifferenceThenZeroTest(Integer expected) {
         this.expected = expected;
     }
 
     @Parameterized.Parameters
     public static Collection<Object[]> testData() {
-        Object[][] data = new Object[][]{{0},{1000}};
+        Object[][] data = new Object[][]{{0}, {1000}};
         return Arrays.asList(data);
     }
 
