@@ -22,7 +22,6 @@ public class TestsWithRules {
     public void setup() throws MalformedURLException {
         dataExtractor = new DataExtractor();
         extractor = new Extractor("http://localhost:8888");
-
     }
 
     @Test
@@ -41,6 +40,12 @@ public class TestsWithRules {
     public void testIfNotNullWithRule() throws NullPointerException, IOException, ClassNotFoundException {
         rule.expect(NullPointerException.class);
         extractor.searchById("a");
+    }
+
+    @Test
+    public void testIfStringContainsOnlyNumbersThrowsExpection() {
+        rule.expect(RuntimeException.class);
+        extractor.checkIfStringContainsOnlyNumbers(null);
     }
 
 
