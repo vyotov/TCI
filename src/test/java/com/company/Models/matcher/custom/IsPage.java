@@ -1,7 +1,10 @@
 package com.company.Models.matcher.custom;
 
 import com.company.SearchAlgorithms.Extractor;
-import org.hamcrest.*;
+import org.hamcrest.Description;
+import org.hamcrest.Factory;
+import org.hamcrest.Matcher;
+import org.hamcrest.TypeSafeMatcher;
 
 import java.net.MalformedURLException;
 
@@ -15,14 +18,12 @@ public class IsPage extends TypeSafeMatcher {
     protected boolean matchesSafely(Object e) {
         try {
             Extractor extractor = new Extractor("http://localhost:8888");
-            if(extractor.getPageCount()!=0)
-            {
+            if (extractor.getPageCount() != 0) {
                 return false;
             }
         } catch (MalformedURLException e1) {
             e1.printStackTrace();
         }
-
         return true;
     }
 
