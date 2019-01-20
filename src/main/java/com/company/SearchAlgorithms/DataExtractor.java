@@ -20,7 +20,10 @@ public class DataExtractor {
     private String url;
 
 
-    public void setUrl(String url) {
+    public void setUrl(String url) throws IllegalAccessException {
+        if (url.equals("")) {
+            throw new IllegalArgumentException("Empty url " + url);
+        }
         this.url = url;
     }
 

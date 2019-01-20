@@ -26,7 +26,7 @@ public class ExceptionTests {
     }
 
     @Test(expected = IllegalArgumentException.class)
-    public void testSearchById() throws IOException, ClassNotFoundException {
+    public void testSearchById() throws IOException, ClassNotFoundException, IllegalAccessException {
         extractor.searchById("");
     }
 
@@ -36,7 +36,7 @@ public class ExceptionTests {
     }
 
     @Test(expected = NullPointerException.class)
-    public void testSearchByKeyWord() throws IOException, ClassNotFoundException, NullPointerException {
+    public void testSearchByKeyWord() throws IOException, ClassNotFoundException, NullPointerException, IllegalAccessException {
         extractor.getJsonForSearchByKeyWord(null);
     }
 

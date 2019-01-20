@@ -25,19 +25,19 @@ public class HamcrestMatcherTest {
     }
 
     @Test
-    public void testSearchByIdForBookModel() throws IOException, ClassNotFoundException {
+    public void testSearchByIdForBookModel() throws IOException, ClassNotFoundException, IllegalAccessException {
         //Assert
         assertThat(extractor.searchById("102"), instanceOf(Book.class));
     }
 
     @Test
-    public void testSearchByIdForMusicModel() throws IOException, ClassNotFoundException {
+    public void testSearchByIdForMusicModel() throws IOException, ClassNotFoundException, IllegalAccessException {
         //Assert
         assertThat(extractor.searchById("302"), instanceOf(Music.class));
     }
 
     @Test
-    public void testSearchByIdForMovieModel() throws IOException, ClassNotFoundException {
+    public void testSearchByIdForMovieModel() throws IOException, ClassNotFoundException, IllegalAccessException {
         //Assert
         assertThat(extractor.searchById("202"), instanceOf(Movie.class));
     }

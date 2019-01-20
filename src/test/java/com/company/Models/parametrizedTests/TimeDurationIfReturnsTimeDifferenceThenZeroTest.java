@@ -33,7 +33,7 @@ public class TimeDurationIfReturnsTimeDifferenceThenZeroTest {
     }
 
     @Test
-    public void testTimeDuration() throws IOException, ClassNotFoundException {
+    public void testTimeDuration() throws IOException, ClassNotFoundException, IllegalAccessException {
         extractor.getAllObjects();
         Long actual = extractor.getTimeDuration();
         //Assert

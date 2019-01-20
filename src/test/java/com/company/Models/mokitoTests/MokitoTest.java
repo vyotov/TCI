@@ -16,19 +16,19 @@ import javax.xml.crypto.Data;
 import java.io.IOException;
 import java.util.Arrays;
 
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 @RunWith(MockitoJUnitRunner.class)
 public class MokitoTest {
     @Mock
-    private DataExtractor dataExtractor;
+    private DataExtractor mockedDataExtractor;
     @Mock
     private Extractor mockedExtractor;
+    @Mock
     private Element table;
 
     @Test
-    public void verifySearchById() throws IOException, ClassNotFoundException {
+    public void verifySearchById() throws IOException, ClassNotFoundException, IllegalAccessException {
         //arrange
         Extractor extractor = new Extractor("http://localhost:8888");
         mockedExtractor.getPageLinks("http://localhost:8888");
@@ -42,7 +42,7 @@ public class MokitoTest {
     }
 
     @Test
-    public void verifySearchByKeyWord() throws IOException, ClassNotFoundException {
+    public void verifySearchByKeyWord() throws IOException, ClassNotFoundException, IllegalAccessException {
         //arrange
         Extractor extractor = new Extractor("http://localhost:8888");
         mockedExtractor.getPageLinks("http://localhost:8888");
@@ -56,7 +56,7 @@ public class MokitoTest {
     }
 
     @Test
-    public void verifyGetAllObjects() throws IOException, ClassNotFoundException {
+    public void verifyGetAllObjects() throws IOException, ClassNotFoundException, IllegalAccessException {
         //arrange
         Extractor extractor = new Extractor("http://localhost:8888");
         mockedExtractor.getPageLinks("http://localhost:8888");
@@ -77,7 +77,7 @@ public class MokitoTest {
 
     //INDIRECT INPUT
     @Test
-    public void verifyFindObjectModelForSearchText() throws IOException, ClassNotFoundException {
+    public void verifyFindObjectModelForSearchText() throws IOException, ClassNotFoundException, IllegalAccessException {
         //arrange
         Extractor extractor = new Extractor("http://localhost:8888");
         mockedExtractor.getPageLinks("http://localhost:8888");
@@ -93,7 +93,7 @@ public class MokitoTest {
         verify(mockedExtractor).getAllObjects();
     }
 
-    @Test public void verifyParsingModel() throws IOException
+    @Test public void verifyMockedDummy() throws IOException
     {
         Movie movie = new Movie();
         movie.setCategory("Movies");
@@ -105,12 +105,11 @@ public class MokitoTest {
         movie.setTitle("Office Space");
         movie.setWriters(Arrays.asList("William Goldman"));
         movie.setStars(Arrays.asList("Ron Livingston", "Jennifer Aniston", "David Herman", "Ajay Naidu", "Diedrich Bader", "Stephen Root"));
-        Extractor extractor = new Extractor("http://localhost:8888");
-        table = extractor.getTable();
+       // Extractor extractor = new Extractor("http://localhost:8888");
+       // table = extractor.getTable();
 
-        when(dataExtractor.parseMovie(table)).thenReturn(movie);
-        dataExtractor.parseMovie(table);
-        verify(dataExtractor).parseMovie(table);
+        Movie mockedMovie = mock(Movie.class);
+
        // MailServer mailServer = mock(MailServer.class);
        // Messenger sut = new Messenger(mailServer, templateEngine);
        // sut.sendMessage(client, template);

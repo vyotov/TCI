@@ -36,7 +36,7 @@ public class ExtractorTest {
      * Method to test if SearchById returns the correct Movie model
      */
     @Test
-    public void testSearchByIdForMovieModel() throws IOException, ClassNotFoundException {
+    public void testSearchByIdForMovieModel() throws IOException, ClassNotFoundException, IllegalAccessException {
         //Arrange
         Extractor extractor = new Extractor("http://localhost:8888");
 
@@ -63,7 +63,7 @@ public class ExtractorTest {
      * Method to test if SearchById returns the correct Book model
      */
     @Test
-    public void testSearchByIdForBookModel() throws IOException, ClassNotFoundException {
+    public void testSearchByIdForBookModel() throws IOException, ClassNotFoundException, IllegalAccessException {
         //Arrange
         Extractor extractor = new Extractor("http://localhost:8888");
 
@@ -89,7 +89,7 @@ public class ExtractorTest {
      * Method to test if SearchById returns the correct Music model
      */
     @Test
-    public void testSearchByIdForMusicModel() throws IOException, ClassNotFoundException {
+    public void testSearchByIdForMusicModel() throws IOException, ClassNotFoundException, IllegalAccessException {
         //Arrange
         Extractor extractor = new Extractor("http://localhost:8888");
 
@@ -112,7 +112,7 @@ public class ExtractorTest {
      * Method to test if SearchByIdJson returns the correct Json object
      */
     @Test
-    public void testSearchByIdJson() throws IOException, ClassNotFoundException {
+    public void testSearchByIdJson() throws IOException, ClassNotFoundException, IllegalAccessException {
         //Arrange
         Extractor extractor = new Extractor("http://localhost:8888");
 
@@ -154,7 +154,7 @@ public class ExtractorTest {
      * Method to test if GetJsonForSearchByKeyWord returns the correct JSON object
      */
     @Test
-    public void testGetJsonForSearchByKeyWord() throws IOException, ClassNotFoundException {
+    public void testGetJsonForSearchByKeyWord() throws IOException, ClassNotFoundException, IllegalAccessException {
         //Arrange
         Extractor extractor = new Extractor("http://localhost:8888");
 
@@ -171,7 +171,7 @@ public class ExtractorTest {
      * Method to test if FindObjectModelForSearchText returns the correct model if search word from Aenre is used
      */
     @Test
-    public void testFindObjectModelForSearchTextByArtist() throws IOException, ClassNotFoundException {
+    public void testFindObjectModelForSearchTextByArtist() throws IOException, ClassNotFoundException, IllegalAccessException {
         //Arrange
         Extractor extractor = new Extractor("http://localhost:8888");
 
@@ -185,7 +185,7 @@ public class ExtractorTest {
      * Method to test if FindObjectModelForSearchText returns the correct model if search word from Genre is used
      */
     @Test
-    public void testFindObjectModelForSearchTextByGenre() throws IOException, ClassNotFoundException {
+    public void testFindObjectModelForSearchTextByGenre() throws IOException, ClassNotFoundException, IllegalAccessException {
         //Arrange
         Extractor extractor = new Extractor("http://localhost:8888");
 
@@ -241,7 +241,7 @@ public class ExtractorTest {
      * Method to test if getAllObject returns the correct JSON string.
      */
     @Test
-    public void testGetAllObjects() throws IOException, ClassNotFoundException {
+    public void testGetAllObjects() throws IOException, ClassNotFoundException, IllegalAccessException {
         //Arrange
         Extractor extractor = new Extractor("http://localhost:8888");
 
@@ -255,7 +255,7 @@ public class ExtractorTest {
 
 
     @Test
-    public void testTimeDurationIfSet() throws IOException, ClassNotFoundException {
+    public void testTimeDurationIfSet() throws IOException, ClassNotFoundException, IllegalAccessException {
         //Arrange
         Extractor extractor = new Extractor("http://localhost:8888");
 

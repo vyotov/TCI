@@ -94,7 +94,7 @@ public class Extractor {
     }
 
     //Tested
-    public Object searchById(String searchById) throws IOException, ClassNotFoundException {
+    public Object searchById(String searchById) throws IOException, ClassNotFoundException, IllegalAccessException {
         if (searchById.equals("")) {
             throw new IllegalArgumentException("Empty search id " + searchById);
         }
@@ -125,7 +125,7 @@ public class Extractor {
     }
 
     //Tested
-    public JSONObject getJsonResultForSearchById(String searchById) throws IOException, ClassNotFoundException {
+    public JSONObject getJsonResultForSearchById(String searchById) throws IOException, ClassNotFoundException, IllegalAccessException {
         JSONObject result = new JSONObject();
         startTime = System.currentTimeMillis();
         result.put("id", searchById);
@@ -144,7 +144,7 @@ public class Extractor {
     }
 
     //Tested
-    public JSONObject getJsonForSearchByKeyWord(String text) throws IOException, ClassNotFoundException {
+    public JSONObject getJsonForSearchByKeyWord(String text) throws IOException, ClassNotFoundException, IllegalAccessException {
 
         if (text.equals("")) {
             throw new NullPointerException("Empty search keyword" + text);
@@ -160,7 +160,7 @@ public class Extractor {
     }
 
     //Tested
-    public JSONObject getAllObjects() throws IOException, ClassNotFoundException {
+    public JSONObject getAllObjects() throws IOException, ClassNotFoundException, IllegalAccessException {
         startTime = System.currentTimeMillis();
         List<Object> moviesList = new ArrayList<>();
         List<Object> bookList = new ArrayList<>();

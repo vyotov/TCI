@@ -26,7 +26,7 @@ public class TestsWithCustomRule {
     }
 
     @Test
-    public void testSearchById() throws IOException, ClassNotFoundException {
+    public void testSearchById() throws IOException, ClassNotFoundException, IllegalAccessException {
         //Act
         Book book = new Book();
         book.setCategory("Books");
@@ -47,7 +47,7 @@ public class TestsWithCustomRule {
     }
 
     @Test
-    public void testSearchByKeyWord() throws IOException, ClassNotFoundException {
+    public void testSearchByKeyWord() throws IOException, ClassNotFoundException, IllegalAccessException {
         //Act
         //Reset time
         JSONObject actual = extractor.getJsonForSearchByKeyWord("Mike Judge");

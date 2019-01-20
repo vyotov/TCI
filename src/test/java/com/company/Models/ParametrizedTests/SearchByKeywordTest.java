@@ -44,7 +44,7 @@ public class SearchByKeywordTest {
     }
 
     @Test
-    public void shouldPassTestSearchByKeywordTest() throws IOException, ClassNotFoundException {
+    public void shouldPassTestSearchByKeywordTest() throws IOException, ClassNotFoundException, IllegalAccessException {
         JSONObject actual = extractor.getJsonForSearchByKeyWord(keyWord);
         actual.put("time", 0);
         //Assert
@@ -52,7 +52,7 @@ public class SearchByKeywordTest {
     }
 
     @Test
-    public void shouldFailTestSearchByKeywordTest() throws IOException, ClassNotFoundException {
+    public void shouldFailTestSearchByKeywordTest() throws IOException, ClassNotFoundException, IllegalAccessException {
         JSONObject actual = extractor.getJsonForSearchByKeyWord(keyWord);
         actual.put("time", 0);
         //Assert

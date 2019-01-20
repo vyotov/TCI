@@ -28,6 +28,7 @@ public class CustomMatcherTest {
     public void shouldPassForPageCount() {
         // Given
         int pages = extractor.getPageCount();
+        System.out.println("WAHAT: "+pages);
         // Then
         assertThat(pages, is(page()));
     }
@@ -37,7 +38,7 @@ public class CustomMatcherTest {
         // Given
         int pages = 0;
         // Then
-        assertThat(0, is(not(page())));
+        assertThat(pages, is(not(page())));
     }
 
     public void checkIsValidJson() {

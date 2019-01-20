@@ -80,14 +80,14 @@ public class SearchByIdParamTest {
     }
 
     @Test
-    public void shouldPassSearchById() throws IOException, ClassNotFoundException {
+    public void shouldPassSearchById() throws IOException, ClassNotFoundException, IllegalAccessException {
         String actual = new Gson().toJson(extractor.searchById(expectedInput));
         String expected = new Gson().toJson(expectedObject);
         //Assert
         Assert.assertEquals(expected, actual);
     }
     @Test
-    public void shouldFailSearchById() throws IOException, ClassNotFoundException {
+    public void shouldFailSearchById() throws IOException, ClassNotFoundException, IllegalAccessException {
         //arrange
         String actual = new Gson().toJson(extractor.searchById(expectedInput));
         //Assert
