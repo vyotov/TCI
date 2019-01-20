@@ -8,11 +8,12 @@ import com.company.SearchAlgorithms.Extractor;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
+
 import java.io.IOException;
 import java.net.MalformedURLException;
 
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.instanceOf;
+    import static org.hamcrest.Matchers.*;
 
 public class HamcrestMatcherTest {
 
@@ -42,5 +43,16 @@ public class HamcrestMatcherTest {
     public void testSearchByIdForMovieModel() throws IOException, ClassNotFoundException {
         //Assert
         assertThat(extractor.searchById("202"), instanceOf(Movie.class));
+    }
+
+    @Test
+    public void testForValidURL() {
+        // Hamcrest for not equals check
+        assertThat(false, is(not(equalTo(extractor.isValidURL("http://localhost:8888")))));
+    }
+
+    @Test
+    public void testForInValidURL() {
+        assertThat(false, is(equalTo(extractor.isValidURL("dasdsa"))));
     }
 }
