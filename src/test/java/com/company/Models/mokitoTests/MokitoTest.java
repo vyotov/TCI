@@ -3,6 +3,7 @@ package com.company.Models.mokitoTests;
 import com.company.Models.Book;
 import com.company.Models.Category;
 import com.company.Models.Movie;
+import com.company.Models.Music;
 import com.company.SearchAlgorithms.DataExtractor;
 import com.company.SearchAlgorithms.Extractor;
 import com.company.utils.Utils;
@@ -48,7 +49,49 @@ public class MokitoTest {
 
     //INDIRECT INPUT
     @Test
-    public void verifyParseMovie() throws IOException, IllegalAccessException, ClassNotFoundException {
+    public void testSearchByIdForMovie() throws IOException, ClassNotFoundException, IllegalAccessException {
+        String url = "http://localhost:8888";
+        String detailPage = "http://localhost:8888/sample_site_to_crawl/details.php?id=202";
+        //arrange
+        Movie movie = getMovie();
+        when(mockedUtils.findCategory(detailPage)).thenReturn(Category.MOVIE);
+        when(mockedDataExtractor.parseMovie(element)).thenReturn(movie);
+        when(mockedUtils.getElement()).thenReturn(element);
+        Extractor extractor = new Extractor(url, mockedDataExtractor, mockedUtils);
+        Object obj = extractor.searchById("202", mockedDataExtractor);
+        Assert.assertEquals(obj, movie);
+    }
+
+    @Test
+    public void testSearchByIdForMusic() throws IOException, ClassNotFoundException, IllegalAccessException {
+        String url = "http://localhost:8888";
+        String detailPage = "http://localhost:8888/sample_site_to_crawl/details.php?id=302";
+        //arrange
+        Music music = getMusic();
+        when(mockedUtils.findCategory(detailPage)).thenReturn(Category.MUSIC);
+        when(mockedDataExtractor.parseMusic(element)).thenReturn(music);
+        when(mockedUtils.getElement()).thenReturn(element);
+        Extractor extractor = new Extractor(url, mockedDataExtractor, mockedUtils);
+        Object obj = extractor.searchById("302", mockedDataExtractor);
+        Assert.assertEquals(obj, music);
+    }
+
+    @Test
+    public void testSearchByIdForBook() throws IOException, ClassNotFoundException {
+        String url = "http://localhost:8888";
+        String detailPage = "http://localhost:8888/sample_site_to_crawl/details.php?id=102";
+        //arrange
+        Book book = getBook();
+        when(mockedUtils.findCategory(detailPage)).thenReturn(Category.BOOKS);
+        when(mockedDataExtractor.parseBook(element)).thenReturn(book);
+        when(mockedUtils.getElement()).thenReturn(element);
+        Extractor extractor = new Extractor(url, mockedDataExtractor, mockedUtils);
+        Object obj = extractor.searchById("102", mockedDataExtractor);
+        Assert.assertEquals(obj, book);
+    }
+    //VERIFICATION OF DIRECT INPUT
+    @Test
+    public void verifyParseMovie() throws IOException, ClassNotFoundException {
         String url = "http://localhost:8888";
         String detailPage = "http://localhost:8888/sample_site_to_crawl/details.php?id=202";
         //arrange
@@ -66,7 +109,7 @@ public class MokitoTest {
         String url = "http://localhost:8888";
         String detailPage = "http://localhost:8888/sample_site_to_crawl/details.php?id=102";
         //arrange
-        when(mockedUtils.findCategory(detailPage)).thenReturn(Category.MOVIE);
+        when(mockedUtils.findCategory(detailPage)).thenReturn(Category.BOOKS);
         when(mockedUtils.getElement()).thenReturn(element);
         Extractor extractor = new Extractor(url, mockedDataExtractor, mockedUtils);
         //Act
@@ -85,20 +128,6 @@ public class MokitoTest {
         //Act
         extractor.searchById("302", mockedDataExtractor);
         verify(mockedDataExtractor).parseMusic(element);
-    }
-    
-    @Test
-    public void testSearchById() throws IOException, ClassNotFoundException, IllegalAccessException {
-        String url = "http://localhost:8888";
-        String detailPage = "http://localhost:8888/sample_site_to_crawl/details.php?id=202";
-        //arrange
-        Movie movie = getMovie();
-        when(mockedUtils.findCategory(detailPage)).thenReturn(Category.MOVIE);
-        when(mockedDataExtractor.parseMovie(element)).thenReturn(movie);
-        when(mockedUtils.getElement()).thenReturn(element);
-        Extractor extractor = new Extractor(url, mockedDataExtractor, mockedUtils);
-        Object obj = extractor.searchById("202", mockedDataExtractor);
-        Assert.assertEquals(obj, movie);
     }
 
     @Test
@@ -141,6 +170,17 @@ public class MokitoTest {
         book.setPublisher("Prentice Hall");
         book.setIsbn("978-0132350884");
         return book;
+    }
+
+    private Music getMusic(){
+        Music music = new Music();
+        music.setName("Elvis Forever");
+        music.setGenre("Rock");
+        music.setFormat("Vinyl");
+        music.setYear("2015");
+        music.setArtist("Elvis Presley");
+        music.setCategory("Music");
+        return music;
     }
 
 
