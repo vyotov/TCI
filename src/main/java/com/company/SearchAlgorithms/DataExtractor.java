@@ -21,6 +21,9 @@ public class DataExtractor {
 
 
     public void setUrl(String url) {
+        if (url.equals("")) {
+            throw new IllegalArgumentException("Empty url " + url);
+        }
         this.url = url;
     }
 
@@ -111,6 +114,7 @@ public class DataExtractor {
                 movie.setStars(result);
             }
         }
+        System.out.println(movie);
         return movie;
     }
 

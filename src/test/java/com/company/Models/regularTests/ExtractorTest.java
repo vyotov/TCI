@@ -4,6 +4,7 @@ import com.company.Models.Book;
 import com.company.Models.Category;
 import com.company.Models.Movie;
 import com.company.Models.Music;
+import com.company.SearchAlgorithms.DataExtractor;
 import com.company.SearchAlgorithms.Extractor;
 import com.google.gson.Gson;
 import org.json.simple.JSONObject;
@@ -23,7 +24,8 @@ public class ExtractorTest {
     @Test
     public void getPageLinks() throws MalformedURLException {
         //Arrange
-        Extractor extractor = new Extractor("http://localhost:8888");
+        DataExtractor dataExtractor = new DataExtractor();
+        Extractor extractor = new Extractor("http://localhost:8888",dataExtractor);
         //Act
         int expected = 22;
         int actual = extractor.getPageCount();
@@ -36,9 +38,10 @@ public class ExtractorTest {
      * Method to test if SearchById returns the correct Movie model
      */
     @Test
-    public void testSearchByIdForMovieModel() throws IOException, ClassNotFoundException {
+    public void testSearchByIdForMovieModel() throws IOException, ClassNotFoundException, IllegalAccessException {
         //Arrange
-        Extractor extractor = new Extractor("http://localhost:8888");
+        DataExtractor dataExtractor = new DataExtractor();
+        Extractor extractor = new Extractor("http://localhost:8888",dataExtractor);
 
         //Act
         Movie movie = new Movie();
@@ -63,9 +66,10 @@ public class ExtractorTest {
      * Method to test if SearchById returns the correct Book model
      */
     @Test
-    public void testSearchByIdForBookModel() throws IOException, ClassNotFoundException {
+    public void testSearchByIdForBookModel() throws IOException, ClassNotFoundException, IllegalAccessException {
         //Arrange
-        Extractor extractor = new Extractor("http://localhost:8888");
+        DataExtractor dataExtractor = new DataExtractor();
+        Extractor extractor = new Extractor("http://localhost:8888",dataExtractor);
 
         //Act
         Book book = new Book();
@@ -89,9 +93,10 @@ public class ExtractorTest {
      * Method to test if SearchById returns the correct Music model
      */
     @Test
-    public void testSearchByIdForMusicModel() throws IOException, ClassNotFoundException {
+    public void testSearchByIdForMusicModel() throws IOException, ClassNotFoundException, IllegalAccessException {
         //Arrange
-        Extractor extractor = new Extractor("http://localhost:8888");
+        DataExtractor dataExtractor = new DataExtractor();
+        Extractor extractor = new Extractor("http://localhost:8888",dataExtractor);
 
         //Act
         Music book = new Music();
@@ -112,9 +117,10 @@ public class ExtractorTest {
      * Method to test if SearchByIdJson returns the correct Json object
      */
     @Test
-    public void testSearchByIdJson() throws IOException, ClassNotFoundException {
+    public void testSearchByIdJson() throws IOException, ClassNotFoundException, IllegalAccessException {
         //Arrange
-        Extractor extractor = new Extractor("http://localhost:8888");
+        DataExtractor dataExtractor = new DataExtractor();
+        Extractor extractor = new Extractor("http://localhost:8888",dataExtractor);
 
         //Act
         JSONObject actual = extractor.getJsonResultForSearchById("203");
@@ -130,7 +136,8 @@ public class ExtractorTest {
     @Test
     public void testIfStringContainsOnlyNumbersMethodReturnsCorrect() throws MalformedURLException {
         //Arrange
-        Extractor extractor = new Extractor("http://localhost:8888");
+        DataExtractor dataExtractor = new DataExtractor();
+        Extractor extractor = new Extractor("http://localhost:8888",dataExtractor);
 
         //Assert
         Assert.assertEquals(true, extractor.checkIfStringContainsOnlyNumbers("203"));
@@ -143,7 +150,8 @@ public class ExtractorTest {
     @Test
     public void testIfStringContainsOnlyNumbersMethodReturnsError() throws MalformedURLException {
         //Arrange
-        Extractor extractor = new Extractor("http://localhost:8888");
+        DataExtractor dataExtractor = new DataExtractor();
+        Extractor extractor = new Extractor("http://localhost:8888",dataExtractor);
 
         //Assert
         Assert.assertNotEquals(true, extractor.checkIfStringContainsOnlyNumbers("cat=Movies"));
@@ -154,9 +162,10 @@ public class ExtractorTest {
      * Method to test if GetJsonForSearchByKeyWord returns the correct JSON object
      */
     @Test
-    public void testGetJsonForSearchByKeyWord() throws IOException, ClassNotFoundException {
+    public void testGetJsonForSearchByKeyWord() throws IOException, ClassNotFoundException, IllegalAccessException {
         //Arrange
-        Extractor extractor = new Extractor("http://localhost:8888");
+        DataExtractor dataExtractor = new DataExtractor();
+        Extractor extractor = new Extractor("http://localhost:8888",dataExtractor);
 
         //Act
         //Reset time
@@ -171,9 +180,10 @@ public class ExtractorTest {
      * Method to test if FindObjectModelForSearchText returns the correct model if search word from Aenre is used
      */
     @Test
-    public void testFindObjectModelForSearchTextByArtist() throws IOException, ClassNotFoundException {
+    public void testFindObjectModelForSearchTextByArtist() throws IOException, ClassNotFoundException, IllegalAccessException {
         //Arrange
-        Extractor extractor = new Extractor("http://localhost:8888");
+        DataExtractor dataExtractor = new DataExtractor();
+        Extractor extractor = new Extractor("http://localhost:8888",dataExtractor);
 
         String actual = new Gson().toJson(extractor.findObjectModelForSearchText(extractor.getAllObjects(), "Elvis Presley"));
         String expected = "{\"name\":\"Elvis Forever\",\"category\":\"Music\",\"genre\":\"Rock\",\"format\":\"Vinyl\",\"year\":\"2015\",\"artist\":\"Elvis Presley\"}";
@@ -185,9 +195,10 @@ public class ExtractorTest {
      * Method to test if FindObjectModelForSearchText returns the correct model if search word from Genre is used
      */
     @Test
-    public void testFindObjectModelForSearchTextByGenre() throws IOException, ClassNotFoundException {
+    public void testFindObjectModelForSearchTextByGenre() throws IOException, ClassNotFoundException, IllegalAccessException {
         //Arrange
-        Extractor extractor = new Extractor("http://localhost:8888");
+        DataExtractor dataExtractor = new DataExtractor();
+        Extractor extractor = new Extractor("http://localhost:8888",dataExtractor);
 
         String actual = new Gson().toJson(extractor.findObjectModelForSearchText(extractor.getAllObjects(), "Vinyl"));
         String expected = "{\"name\":\"Elvis Forever\",\"category\":\"Music\",\"genre\":\"Rock\",\"format\":\"Vinyl\",\"year\":\"2015\",\"artist\":\"Elvis Presley\"}";
@@ -201,7 +212,8 @@ public class ExtractorTest {
     @Test
     public void testFindCategoryForMusic() throws MalformedURLException, ClassNotFoundException {
         //Arrange
-        Extractor extractor = new Extractor("http://localhost:8888");
+        DataExtractor dataExtractor = new DataExtractor();
+        Extractor extractor = new Extractor("http://localhost:8888",dataExtractor);
 
         Category actual = extractor.findCategory("http://localhost:8888/sample_site_to_crawl/details.php?id=301");
         Category expected = Category.MUSIC;
@@ -215,7 +227,8 @@ public class ExtractorTest {
     @Test
     public void testFindCategoryForBook() throws MalformedURLException, ClassNotFoundException {
         //Arrange
-        Extractor extractor = new Extractor("http://localhost:8888");
+        DataExtractor dataExtractor = new DataExtractor();
+        Extractor extractor = new Extractor("http://localhost:8888",dataExtractor);
 
         Category actual = extractor.findCategory("http://localhost:8888/sample_site_to_crawl/details.php?id=102");
         Category expected = Category.BOOKS;
@@ -229,7 +242,8 @@ public class ExtractorTest {
     @Test
     public void testFindCategoryForMovie() throws MalformedURLException, ClassNotFoundException {
         //Arrange
-        Extractor extractor = new Extractor("http://localhost:8888");
+        DataExtractor dataExtractor = new DataExtractor();
+        Extractor extractor = new Extractor("http://localhost:8888",dataExtractor);
 
         Category actual = extractor.findCategory("http://localhost:8888/sample_site_to_crawl/details.php?id=202");
         Category expected = Category.MOVIE;
@@ -241,9 +255,10 @@ public class ExtractorTest {
      * Method to test if getAllObject returns the correct JSON string.
      */
     @Test
-    public void testGetAllObjects() throws IOException, ClassNotFoundException {
+    public void testGetAllObjects() throws IOException, ClassNotFoundException, IllegalAccessException {
         //Arrange
-        Extractor extractor = new Extractor("http://localhost:8888");
+        DataExtractor dataExtractor = new DataExtractor();
+        Extractor extractor = new Extractor("http://localhost:8888",dataExtractor);
 
         JSONObject actual = extractor.getAllObjects();
         //Reset time
@@ -255,9 +270,10 @@ public class ExtractorTest {
 
 
     @Test
-    public void testTimeDurationIfSet() throws IOException, ClassNotFoundException {
+    public void testTimeDurationIfSet() throws IOException, ClassNotFoundException, IllegalAccessException {
         //Arrange
-        Extractor extractor = new Extractor("http://localhost:8888");
+        DataExtractor dataExtractor = new DataExtractor();
+        Extractor extractor = new Extractor("http://localhost:8888",dataExtractor);
 
         extractor.getAllObjects();
         Long actual = extractor.getTimeDuration();

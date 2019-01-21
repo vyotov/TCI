@@ -1,8 +1,9 @@
-package com.company.Models.parametrizedTests;
+package com.company.Models.ParametrizedTests;
 
 import com.company.Models.Book;
 import com.company.Models.Movie;
 import com.company.Models.Music;
+import com.company.SearchAlgorithms.DataExtractor;
 import com.company.SearchAlgorithms.Extractor;
 import com.google.gson.Gson;
 import org.junit.Assert;
@@ -21,6 +22,7 @@ public class SearchByIdParamTest {
 
     private Object expectedObject;
     private Extractor extractor;
+    private DataExtractor dataExtractor;
     private String expectedInput;
 
 
@@ -76,14 +78,23 @@ public class SearchByIdParamTest {
 
     @Before
     public void setup() throws MalformedURLException {
-        extractor = new Extractor("http://localhost:8888");
+        dataExtractor = new DataExtractor();
+        extractor = new Extractor("http://localhost:8888",dataExtractor);
     }
 
     @Test
-    public void SearchById() throws IOException, ClassNotFoundException {
+    public void shouldPassSearchById() throws IOException, ClassNotFoundException, IllegalAccessException {
         String actual = new Gson().toJson(extractor.searchById(expectedInput));
         String expected = new Gson().toJson(expectedObject);
         //Assert
         Assert.assertEquals(expected, actual);
     }
+    @Test
+    public void shouldFailSearchById() throws IOException, ClassNotFoundException, IllegalAccessException {
+        //arrange
+        String actual = new Gson().toJson(extractor.searchById(expectedInput));
+        //Assert
+        Assert.assertNotEquals(null, actual);
+    }
+
 }

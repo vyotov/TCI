@@ -1,5 +1,6 @@
-package com.company.Models.parametrizedTests;
+package com.company.Models.ParametrizedTests;
 
+import com.company.SearchAlgorithms.DataExtractor;
 import com.company.SearchAlgorithms.Extractor;
 import org.json.simple.JSONObject;
 import org.junit.Assert;
@@ -18,7 +19,7 @@ public class SearchByKeywordTest {
     private final String keyWord;
     private final String expected;
     private Extractor extractor;
-
+    private DataExtractor dataExtractor;
     public SearchByKeywordTest(String keyWord, String expected) {
 
         this.keyWord = keyWord;
@@ -40,11 +41,20 @@ public class SearchByKeywordTest {
 
     @Before
     public void setup() throws MalformedURLException {
-        extractor = new Extractor("http://localhost:8888");
+        dataExtractor = new DataExtractor();
+        extractor = new Extractor("http://localhost:8888",dataExtractor);
     }
 
     @Test
-    public void TestSearchByKeywordTest() throws IOException, ClassNotFoundException {
+    public void shouldPassTestSearchByKeywordTest() throws IOException, ClassNotFoundException, IllegalAccessException {
+        JSONObject actual = extractor.getJsonForSearchByKeyWord(keyWord);
+        actual.put("time", 0);
+        //Assert
+        Assert.assertEquals(expected, actual.toString());
+    }
+
+    @Test
+    public void shouldFailTestSearchByKeywordTest() throws IOException, ClassNotFoundException, IllegalAccessException {
         JSONObject actual = extractor.getJsonForSearchByKeyWord(keyWord);
         actual.put("time", 0);
         //Assert

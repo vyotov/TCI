@@ -15,8 +15,9 @@ public class ExceptionTests {
 
     @Before
     public void before() throws MalformedURLException {
-        extractor = new Extractor("http://localhost:8888");
         dataExtractor = new DataExtractor();
+        extractor = new Extractor("http://localhost:8888",dataExtractor);
+
 
     }
 
@@ -26,7 +27,7 @@ public class ExceptionTests {
     }
 
     @Test(expected = IllegalArgumentException.class)
-    public void testSearchById() throws IOException, ClassNotFoundException {
+    public void testSearchById() throws IOException, ClassNotFoundException, IllegalAccessException {
         extractor.searchById("");
     }
 
@@ -36,7 +37,7 @@ public class ExceptionTests {
     }
 
     @Test(expected = NullPointerException.class)
-    public void testSearchByKeyWord() throws IOException, ClassNotFoundException, NullPointerException {
+    public void testSearchByKeyWord() throws IOException, ClassNotFoundException, NullPointerException, IllegalAccessException {
         extractor.getJsonForSearchByKeyWord(null);
     }
 

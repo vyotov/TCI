@@ -27,11 +27,13 @@ public class Extractor {
     private Long startTime;
     private Long endTime;
     private Gson gson = new Gson();
-    private DataExtractor dataExtractor = new DataExtractor();
+
     private Element table = null;
     private String URL;
+    private DataExtractor dataExtractor;
 
-    public Extractor(String URL) throws MalformedURLException {
+    public Extractor(String URL, DataExtractor dataExtractor) throws MalformedURLException {
+        this.dataExtractor = dataExtractor;
         this.URL = URL;
         links = new HashSet<>();
         getPageLinks(URL);
@@ -62,7 +64,7 @@ public class Extractor {
         if (!isValidURL(URL) && !canConnectToUrl(URL)) {
             throw new MalformedURLException();
         }
-        if (!links.contains(URL) && !URL.contains("twitter") && !URL.contains("facebook")  && URL.contains("localhost:8888")) {
+            if (!links.contains(URL) && !URL.contains("twitter") && !URL.contains("facebook") && URL.contains("localhost:8888")) {
             try {
                 //Set the start time
                 // startTime = System.currentTimeMillis();
@@ -89,7 +91,7 @@ public class Extractor {
     }
 
     //Tested
-    public Object searchById(String searchById) throws IOException, ClassNotFoundException {
+    public Object searchById(String searchById) throws IOException, ClassNotFoundException, IllegalAccessException {
         if (searchById.equals("")) {
             throw new IllegalArgumentException("Empty search id " + searchById);
         }
@@ -110,6 +112,7 @@ public class Extractor {
                         break;
                     case MOVIE:
                         dataExtractor.setUrl(url);
+                        System.out.println("TABLE: " + table);
                         object = dataExtractor.parseMovie(table);
                         break;
                 }
@@ -120,7 +123,7 @@ public class Extractor {
     }
 
     //Tested
-    public JSONObject getJsonResultForSearchById(String searchById) throws IOException, ClassNotFoundException {
+    public JSONObject getJsonResultForSearchById(String searchById) throws IOException, ClassNotFoundException, IllegalAccessException {
         JSONObject result = new JSONObject();
         startTime = System.currentTimeMillis();
         result.put("id", searchById);
@@ -132,14 +135,14 @@ public class Extractor {
 
     //Tested
     public boolean checkIfStringContainsOnlyNumbers(String text) {
-        if(text == null){
+        if (text == null) {
             throw new RuntimeException("Parameter text should not be called with null value");
         }
         return text.matches("\\d+");
     }
 
     //Tested
-    public JSONObject getJsonForSearchByKeyWord(String text) throws IOException, ClassNotFoundException {
+    public JSONObject getJsonForSearchByKeyWord(String text) throws IOException, ClassNotFoundException, IllegalAccessException {
 
         if (text.equals("")) {
             throw new NullPointerException("Empty search keyword" + text);
@@ -155,7 +158,7 @@ public class Extractor {
     }
 
     //Tested
-    public JSONObject getAllObjects() throws IOException, ClassNotFoundException {
+    public JSONObject getAllObjects() throws IOException, ClassNotFoundException, IllegalAccessException {
         startTime = System.currentTimeMillis();
         List<Object> moviesList = new ArrayList<>();
         List<Object> bookList = new ArrayList<>();
@@ -191,8 +194,6 @@ public class Extractor {
         result.put("movies", gson.toJsonTree(moviesList));
         result.put("books", gson.toJsonTree(bookList));
         result.put("music", gson.toJsonTree(musicList));
-        // System.out.println(result.toString());
-
         return result;
     }
 
@@ -315,8 +316,9 @@ public class Extractor {
         }
         //Find the media details tag on the right of the page
         Elements results = doc.getElementsByClass(Constants.media_detail);
+        System.out.println("RESULT: " + results);
         //Table
-        if(results !=null) {
+        if (results != null) {
             table = results.select("table").first();
             Elements th = table.getElementsByTag("th");
             Elements td = table.getElementsByTag("td");
@@ -327,10 +329,13 @@ public class Extractor {
                 if (key.equals(Constants.category)) {
                     switch (value) {
                         case Constants.music:
+                            System.out.println("Tablemu: " + table);
                             return Category.MUSIC;
                         case Constants.movies:
+                            System.out.println("Tablemo: " + table);
                             return Category.MOVIE;
                         case Constants.books:
+                            System.out.println("Table:bo " + table);
                             return Category.BOOKS;
                     }
                 }
