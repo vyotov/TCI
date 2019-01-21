@@ -1,5 +1,6 @@
-package com.company.Models.parametrizedTests;
+package com.company.Models.ParametrizedTests;
 
+import com.company.SearchAlgorithms.DataExtractor;
 import com.company.SearchAlgorithms.Extractor;
 import org.junit.Assert;
 import org.junit.Test;
@@ -15,6 +16,7 @@ public class PageCountTest {
 
     private final int expected;
     private Extractor extractor;
+    private DataExtractor dataExtractor;
     private String inputUrl;
 
 
@@ -35,7 +37,8 @@ public class PageCountTest {
     @Test
     public void ifPageCountValid() throws MalformedURLException {
         //Arrange
-        extractor = new Extractor(inputUrl);
+        dataExtractor = new DataExtractor();
+        extractor = new Extractor(inputUrl,dataExtractor);
         //Act
         int actual = extractor.getPageCount();
         //Assert
@@ -45,7 +48,8 @@ public class PageCountTest {
     @Test
     public void ifPageCountNotValid() throws MalformedURLException {
         //Arrange
-        extractor = new Extractor(inputUrl);
+        dataExtractor = new DataExtractor();
+        extractor = new Extractor(inputUrl,dataExtractor);
         //Act
         int actual = extractor.getPageCount();
         //Assert

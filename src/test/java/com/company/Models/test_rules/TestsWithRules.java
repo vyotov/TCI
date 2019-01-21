@@ -21,7 +21,7 @@ public class TestsWithRules {
     @Before
     public void setup() throws MalformedURLException {
         dataExtractor = new DataExtractor();
-        extractor = new Extractor("http://localhost:8888");
+        extractor = new Extractor("http://localhost:8888",dataExtractor);
     }
 
     @Test

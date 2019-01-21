@@ -15,8 +15,9 @@ public class ExceptionTests {
 
     @Before
     public void before() throws MalformedURLException {
-        extractor = new Extractor("http://localhost:8888");
         dataExtractor = new DataExtractor();
+        extractor = new Extractor("http://localhost:8888",dataExtractor);
+
 
     }
 

@@ -1,6 +1,7 @@
 package com.company.Models.matcher;
 
 import com.company.Models.custom_rule.LoggerRule;
+import com.company.SearchAlgorithms.DataExtractor;
 import com.company.SearchAlgorithms.Extractor;
 import org.junit.Before;
 import org.junit.Rule;
@@ -18,12 +19,13 @@ public class CustomMatcherTest {
     public LoggerRule performanceLogger = new LoggerRule();
 
     private Extractor extractor;
+    private DataExtractor dataExtractor;
 
     @Before
     public void setup() throws MalformedURLException {
-        extractor = new Extractor("http://localhost:8888");
+        dataExtractor = new DataExtractor();
+        extractor = new Extractor("http://localhost:8888",dataExtractor);
     }
-
     @Test
     public void shouldPassForPageCount() {
         // Given

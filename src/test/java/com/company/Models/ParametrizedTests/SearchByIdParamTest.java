@@ -3,6 +3,7 @@ package com.company.Models.ParametrizedTests;
 import com.company.Models.Book;
 import com.company.Models.Movie;
 import com.company.Models.Music;
+import com.company.SearchAlgorithms.DataExtractor;
 import com.company.SearchAlgorithms.Extractor;
 import com.google.gson.Gson;
 import org.junit.Assert;
@@ -21,6 +22,7 @@ public class SearchByIdParamTest {
 
     private Object expectedObject;
     private Extractor extractor;
+    private DataExtractor dataExtractor;
     private String expectedInput;
 
 
@@ -76,7 +78,8 @@ public class SearchByIdParamTest {
 
     @Before
     public void setup() throws MalformedURLException {
-        extractor = new Extractor("http://localhost:8888");
+        dataExtractor = new DataExtractor();
+        extractor = new Extractor("http://localhost:8888",dataExtractor);
     }
 
     @Test

@@ -1,6 +1,7 @@
 package com.company.Models.ParametrizedTests;
 
 import com.company.Models.Category;
+import com.company.SearchAlgorithms.DataExtractor;
 import com.company.SearchAlgorithms.Extractor;
 import com.google.gson.Gson;
 import org.junit.Assert;
@@ -19,6 +20,7 @@ public class FindCategoryTest {
     private final Category outPutCategory;
     private final String input;
     private Extractor extractor;
+    private DataExtractor dataExtractor;
 
     public FindCategoryTest(Category outPutCategory, String input) {
         this.outPutCategory = outPutCategory;
@@ -35,7 +37,8 @@ public class FindCategoryTest {
 
     @Before
     public void setup() throws MalformedURLException {
-        extractor = new Extractor("http://localhost:8888");
+        dataExtractor = new DataExtractor();
+        extractor = new Extractor("http://localhost:8888",dataExtractor);
     }
 
     @Test

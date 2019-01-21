@@ -1,5 +1,6 @@
 package com.company.Models.matcher.custom;
 
+import com.company.SearchAlgorithms.DataExtractor;
 import com.company.SearchAlgorithms.Extractor;
 import org.hamcrest.Description;
 import org.hamcrest.Factory;
@@ -17,7 +18,8 @@ public class IsPage extends TypeSafeMatcher {
     @Override
     protected boolean matchesSafely(Object e) {
         try {
-            Extractor extractor = new Extractor("http://localhost:8888");
+            DataExtractor dataExtractor = new DataExtractor();
+            Extractor extractor = new Extractor("http://localhost:8888",dataExtractor);
             if (extractor.getPageCount() != 0) {
                 return false;
             }

@@ -1,5 +1,6 @@
 package com.company.Models.parametrizedTests;
 
+import com.company.SearchAlgorithms.DataExtractor;
 import com.company.SearchAlgorithms.Extractor;
 import org.junit.Assert;
 import org.junit.Before;
@@ -17,7 +18,7 @@ public class TestStringContainsOnlyNumbersMethod {
     private final boolean output;
     private final String input;
     private Extractor extractor;
-
+    private DataExtractor dataExtractor;
     public TestStringContainsOnlyNumbersMethod(boolean output, String input) {
         this.output = output;
         this.input = input;
@@ -31,7 +32,8 @@ public class TestStringContainsOnlyNumbersMethod {
 
     @Before
     public void setup() throws MalformedURLException {
-        extractor = new Extractor("http://localhost:8888");
+        dataExtractor = new DataExtractor();
+        extractor = new Extractor("http://localhost:8888",dataExtractor);
     }
 
     @Test

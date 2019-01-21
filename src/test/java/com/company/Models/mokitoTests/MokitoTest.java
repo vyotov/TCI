@@ -1,5 +1,6 @@
 package com.company.Models.mokitoTests;
 
+import com.company.Models.Book;
 import com.company.Models.Movie;
 import com.company.SearchAlgorithms.DataExtractor;
 import com.company.SearchAlgorithms.Extractor;
@@ -30,21 +31,48 @@ public class MokitoTest {
     @Test
     public void verifySearchById() throws IOException, ClassNotFoundException, IllegalAccessException {
         //arrange
-        Extractor extractor = new Extractor("http://localhost:8888");
-        mockedExtractor.getPageLinks("http://localhost:8888");
+        Movie movie = new Movie();
+        movie.setCategory("Movies");
+        movie.setGenre("Comedy");
+        movie.setFormat("Blu-ray");
+        movie.setYear("1999");
+        movie.setFormat("Blu-ray");
+        movie.setDirector("Mike Judge");
+        movie.setTitle("Office Space");
+        movie.setWriters(Arrays.asList("William Goldman"));
+        movie.setStars(Arrays.asList("Ron Livingston", "Jennifer Aniston", "David Herman", "Ajay Naidu", "Diedrich Bader", "Stephen Root"));
+
+        //mockedDataExtractor = new();
+
+        when(mockedDataExtractor.parseMovie(table)).thenReturn(movie);
+        Extractor extractor = new Extractor("http://localhost:8888", mockedDataExtractor);
+        Object obj = extractor.searchById("202");
+        Assert.assertEquals(obj,movie);
+
+        //indirefct output change instace of another object    reads writes
         //act
-        String actual = new Gson().toJson(extractor.searchById("201"));
-        when(new Gson().toJson(mockedExtractor.searchById("201"))).thenReturn(actual);
-        Object expected = mockedExtractor.searchById("201");
-        //assert
-        Assert.assertEquals(expected.toString(), actual);
-        verify(mockedExtractor).searchById("201");
+
+
+        // assert
+
+//        Book b = new book("abc");
+//        assert(obj == expected);
+//
+//        mockedExtractor.getPageLinks("http://localhost:8888");
+//        //act
+//        String actual = new Gson().toJson();
+//
+//        when(new Gson().toJson(mockedExtractor.searchById("201"))).thenReturn(actual);
+//        Object expected = mockedExtractor.searchById("201");
+//        //assert
+//        Assert.assertEquals(expected.toString(), actual);
+//        verify(mockedExtractor).searchById("201");
     }
 
     @Test
     public void verifySearchByKeyWord() throws IOException, ClassNotFoundException, IllegalAccessException {
         //arrange
-        Extractor extractor = new Extractor("http://localhost:8888");
+        Extractor extractor = new Extractor("http://localhost:8888",mockedDataExtractor);
         mockedExtractor.getPageLinks("http://localhost:8888");
         //act
         JSONObject actual = extractor.getJsonForSearchByKeyWord("Tech");
@@ -58,7 +86,7 @@ public class MokitoTest {
     @Test
     public void verifyGetAllObjects() throws IOException, ClassNotFoundException, IllegalAccessException {
         //arrange
-        Extractor extractor = new Extractor("http://localhost:8888");
+        Extractor extractor = new Extractor("http://localhost:8888",mockedDataExtractor);
         mockedExtractor.getPageLinks("http://localhost:8888");
         //act
         JSONObject actual = extractor.getAllObjects();
@@ -79,7 +107,7 @@ public class MokitoTest {
     @Test
     public void verifyFindObjectModelForSearchText() throws IOException, ClassNotFoundException, IllegalAccessException {
         //arrange
-        Extractor extractor = new Extractor("http://localhost:8888");
+        Extractor extractor = new Extractor("http://localhost:8888",mockedDataExtractor);
         mockedExtractor.getPageLinks("http://localhost:8888");
 
         //act

@@ -27,7 +27,6 @@ public class Extractor {
     private Long startTime;
     private Long endTime;
     private Gson gson = new Gson();
-    private DataExtractor dataExtractor = new DataExtractor();
 
     public Element getTable() {
         return table;
@@ -35,8 +34,10 @@ public class Extractor {
 
     private Element table = null;
     private String URL;
+    private DataExtractor dataExtractor;
 
-    public Extractor(String URL) throws MalformedURLException {
+    public Extractor(String URL, DataExtractor dataExtractor) throws MalformedURLException {
+        this.dataExtractor = dataExtractor;
         this.URL = URL;
         links = new HashSet<>();
         getPageLinks(URL);

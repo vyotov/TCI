@@ -1,6 +1,7 @@
 package com.company.Models.custom_rule;
 
 import com.company.Models.Book;
+import com.company.SearchAlgorithms.DataExtractor;
 import com.company.SearchAlgorithms.Extractor;
 import com.google.gson.Gson;
 import org.json.simple.JSONObject;
@@ -18,11 +19,12 @@ public class TestsWithCustomRule {
     @Rule
     public LoggerRule performanceLogger = new LoggerRule();
     private Extractor extractor;
+    private DataExtractor dataExtractor;
 
     @Before
     public void setup() throws MalformedURLException {
-        extractor = new Extractor("http://localhost:8888");
-
+        dataExtractor = new DataExtractor();
+        extractor = new Extractor("http://localhost:8888",dataExtractor);
     }
 
     @Test
@@ -61,7 +63,7 @@ public class TestsWithCustomRule {
     @Test
     public void testGetAllObjects() throws IOException, ClassNotFoundException, IllegalAccessException {
         //Arrange
-        Extractor extractor = new Extractor("http://localhost:8888");
+        Extractor extractor = new Extractor("http://localhost:8888",dataExtractor);
         JSONObject actual = extractor.getAllObjects();
         //Reset time
         actual.put("time", 0);
@@ -74,7 +76,7 @@ public class TestsWithCustomRule {
     @Test
     public void testGetJsonForSearchByKeyWord() throws IOException, ClassNotFoundException, IllegalAccessException {
         //Arrange
-        Extractor extractor = new Extractor("http://localhost:8888");
+        Extractor extractor = new Extractor("http://localhost:8888",dataExtractor);
         //Act
         //Reset time
         JSONObject actual = extractor.getJsonForSearchByKeyWord("Mike Judge");
@@ -87,7 +89,7 @@ public class TestsWithCustomRule {
     @Test
     public void testIfStringContainsOnlyNumbersMethodReturnsError() throws MalformedURLException {
         //Arrange
-        Extractor extractor = new Extractor("http://localhost:8888");
+        Extractor extractor = new Extractor("http://localhost:8888",dataExtractor);
         //Assert
         Assert.assertNotEquals(true, extractor.checkIfStringContainsOnlyNumbers("cat=Movies"));
         Assert.assertFalse(extractor.checkIfStringContainsOnlyNumbers("cat=Movies"));
@@ -96,7 +98,7 @@ public class TestsWithCustomRule {
     @Test
     public void testIfStringContainsOnlyNumbersMethodReturnsCorrect() throws MalformedURLException {
         //Arrange
-        Extractor extractor = new Extractor("http://localhost:8888");
+        Extractor extractor = new Extractor("http://localhost:8888",dataExtractor);
 
         //Assert
         Assert.assertEquals(true, extractor.checkIfStringContainsOnlyNumbers("203"));
@@ -106,7 +108,7 @@ public class TestsWithCustomRule {
     @Test
     public void getPageLinks() throws MalformedURLException {
         //Arrange
-        Extractor extractor = new Extractor("http://localhost:8888");
+        Extractor extractor = new Extractor("http://localhost:8888",dataExtractor);
         //Act
         int expected = 22;
         int actual = extractor.getPageCount();
