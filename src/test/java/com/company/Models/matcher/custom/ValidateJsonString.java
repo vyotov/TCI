@@ -11,7 +11,6 @@ import java.io.IOException;
 
 public class ValidateJsonString extends TypeSafeMatcher<Boolean> {
 
-
     private String value;
 
     public ValidateJsonString(String value) {

@@ -43,7 +43,7 @@ public class TestsWithRules {
     }
 
     @Test
-    public void testIfStringContainsOnlyNumbersThrowsExpection() {
+    public void testIfStringContainsOnlyNumbersThrowsException() {
         rule.expect(RuntimeException.class);
         extractor.checkIfStringContainsOnlyNumbers(null);
     }

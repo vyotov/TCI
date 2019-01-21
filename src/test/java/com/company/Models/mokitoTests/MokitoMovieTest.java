@@ -56,7 +56,6 @@ public class MokitoMovieTest {
         //assert
         verify(movie).getTitle();
         Assert.assertEquals(null, movie.getTitle());
-
     }
 
     //Stub Test

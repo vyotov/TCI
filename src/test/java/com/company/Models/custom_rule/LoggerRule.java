@@ -14,7 +14,7 @@ public class LoggerRule implements TestRule {
                 try {
                     base.evaluate();
                 } finally {
-                    System.out.printf("Time taken for %s: %s milli sec%n", description.getDisplayName(), System.currentTimeMillis() - start);
+                    System.out.printf("Time -> %s: %s milli sec%n", description.getDisplayName(), System.currentTimeMillis() - start);
                 }
             }
         };

@@ -5,7 +5,9 @@ import com.company.SearchAlgorithms.Extractor;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
+
 import java.net.MalformedURLException;
+
 import static com.company.Models.matcher.custom.IsPage.page;
 import static com.company.Models.matcher.custom.IsValidUrl.IsValidUrl;
 import static com.company.Models.matcher.custom.ValidateJsonString.isValidJson;
@@ -38,9 +40,6 @@ public class CustomMatcherTest {
         int pages = 0;
         // Then
         assertThat(0, is(not(page())));
-    }
-
-    public void checkIsValidJson() {
     }
 
     //TEST TO SEE IF MATCHER WORKS
