@@ -96,7 +96,7 @@ public class Extractor {
     }
 
     //Tested
-    public Object searchById(String searchById,DataExtractor dataExtractor) throws IOException, ClassNotFoundException, IllegalAccessException {
+    public Object searchById(String searchById,DataExtractor dataExtractor) throws IOException, ClassNotFoundException {
         if (searchById.equals("")) {
             throw new IllegalArgumentException("Empty search id " + searchById);
         }
