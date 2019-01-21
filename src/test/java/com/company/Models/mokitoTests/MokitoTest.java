@@ -13,6 +13,7 @@ import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.util.Arrays;
 
 import static org.mockito.Mockito.verify;
@@ -23,10 +24,24 @@ public class MokitoTest {
     @Mock
     private DataExtractor mockedDataExtractor;
     @Mock
+    private Extractor mockedExtractor;
+    @Mock
     private Utils mockedUtils;
     @Mock
     private Element element;
+    //MOCKITO DUMMY OBJ
+    @Test
+    public void mockitoDummyObjectTest()throws IOException, ClassNotFoundException, IllegalAccessException {
 
+        String url = "http://localhost:8888";
+        //Creation of SUT
+        // mockedDataExtractor and mockedUtiles are injected into SUT
+        Extractor extractor = new Extractor(url,mockedDataExtractor,mockedUtils);
+        //Execution of the SUT’s method using a dummy mockedDataExtractor object as one of the parameters
+        mockedDataExtractor.parseBook(element);
+
+    }
+    //INDIRECT INPUT
     @Test
     public void verifySearchById() throws IOException, ClassNotFoundException, IllegalAccessException {
 
@@ -34,16 +49,26 @@ public class MokitoTest {
         String detailPage = "http://localhost:8888/sample_site_to_crawl/details.php?id=202";
         //arrange
         Movie movie = getMovie();
+
         when(mockedDataExtractor.getUrl()).thenReturn(detailPage);
         when(mockedUtils.findCategory(detailPage)).thenReturn(Category.MOVIE);
         when(mockedDataExtractor.parseMovie(element)).thenReturn(movie);
         when(mockedUtils.getElement()).thenReturn(element);
-        //when()
         Extractor extractor = new Extractor(url, mockedDataExtractor,mockedUtils);
-        //when(mockedExtractor.searchById("202")).thenReturn(movie);
 
         Object obj = extractor.searchById("202", mockedDataExtractor);
         Assert.assertEquals(obj, movie);
+        //verify(mockedDataExtractor).getUrl();
+    }
+
+    @Test
+    public void verifyGetAllObjects() throws IOException, ClassNotFoundException, IllegalAccessException {
+
+
+        mockedExtractor.getPageCount();
+        //behave
+        when(mockedExtractor.getPageCount()).thenReturn(22);
+        verify(mockedExtractor).getPageCount();
 
     }
 
