@@ -27,6 +27,10 @@ public class DataExtractor {
         this.url = url;
     }
 
+    public String getUrl() {
+        return url;
+    }
+
     /**
      * Method used to get the specific object name
      *

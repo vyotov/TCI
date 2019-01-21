@@ -2,6 +2,7 @@ package com.company.Models.ParametrizedTests;
 
 import com.company.SearchAlgorithms.DataExtractor;
 import com.company.SearchAlgorithms.Extractor;
+import com.company.utils.Utils;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -19,9 +20,11 @@ public class TimeDurationIfReturnsTimeDifferenceThenZeroTest {
     private final Integer expected;
     private Extractor extractor;
     private DataExtractor dataExtractor;
+    private Utils utils;
 
     public TimeDurationIfReturnsTimeDifferenceThenZeroTest(Integer expected) {
         this.expected = expected;
+        utils = new Utils();
     }
 
     @Parameterized.Parameters
@@ -33,7 +36,7 @@ public class TimeDurationIfReturnsTimeDifferenceThenZeroTest {
     @Before
     public void setup() throws MalformedURLException {
         dataExtractor = new DataExtractor();
-        extractor = new Extractor("http://localhost:8888",dataExtractor);
+        extractor = new Extractor("http://localhost:8888",dataExtractor,utils);
 
     }
 

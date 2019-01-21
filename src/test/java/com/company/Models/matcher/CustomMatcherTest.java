@@ -3,6 +3,7 @@ package com.company.Models.matcher;
 import com.company.Models.custom_rule.LoggerRule;
 import com.company.SearchAlgorithms.DataExtractor;
 import com.company.SearchAlgorithms.Extractor;
+import com.company.utils.Utils;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -20,11 +21,13 @@ public class CustomMatcherTest {
 
     private Extractor extractor;
     private DataExtractor dataExtractor;
+    private Utils utils;
 
     @Before
     public void setup() throws MalformedURLException {
         dataExtractor = new DataExtractor();
-        extractor = new Extractor("http://localhost:8888",dataExtractor);
+        extractor = new Extractor("http://localhost:8888",dataExtractor,utils);
+        utils = new Utils();
     }
 
     @Test

@@ -5,6 +5,7 @@ import com.company.Models.Music;
 import com.company.Models.custom_rule.LoggerRule;
 import com.company.SearchAlgorithms.DataExtractor;
 import com.company.SearchAlgorithms.Extractor;
+import com.company.utils.Utils;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -20,29 +21,31 @@ public class HamcrestMatcherTest {
 
     private Extractor extractor;
     private DataExtractor dataExtractor;
+    private Utils utils;
 
     @Before
     public void setup() throws MalformedURLException {
         dataExtractor = new DataExtractor();
-        extractor = new Extractor("http://localhost:8888",dataExtractor);
+        utils = new Utils();
+        extractor = new Extractor("http://localhost:8888",dataExtractor,utils);
     }
 
     @Test
     public void testSearchByIdForBookModel() throws IOException, ClassNotFoundException, IllegalAccessException {
         //Assert
-        assertThat(extractor.searchById("102"), instanceOf(Book.class));
+        assertThat(extractor.searchById("102",dataExtractor), instanceOf(Book.class));
     }
 
     @Test
     public void testSearchByIdForMusicModel() throws IOException, ClassNotFoundException, IllegalAccessException {
         //Assert
-        assertThat(extractor.searchById("302"), instanceOf(Music.class));
+        assertThat(extractor.searchById("302",dataExtractor), instanceOf(Music.class));
     }
 
     @Test
     public void testSearchByIdForMovieModel() throws IOException, ClassNotFoundException, IllegalAccessException {
         //Assert
-        assertThat(extractor.searchById("202"), instanceOf(Movie.class));
+        assertThat(extractor.searchById("202",dataExtractor), instanceOf(Movie.class));
     }
 
     @Test

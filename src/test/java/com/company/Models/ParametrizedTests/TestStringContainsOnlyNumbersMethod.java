@@ -2,6 +2,7 @@ package com.company.Models.parametrizedTests;
 
 import com.company.SearchAlgorithms.DataExtractor;
 import com.company.SearchAlgorithms.Extractor;
+import com.company.utils.Utils;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -19,9 +20,11 @@ public class TestStringContainsOnlyNumbersMethod {
     private final String input;
     private Extractor extractor;
     private DataExtractor dataExtractor;
+    private Utils utils;
     public TestStringContainsOnlyNumbersMethod(boolean output, String input) {
         this.output = output;
         this.input = input;
+        utils = new Utils();
     }
 
     @Parameterized.Parameters
@@ -33,7 +36,7 @@ public class TestStringContainsOnlyNumbersMethod {
     @Before
     public void setup() throws MalformedURLException {
         dataExtractor = new DataExtractor();
-        extractor = new Extractor("http://localhost:8888",dataExtractor);
+        extractor = new Extractor("http://localhost:8888",dataExtractor,utils);
     }
 
     @Test
