@@ -114,6 +114,7 @@ public class DataExtractor {
                 movie.setStars(result);
             }
         }
+        System.out.println(movie);
         return movie;
     }
 

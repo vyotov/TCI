@@ -12,7 +12,7 @@ import java.net.MalformedURLException;
 public class IsPage extends TypeSafeMatcher {
     @Override
     public void describeTo(Description description) {
-        description.appendText("no pages");
+        description.appendText("22");
     }
 
     @Override

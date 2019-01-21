@@ -26,13 +26,14 @@ public class CustomMatcherTest {
         dataExtractor = new DataExtractor();
         extractor = new Extractor("http://localhost:8888",dataExtractor);
     }
+
     @Test
     public void shouldPassForPageCount() {
         // Given
-        int pages = extractor.getPageCount();
+        Integer pages = extractor.getPageCount();
         System.out.println("WAHAT: "+pages);
         // Then
-        assertThat(pages, is(page()));
+        assertThat(pages, (not(page())));
     }
 
     @Test

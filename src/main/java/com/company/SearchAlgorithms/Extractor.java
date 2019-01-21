@@ -28,10 +28,6 @@ public class Extractor {
     private Long endTime;
     private Gson gson = new Gson();
 
-    public Element getTable() {
-        return table;
-    }
-
     private Element table = null;
     private String URL;
     private DataExtractor dataExtractor;
@@ -116,6 +112,7 @@ public class Extractor {
                         break;
                     case MOVIE:
                         dataExtractor.setUrl(url);
+                        System.out.println("TABLE: "+ table);
                         object = dataExtractor.parseMovie(table);
                         break;
                 }
@@ -321,6 +318,7 @@ public class Extractor {
         }
         //Find the media details tag on the right of the page
         Elements results = doc.getElementsByClass(Constants.media_detail);
+        System.out.println("RESULT: "+ results);
         //Table
         if(results !=null) {
             table = results.select("table").first();
@@ -333,10 +331,13 @@ public class Extractor {
                 if (key.equals(Constants.category)) {
                     switch (value) {
                         case Constants.music:
+                            System.out.println("Tablemu: "+table);
                             return Category.MUSIC;
                         case Constants.movies:
+                            System.out.println("Tablemo: "+table);
                             return Category.MOVIE;
                         case Constants.books:
+                            System.out.println("Table:bo "+table);
                             return Category.BOOKS;
                     }
                 }

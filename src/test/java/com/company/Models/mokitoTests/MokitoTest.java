@@ -25,8 +25,6 @@ public class MokitoTest {
     private DataExtractor mockedDataExtractor;
     @Mock
     private Extractor mockedExtractor;
-    @Mock
-    private Element table;
 
     @Test
     public void verifySearchById() throws IOException, ClassNotFoundException, IllegalAccessException {
@@ -43,10 +41,46 @@ public class MokitoTest {
         movie.setStars(Arrays.asList("Ron Livingston", "Jennifer Aniston", "David Herman", "Ajay Naidu", "Diedrich Bader", "Stephen Root"));
 
         //mockedDataExtractor = new();
+        Element element = new Element("<div class=\"media-details\"> \n" +
+                " <h1>Office Space</h1> \n" +
+                " <table> \n" +
+                "  <tbody>\n" +
+                "   <tr> \n" +
+                "    <th>Category</th> \n" +
+                "    <td>Movies</td> \n" +
+                "   </tr> \n" +
+                "   <tr> \n" +
+                "    <th>Genre</th> \n" +
+                "    <td>Comedy</td> \n" +
+                "   </tr> \n" +
+                "   <tr> \n" +
+                "    <th>Format</th> \n" +
+                "    <td>Blu-ray</td> \n" +
+                "   </tr> \n" +
+                "   <tr> \n" +
+                "    <th>Year</th> \n" +
+                "    <td>1999</td> \n" +
+                "   </tr> \n" +
+                "   <tr> \n" +
+                "    <th>Director</th> \n" +
+                "    <td>Mike Judge</td> \n" +
+                "   </tr> \n" +
+                "   <tr> \n" +
+                "    <th>Writers</th> \n" +
+                "    <td>William Goldman</td> \n" +
+                "   </tr> \n" +
+                "   <tr> \n" +
+                "    <th>Stars</th> \n" +
+                "    <td>Ron Livingston, Jennifer Aniston, David Herman, Ajay Naidu, Diedrich Bader, Stephen Root</td> \n" +
+                "   </tr> \n" +
+                "  </tbody>\n" +
+                " </table> \n" +
+                "</div>");
 
-        when(mockedDataExtractor.parseMovie(table)).thenReturn(movie);
+        when(mockedDataExtractor.parseMovie(element)).thenReturn(movie);
         Extractor extractor = new Extractor("http://localhost:8888", mockedDataExtractor);
         Object obj = extractor.searchById("202");
+        System.out.println("OBJ: "+obj);
         Assert.assertEquals(obj,movie);
 
         //indirefct output change instace of another object    reads writes
