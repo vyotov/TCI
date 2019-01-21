@@ -38,7 +38,8 @@ public class MokitoTest {
         // mockedDataExtractor and mockedUtiles are injected into SUT
         Extractor extractor = new Extractor(url,mockedDataExtractor,mockedUtils);
         //Execution of the SUT’s method using a dummy mockedDataExtractor object as one of the parameters
-        mockedDataExtractor.parseBook(element);
+        extractor.searchById("201",mockedDataExtractor);
+        //mockedDataExtractor.parseBook(element);
 
     }
     //INDIRECT INPUT
