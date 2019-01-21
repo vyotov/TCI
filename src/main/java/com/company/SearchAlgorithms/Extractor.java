@@ -4,7 +4,7 @@ import com.company.Models.Book;
 import com.company.Models.Category;
 import com.company.Models.Movie;
 import com.company.Models.Music;
-import com.company.utils.Constants;
+import com.company.utils.Utils;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
@@ -28,13 +28,18 @@ public class Extractor {
     private Long endTime;
     private Gson gson = new Gson();
 
-    private Element table = null;
     private String URL;
+    private Utils utils;
     private DataExtractor dataExtractor;
 
-    public Extractor(String URL, DataExtractor dataExtractor) throws MalformedURLException {
+    public String getURL() {
+        return URL;
+    }
+
+    public Extractor(String URL, DataExtractor dataExtractor,Utils utils) throws MalformedURLException {
         this.dataExtractor = dataExtractor;
         this.URL = URL;
+        this.utils = utils;
         links = new HashSet<>();
         getPageLinks(URL);
     }
@@ -91,29 +96,29 @@ public class Extractor {
     }
 
     //Tested
-    public Object searchById(String searchById) throws IOException, ClassNotFoundException, IllegalAccessException {
+    public Object searchById(String searchById,DataExtractor dataExtractor) throws IOException, ClassNotFoundException, IllegalAccessException {
         if (searchById.equals("")) {
             throw new IllegalArgumentException("Empty search id " + searchById);
         }
         Object object = null;
         //Loop over the list:
+
         for (String url : links) {
             //Check which url matches the search word:
             if (url.contains(searchById)) {
-                Category category = findCategory(url);
+                Category category = utils.findCategory(url);
                 switch (category) {
                     case BOOKS:
                         dataExtractor.setUrl(url);
-                        object = dataExtractor.parseBook(table);
+                        object = dataExtractor.parseBook(utils.getElement());
                         break;
                     case MUSIC:
                         dataExtractor.setUrl(url);
-                        object = dataExtractor.parseMusic(table);
+                        object = dataExtractor.parseMusic(utils.getElement());
                         break;
                     case MOVIE:
                         dataExtractor.setUrl(url);
-                        System.out.println("TABLE: " + table);
-                        object = dataExtractor.parseMovie(table);
+                        object = dataExtractor.parseMovie(utils.getElement());
                         break;
                 }
                 break;
@@ -127,7 +132,7 @@ public class Extractor {
         JSONObject result = new JSONObject();
         startTime = System.currentTimeMillis();
         result.put("id", searchById);
-        result.put("result", gson.toJsonTree(searchById(searchById)));
+        result.put("result", gson.toJsonTree(searchById(searchById,dataExtractor)));
         endTime = System.currentTimeMillis();
         result.put("time", getTimeDuration());
         return result;
@@ -163,23 +168,23 @@ public class Extractor {
         List<Object> moviesList = new ArrayList<>();
         List<Object> bookList = new ArrayList<>();
         List<Object> musicList = new ArrayList<>();
-
+        Element element = null;
         for (String url : links) {
             String number = url.substring(url.lastIndexOf("=") + 1);
             if (!number.equals("") && checkIfStringContainsOnlyNumbers(number)) {
-                Category category = findCategory(url);
+                Category category = utils.findCategory(url);
                 switch (category) {
                     case BOOKS:
                         dataExtractor.setUrl(url);
-                        bookList.add(dataExtractor.parseBook(table));
+                        bookList.add(dataExtractor.parseBook(utils.getElement()));
                         break;
                     case MUSIC:
                         dataExtractor.setUrl(url);
-                        musicList.add(dataExtractor.parseMusic(table));
+                        musicList.add(dataExtractor.parseMusic(utils.getElement()));
                         break;
                     case MOVIE:
                         dataExtractor.setUrl(url);
-                        moviesList.add(dataExtractor.parseMovie(table));
+                        moviesList.add(dataExtractor.parseMovie(utils.getElement()));
                         break;
                 }
             }
@@ -304,45 +309,42 @@ public class Extractor {
     }
 
 
-    public Category findCategory(String url) throws ClassNotFoundException {
-        if (url.equals("")) {
-            throw new ClassNotFoundException();
-        }
-        Document doc = null;
-        try {
-            doc = Jsoup.connect(url).get();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        //Find the media details tag on the right of the page
-        Elements results = doc.getElementsByClass(Constants.media_detail);
-        System.out.println("RESULT: " + results);
-        //Table
-        if (results != null) {
-            table = results.select("table").first();
-            Elements th = table.getElementsByTag("th");
-            Elements td = table.getElementsByTag("td");
-            for (int i = 0, l = th.size(); i < l; i++) {
-                String key = th.get(i).text();
-                String value = td.get(i).text();
-                //Check which category:
-                if (key.equals(Constants.category)) {
-                    switch (value) {
-                        case Constants.music:
-                            System.out.println("Tablemu: " + table);
-                            return Category.MUSIC;
-                        case Constants.movies:
-                            System.out.println("Tablemo: " + table);
-                            return Category.MOVIE;
-                        case Constants.books:
-                            System.out.println("Table:bo " + table);
-                            return Category.BOOKS;
-                    }
-                }
-            }
-        }
-        return null;
-    }
+    //public Category findCategory(String url) throws ClassNotFoundException {
+    //    if (url.equals("")) {
+    //        throw new ClassNotFoundException();
+    //    }
+    //    Document doc = null;
+    //    try {
+    //        doc = Jsoup.connect(url).get();
+    //    } catch (IOException e) {
+    //        e.printStackTrace();
+    //    }
+    //    //Find the media details tag on the right of the page
+    //    Elements results = doc.getElementsByClass(Constants.media_detail);
+    //    System.out.println("RESULT: "+ results);
+    //    //Table
+    //    if(results !=null) {
+    //        table = results.select("table").first();
+    //        Elements th = table.getElementsByTag("th");
+    //        Elements td = table.getElementsByTag("td");
+    //        for (int i = 0, l = th.size(); i < l; i++) {
+    //            String key = th.get(i).text();
+    //            String value = td.get(i).text();
+    //            //Check which category:
+    //            if (key.equals(Constants.category)) {
+    //                switch (value) {
+    //                    case Constants.music:
+    //                        return Category.MUSIC;
+    //                    case Constants.movies:
+    //                        return Category.MOVIE;
+    //                    case Constants.books:
+    //                        return Category.BOOKS;
+    //                }
+    //            }
+    //        }
+    //    }
+    //    return null;
+    //}
 
     public Long getTimeDuration() {
         return endTime - startTime;

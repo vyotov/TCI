@@ -3,6 +3,7 @@ package com.company.Models.custom_rule;
 import com.company.Models.Book;
 import com.company.SearchAlgorithms.DataExtractor;
 import com.company.SearchAlgorithms.Extractor;
+import com.company.utils.Utils;
 import com.google.gson.Gson;
 import org.json.simple.JSONObject;
 import org.junit.Assert;
@@ -20,11 +21,13 @@ public class TestsWithCustomRule {
     public LoggerRule performanceLogger = new LoggerRule();
     private Extractor extractor;
     private DataExtractor dataExtractor;
+    private Utils utils;
 
     @Before
     public void setup() throws MalformedURLException {
         dataExtractor = new DataExtractor();
-        extractor = new Extractor("http://localhost:8888",dataExtractor);
+        utils = new Utils();
+        extractor = new Extractor("http://localhost:8888",dataExtractor,utils);
     }
 
     @Test
@@ -39,7 +42,7 @@ public class TestsWithCustomRule {
         book.setAuthors(Arrays.asList("Robert C. Martin"));
         book.setPublisher("Prentice Hall");
         book.setIsbn("978-0132350884");
-        String actual = new Gson().toJson(extractor.searchById("102"));
+        String actual = new Gson().toJson(extractor.searchById("102",dataExtractor));
 
         String expected = new Gson().toJson(book);
 
@@ -63,7 +66,7 @@ public class TestsWithCustomRule {
     @Test
     public void testGetAllObjects() throws IOException, ClassNotFoundException, IllegalAccessException {
         //Arrange
-        Extractor extractor = new Extractor("http://localhost:8888",dataExtractor);
+        Extractor extractor = new Extractor("http://localhost:8888",dataExtractor,utils);
         JSONObject actual = extractor.getAllObjects();
         //Reset time
         actual.put("time", 0);
@@ -76,7 +79,7 @@ public class TestsWithCustomRule {
     @Test
     public void testGetJsonForSearchByKeyWord() throws IOException, ClassNotFoundException, IllegalAccessException {
         //Arrange
-        Extractor extractor = new Extractor("http://localhost:8888",dataExtractor);
+        Extractor extractor = new Extractor("http://localhost:8888",dataExtractor,utils);
         //Act
         //Reset time
         JSONObject actual = extractor.getJsonForSearchByKeyWord("Mike Judge");
@@ -89,7 +92,7 @@ public class TestsWithCustomRule {
     @Test
     public void testIfStringContainsOnlyNumbersMethodReturnsError() throws MalformedURLException {
         //Arrange
-        Extractor extractor = new Extractor("http://localhost:8888",dataExtractor);
+        Extractor extractor = new Extractor("http://localhost:8888",dataExtractor,utils);
         //Assert
         Assert.assertNotEquals(true, extractor.checkIfStringContainsOnlyNumbers("cat=Movies"));
         Assert.assertFalse(extractor.checkIfStringContainsOnlyNumbers("cat=Movies"));
@@ -98,7 +101,7 @@ public class TestsWithCustomRule {
     @Test
     public void testIfStringContainsOnlyNumbersMethodReturnsCorrect() throws MalformedURLException {
         //Arrange
-        Extractor extractor = new Extractor("http://localhost:8888",dataExtractor);
+        Extractor extractor = new Extractor("http://localhost:8888",dataExtractor,utils);
 
         //Assert
         Assert.assertEquals(true, extractor.checkIfStringContainsOnlyNumbers("203"));
@@ -108,7 +111,7 @@ public class TestsWithCustomRule {
     @Test
     public void getPageLinks() throws MalformedURLException {
         //Arrange
-        Extractor extractor = new Extractor("http://localhost:8888",dataExtractor);
+        Extractor extractor = new Extractor("http://localhost:8888",dataExtractor,utils);
         //Act
         int expected = 22;
         int actual = extractor.getPageCount();

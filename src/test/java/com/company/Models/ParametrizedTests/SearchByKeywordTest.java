@@ -2,6 +2,7 @@ package com.company.Models.ParametrizedTests;
 
 import com.company.SearchAlgorithms.DataExtractor;
 import com.company.SearchAlgorithms.Extractor;
+import com.company.utils.Utils;
 import org.json.simple.JSONObject;
 import org.junit.Assert;
 import org.junit.Before;
@@ -20,8 +21,9 @@ public class SearchByKeywordTest {
     private final String expected;
     private Extractor extractor;
     private DataExtractor dataExtractor;
+    private Utils utils;
     public SearchByKeywordTest(String keyWord, String expected) {
-
+        utils = new Utils();
         this.keyWord = keyWord;
         this.expected = expected;
     }
@@ -42,7 +44,7 @@ public class SearchByKeywordTest {
     @Before
     public void setup() throws MalformedURLException {
         dataExtractor = new DataExtractor();
-        extractor = new Extractor("http://localhost:8888",dataExtractor);
+        extractor = new Extractor("http://localhost:8888",dataExtractor,utils);
     }
 
     @Test

@@ -2,6 +2,7 @@ package com.company;
 
 import com.company.SearchAlgorithms.DataExtractor;
 import com.company.SearchAlgorithms.Extractor;
+import com.company.utils.Utils;
 import com.google.gson.Gson;
 
 import java.io.IOException;
@@ -12,8 +13,9 @@ public class Main {
 
     public static void main(String[] args) throws IOException, ClassNotFoundException, IllegalAccessException {
         DataExtractor dataExtractor = new DataExtractor();
-        Extractor extractor = new Extractor("http://localhost:8888",dataExtractor);
-        String actual = new Gson().toJson(extractor.searchById("202"));
+        Utils util = new Utils();
+        Extractor extractor = new Extractor("http://localhost:8888",dataExtractor,util);
+        String actual = new Gson().toJson(extractor.searchById("202",dataExtractor));
         System.out.println(actual);
     }
 

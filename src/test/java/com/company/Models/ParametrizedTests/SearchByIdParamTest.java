@@ -5,6 +5,7 @@ import com.company.Models.Movie;
 import com.company.Models.Music;
 import com.company.SearchAlgorithms.DataExtractor;
 import com.company.SearchAlgorithms.Extractor;
+import com.company.utils.Utils;
 import com.google.gson.Gson;
 import org.junit.Assert;
 import org.junit.Before;
@@ -24,9 +25,11 @@ public class SearchByIdParamTest {
     private Extractor extractor;
     private DataExtractor dataExtractor;
     private String expectedInput;
+    private Utils utils;
 
 
     public SearchByIdParamTest(Object object, String input) {
+        utils = new Utils();
         this.expectedObject = object;
         this.expectedInput = input;
     }
@@ -79,12 +82,12 @@ public class SearchByIdParamTest {
     @Before
     public void setup() throws MalformedURLException {
         dataExtractor = new DataExtractor();
-        extractor = new Extractor("http://localhost:8888",dataExtractor);
+        extractor = new Extractor("http://localhost:8888",dataExtractor,utils);
     }
 
     @Test
     public void shouldPassSearchById() throws IOException, ClassNotFoundException, IllegalAccessException {
-        String actual = new Gson().toJson(extractor.searchById(expectedInput));
+        String actual = new Gson().toJson(extractor.searchById(expectedInput,dataExtractor));
         String expected = new Gson().toJson(expectedObject);
         //Assert
         Assert.assertEquals(expected, actual);
@@ -92,7 +95,7 @@ public class SearchByIdParamTest {
     @Test
     public void shouldFailSearchById() throws IOException, ClassNotFoundException, IllegalAccessException {
         //arrange
-        String actual = new Gson().toJson(extractor.searchById(expectedInput));
+        String actual = new Gson().toJson(extractor.searchById(expectedInput,dataExtractor));
         //Assert
         Assert.assertNotEquals(null, actual);
     }
