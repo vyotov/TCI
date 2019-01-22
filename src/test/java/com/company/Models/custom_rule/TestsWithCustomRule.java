@@ -31,7 +31,7 @@ public class TestsWithCustomRule {
     }
 
     @Test
-    public void testSearchById() throws IOException, ClassNotFoundException, IllegalAccessException {
+    public void testSearchById() throws IOException, ClassNotFoundException {
         //Act
         Book book = new Book();
         book.setCategory("Books");
