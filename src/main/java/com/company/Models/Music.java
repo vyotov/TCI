@@ -7,6 +7,10 @@ public class Music  implements Serializable{
 
     private String name;
     private String category;
+    private String genre;
+    private String format;
+    private String year;
+    private String artist;
 
     public Music(String name, String category, String genre, String format, String year, String artist) {
         this.name = name;
@@ -17,10 +21,7 @@ public class Music  implements Serializable{
         this.artist = artist;
     }
 
-    private String genre;
-    private String format;
-    private String year;
-    private String artist;
+
 
     public void setName(String name) {
         this.name = name;

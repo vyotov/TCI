@@ -37,6 +37,11 @@ public class DataExtractor {
      * @return
      */
     private String getTitle() {
+        try {
+            this.doc = Jsoup.connect(url).get();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         return doc.getElementsByTag("h1").last().text();
     }
 
@@ -46,7 +51,7 @@ public class DataExtractor {
             throw new RuntimeException("method set url must be called");
         }
 
-        this.doc = Jsoup.connect(url).get();
+
         Elements th = table.getElementsByTag("th");
         Elements td = table.getElementsByTag("td");
 
@@ -73,8 +78,7 @@ public class DataExtractor {
         return music;
     }
 
-    public Movie parseMovie(Element table) throws IOException {
-        this.doc = Jsoup.connect(url).get();
+    public Movie parseMovie(Element table) {
 
         Elements th = table.getElementsByTag("th");
         Elements td = table.getElementsByTag("td");
@@ -122,11 +126,10 @@ public class DataExtractor {
         return movie;
     }
 
-    public Book parseBook(Element table) throws IOException {
-        if (url.equals("") || url == null) {
+    public Book parseBook(Element table) {
+        if (url.equals("")) {
             throw new RuntimeException("method set url must be called");
         }
-        this.doc = Jsoup.connect(url).get();
 
         Elements th = table.getElementsByTag("th");
         Elements td = table.getElementsByTag("td");
