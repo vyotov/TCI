@@ -85,6 +85,17 @@ public class SearchByIdParamTest {
         extractor = new Extractor("http://localhost:8888",dataExtractor,utils);
     }
 
+    /*
+    INPUT  Direct call of the calculateBonus() method of the SUT with clientId and payment arguments
+    OUTPUT bonus value returned by the SUT to the test class after it called the calculateBonus() method
+     */
+    @Test
+    public void shouldPassSearchByIdOutput() throws IOException, ClassNotFoundException, IllegalAccessException {
+        String actual = new Gson().toJson(extractor.searchById(expectedInput,dataExtractor));
+        String expected = new Gson().toJson(expectedObject);
+        //Assert
+        Assert.assertEquals(expected, actual);
+    }
     @Test
     public void shouldPassSearchById() throws IOException, ClassNotFoundException, IllegalAccessException {
         String actual = new Gson().toJson(extractor.searchById(expectedInput,dataExtractor));

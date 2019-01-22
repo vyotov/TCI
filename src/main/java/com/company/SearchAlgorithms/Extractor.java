@@ -163,7 +163,7 @@ public class Extractor {
     }
 
     //Tested
-    public JSONObject getAllObjects() throws IOException, ClassNotFoundException, IllegalAccessException {
+    public JSONObject getAllObjects() throws IOException, ClassNotFoundException {
         startTime = System.currentTimeMillis();
         List<Object> moviesList = new ArrayList<>();
         List<Object> bookList = new ArrayList<>();
