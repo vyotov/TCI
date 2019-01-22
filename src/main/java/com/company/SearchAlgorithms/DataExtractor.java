@@ -78,7 +78,9 @@ public class DataExtractor {
         return music;
     }
 
-    public Movie parseMovie(Element table) {
+    public Movie parseMovie(Element table) throws IOException {
+        this.doc = Jsoup.connect(url).get();
+
 
         Elements th = table.getElementsByTag("th");
         Elements td = table.getElementsByTag("td");

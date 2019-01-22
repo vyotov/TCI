@@ -20,6 +20,12 @@ import java.util.*;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.List;
+
+import static org.hamcrest.Matchers.hasProperty;
 import static org.mockito.Mockito.*;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -132,7 +138,7 @@ public class MokitoTest {
 
     //DIRECT INPUT - sut if method called on param
     @Test
-    public void verifyIfParseMovie() {
+    public void verifyIfParseMovie() throws IOException {
         //arrange
         String detailPage = "http://localhost:8888/sample_site_to_crawl/details.php?id=202";
         Elements elements = mock(Elements.class);
@@ -154,7 +160,7 @@ public class MokitoTest {
 
 
     @Test
-    public void verifyIfMovieStars(){
+    public void verifyIfMovieStars() throws IOException {
         //arrange
         String detailPage = "http://localhost:8888/sample_site_to_crawl/details.php?id=201";
         String keyWord = "Tom Hanks";
@@ -208,7 +214,6 @@ public class MokitoTest {
         when(tmpValue.text()).thenReturn(genre);
 
         when(element.getElementsByTag("td")).thenReturn(elementsValue);
-        when(mockedUtils.getElement()).thenReturn(element);
 
         Music music = dataExtractor.parseMusic(element);
         //Assert
@@ -240,7 +245,6 @@ public class MokitoTest {
         when(tmpKey.text()).thenReturn("Artist");
         when(tmpValue.text()).thenReturn(artist);
 
-        when(mockedUtils.getElement()).thenReturn(element);
         Music music = dataExtractor.parseMusic(element);
         //Assert
         Assert.assertThat(music, hasProperty("artist", is(artist)));
@@ -268,12 +272,122 @@ public class MokitoTest {
         when(tmpKey.text()).thenReturn("Name");
         when(tmpValue.text()).thenReturn(name);
 
-        when(mockedUtils.getElement()).thenReturn(element);
         Music music = dataExtractor.parseMusic(element);
         //Assert
         Assert.assertThat(music, hasProperty("name", is(name)));
     }
 
+    ////DIRECT INPUT - sut if method is called
+    @Test
+    public void testSearchByIdForBookDirect() throws  IOException,ClassNotFoundException
+    {
+        //arrange
+        String url = "http://localhost:8888";
+        String detailPage = "http://localhost:8888/sample_site_to_crawl/details.php?id=102";
+
+        Book book = getBook();
+        when(mockedUtils.findCategory(detailPage)).thenReturn(Category.BOOKS);
+        when(mockedDataExtractor.parseBook(element)).thenReturn(book);
+
+        //act
+        Extractor extractor = new Extractor(url, mockedDataExtractor, mockedUtils);
+        extractor.searchById("102", mockedDataExtractor);
+
+        //assert
+        Assert.assertThat(extractor.searchById("102",mockedDataExtractor), is(book));
+    }
+    //DIRECT OUTPUT PARAMS - sut if method called on param
+
+    //DIRECT INPUT PARAMS - sut if method called on param
+    @Test
+    public void verifyIfGetElementsByTagIsCalled() throws IOException, ClassNotFoundException {
+        //arrange
+        String url = "http://localhost:8888";
+        String detailPage = "http://localhost:8888/sample_site_to_crawl/details.php?id=202";
+        Elements elements = mock(Elements.class);
+        DataExtractor dataExtractor = new DataExtractor();
+        dataExtractor.setUrl(detailPage);
+
+        when(element.getElementsByTag("th")).thenReturn(elements);
+        when(elements.size()).thenReturn(0); //skip for loop
+
+        when(element.getElementsByTag("td")).thenReturn(elements);
+        //when(mockedUtils.getElement()).thenReturn(element);
+        //act
+        dataExtractor.parseMovie(element);
+        //assert
+        verify(element, times(1)).getElementsByTag("th");
+        verify(element, times(1)).getElementsByTag("td");
+
+    }
+
+    @Test
+    public void verifyIfParseMovieProperty() throws IOException, ClassNotFoundException {
+        //arrange
+        String url = "http://localhost:8888";
+        String detailPage = "http://localhost:8888/sample_site_to_crawl/details.php?id=202";
+        String year = "1999";
+        Elements mockedElementsKey = mock(Elements.class);
+        Elements mockedEementsVaule = mock(Elements.class);
+        Element mockedTmpKey = mock(Element.class);
+        Element mockedTmpValue = mock(Element.class);
+        Movie mockedMovie = mock(Movie.class);
+
+        DataExtractor dataExtractor =  new DataExtractor();
+        dataExtractor.setUrl(detailPage);
+
+        when(element.getElementsByTag("th")).thenReturn(mockedElementsKey);
+        when(element.getElementsByTag("td")).thenReturn(mockedEementsVaule);
+        when(mockedElementsKey.size()).thenReturn(1);
+        when(mockedElementsKey.get(0)).thenReturn(mockedTmpKey);
+        when(mockedEementsVaule.get(0)).thenReturn(mockedTmpValue);
+        when(mockedTmpKey.text()).thenReturn("Year");
+        when(mockedTmpValue.text()).thenReturn(year);
+
+        //act
+        dataExtractor.parseMovie(element);
+        mockedMovie.setYear("1999");
+        //assert
+        verify(mockedMovie, times(1)).setYear("1999");
+
+    }
+
+    @Test
+    public void verifyIfParseBookAuthors() throws IOException, ClassNotFoundException {
+        //arrange
+        String url = "http://localhost:8888";
+        String detailPage = "http://localhost:8888/sample_site_to_crawl/details.php?id=101";
+        Elements mockedElementsKey = mock(Elements.class);
+        Elements mockedEementsVaule = mock(Elements.class);
+        Element mockedTmpKey = mock(Element.class);
+        Element mockedTmpValue = mock(Element.class);
+        Book mockedBook = mock(Book.class);
+
+        DataExtractor dataExtractor =  new DataExtractor();
+        dataExtractor.setUrl(detailPage);
+        List<String> authorss = null;
+        List<String> authors = new ArrayList<>();
+        authors.add("Erich Gamma");
+        authors.add("Rchard Helm");
+        authors.add("Ralphasdas Johnson");
+        authors.add("John Vlissides");
+
+
+        when(element.getElementsByTag("th")).thenReturn(mockedElementsKey);
+        when(element.getElementsByTag("td")).thenReturn(mockedEementsVaule);
+        when(mockedElementsKey.size()).thenReturn(1);
+        when(mockedElementsKey.get(0)).thenReturn(mockedTmpKey);
+        when(mockedEementsVaule.get(0)).thenReturn(mockedTmpValue);
+        when(mockedTmpKey.text()).thenReturn("Authors");
+        when(mockedTmpValue.text()).thenReturn(String.valueOf(authors));
+
+        //act
+        dataExtractor.parseMovie(element);
+        mockedBook.setAuthors(authors);
+        //assert
+        verify(mockedBook, times(1)).setAuthors(authors);
+
+    }
 
     private Movie getMovie() {
         Movie movie = new Movie();
