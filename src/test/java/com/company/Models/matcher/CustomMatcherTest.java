@@ -4,10 +4,15 @@ import com.company.Models.custom_rule.LoggerRule;
 import com.company.SearchAlgorithms.DataExtractor;
 import com.company.SearchAlgorithms.Extractor;
 import com.company.utils.Utils;
+import com.google.gson.Gson;
+import org.hamcrest.FeatureMatcher;
+import org.hamcrest.Matcher;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 
+import java.io.IOException;
 import java.net.MalformedURLException;
 
 import static com.company.Models.matcher.custom.IsPage.page;
@@ -21,6 +26,9 @@ public class CustomMatcherTest {
     @Rule
     public LoggerRule performanceLogger = new LoggerRule();
 
+    @Rule
+    public ExpectedException rule = ExpectedException.none();
+
     private Extractor extractor;
     private DataExtractor dataExtractor;
     private Utils utils;
@@ -28,7 +36,7 @@ public class CustomMatcherTest {
     @Before
     public void setup() throws MalformedURLException {
         dataExtractor = new DataExtractor();
-        extractor = new Extractor("http://localhost:8888",dataExtractor,utils);
+        extractor = new Extractor("http://localhost:8888", dataExtractor, utils);
         utils = new Utils();
     }
 
@@ -50,27 +58,42 @@ public class CustomMatcherTest {
 
     //TEST TO SEE IF MATCHER WORKS
     @Test
-    public void checkIsValidJsonStringWithCustomMatcherShouldFail() {
+    public void testIfGetJsonForSearchByKeyWordReturnsCorrectJsonObject() throws IOException, ClassNotFoundException {
+        //Arrange
+        DataExtractor dataExtractor = new DataExtractor();
+        Utils util = new Utils();
+        Extractor extractor = new Extractor("http://localhost:8888", dataExtractor, util);
 
-        assertThat(false, isValidJson("dsadsada"));
+        String jsonString = new Gson().toJson(extractor.findObjectModelForSearchText(extractor.getAllObjects(), "Elvis Presley"));
+        assertThat(true, isValidJson(jsonString));
     }
 
     //TEST TO SEE IF MATCHER WORKS
     @Test
-    public void checkIsValidJsonStringWithCustomMatcherShouldPass() {
-        assertThat(true, isValidJson("{\"result\":{\"title\":\"The Lord of the Rings: The Fellowship of the Ring\",\"category\":\"Movies\",\"genre\":\"Drama\",\"format\":\"Blu-ray\",\"year\":\"2001\",\"director\":\"Peter Jackson\",\"writers\":[\"J.R.R. Tolkien\",\"Fran Walsh\",\"Philippa Boyens\",\"Peter Jackson\"],\"stars\":[\"Ron Livingston\",\"Jennifer Aniston\",\"David Herman\",\"Ajay Naidu\",\"Diedrich Bader\",\"Stephen Root\"]},\"id\":\"203\",\"time\":0}"));
+    public void checkIfTestPassesWithValidUrl() throws MalformedURLException {
+        //Arrange
+        DataExtractor dataExtractor = new DataExtractor();
+        Utils util = new Utils();
+        Extractor extractor = new Extractor("http://localhost:8888", dataExtractor, util);
+        assertThat(true, IsValidUrl(extractor.getURL()));
     }
 
-    //TEST TO SEE IF MATCHER WORKS
     @Test
-    public void checkIfIsValidUrlSucceedsWithInCorrectUrl() {
-        assertThat(true, IsValidUrl("http://localhost:8888"));
+    public void testWithLengthMatcher() throws MalformedURLException {
+        //Arrange
+        String url = "http://localhost:8888";
+        DataExtractor dataExtractor = new DataExtractor();
+        Utils util = new Utils();
+        Extractor extractor = new Extractor(url, dataExtractor, util);
+        assertThat(url, length(is(extractor.getURL().length())));
     }
 
-    //TEST TO SEE IF MATCHER WORKS
-    @Test
-    public void checkIfIsValidUrlFailWithInCorrectUrl() {
-        assertThat(false, IsValidUrl("fafdsa"));
+    public static Matcher<String> length(Matcher<? super Integer> matcher) {
+        return new FeatureMatcher<String, Integer>(matcher, "a String of length :", "length") {
+            @Override
+            protected Integer featureValueOf(String actual) {
+                return actual.length();
+            }
+        };
     }
-
 }

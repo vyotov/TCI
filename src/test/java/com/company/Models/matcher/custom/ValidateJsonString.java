@@ -1,13 +1,16 @@
 package com.company.Models.matcher.custom;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.gson.JsonObject;
 import org.hamcrest.Description;
 import org.hamcrest.Factory;
 import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeMatcher;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 
 import java.io.IOException;
-
+import java.util.*;
 
 public class ValidateJsonString extends TypeSafeMatcher<Boolean> {
 
@@ -23,8 +26,8 @@ public class ValidateJsonString extends TypeSafeMatcher<Boolean> {
     }
 
     @Override
-    protected boolean matchesSafely(Boolean expected) {
-        return isJSONValid(value) || (isJSONValid(value) == expected);
+    protected boolean matchesSafely(Boolean actual) {
+        return isJSONValid(value) || (isJSONValid(value) == actual);
     }
 
     private boolean isJSONValid(String jsonInString) {

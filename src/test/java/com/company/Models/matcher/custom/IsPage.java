@@ -17,7 +17,7 @@ public class IsPage extends TypeSafeMatcher {
     }
 
     @Override
-    protected boolean matchesSafely(Object e) {
+    protected boolean matchesSafely(Object actual) {
         try {
             DataExtractor dataExtractor = new DataExtractor();
             Utils utils = new Utils();

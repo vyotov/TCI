@@ -1,12 +1,9 @@
 package com.company.Models.matcher.custom;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.hamcrest.Description;
 import org.hamcrest.Factory;
 import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeMatcher;
-
-import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 
@@ -24,8 +21,8 @@ public class IsValidUrl extends TypeSafeMatcher<Boolean> {
     }
 
     @Override
-    protected boolean matchesSafely(Boolean expected) {
-        return isValidURL(value) || (isValidURL(value) == expected);
+    protected boolean matchesSafely(Boolean actual) {
+        return isValidURL(value) || (isValidURL(value) == actual);
     }
 
     public boolean isValidURL(String urlStr) {

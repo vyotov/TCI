@@ -16,10 +16,6 @@ public class Utils {
         return table;
     }
 
-    public void setTable(Element table) {
-        this.table = table;
-    }
-
     public Category findCategory(String url) throws ClassNotFoundException {
         if (url.equals("")) {
             throw new ClassNotFoundException();
