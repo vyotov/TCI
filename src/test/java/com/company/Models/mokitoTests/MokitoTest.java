@@ -190,7 +190,7 @@ public class MokitoTest {
         //arrange
         String url = "http://localhost:8888";
         String detailPage = "http://localhost:8888/sample_site_to_crawl/details.php?id=302";
-        String artist = "Elvis Presley\n";
+        String artist = "Elvis Presley";
 
         Elements elementsKey = mock(Elements.class);
         Elements elementsVaule = mock(Elements.class);
@@ -212,6 +212,34 @@ public class MokitoTest {
         Music music = dataExtractor.parseMusic(element);
         //Assert
         Assert.assertThat(music,hasProperty("artist",  Matchers.is(artist)));
+    }
+    @Test
+    public void verifyMusicName() throws IOException, ClassNotFoundException {
+        //arrange
+        String url = "http://localhost:8888";
+        String detailPage = "http://localhost:8888/sample_site_to_crawl/details.php?id=302";
+        String name = "Elvis Forever";
+
+        Elements elementsKey = mock(Elements.class);
+        Elements elementsVaule = mock(Elements.class);
+        Element tmpKey = mock(Element.class);
+        Element tmpValue = mock(Element.class);
+
+        DataExtractor dataExtractor =  new DataExtractor();
+        dataExtractor.setUrl(detailPage);
+        //act
+        when(element.getElementsByTag("th")).thenReturn(elementsKey);
+        when(element.getElementsByTag("td")).thenReturn(elementsVaule);
+        when(elementsKey.size()).thenReturn(1);
+        when(elementsKey.get(0)).thenReturn(tmpKey);
+        when(elementsVaule.get(0)).thenReturn(tmpValue);
+        when(tmpKey.text()).thenReturn("Name");
+        when(tmpValue.text()).thenReturn(name);
+
+        when(mockedUtils.getElement()).thenReturn(element);
+        Music music = dataExtractor.parseMusic(element);
+        //Assert
+        Assert.assertThat(music,hasProperty("name",  Matchers.is(name)));
     }
 
 
