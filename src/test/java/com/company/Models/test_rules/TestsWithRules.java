@@ -51,11 +51,11 @@ public class TestsWithRules {
         extractor.checkIfStringContainsOnlyNumbers(null);
     }
 
-    @Test
-    public void testIfModelIsParsed() throws IllegalArgumentException,IOException {
+    //@Test
+    //public void testIfModelIsParsed() throws IllegalArgumentException,IOException {
      //   rule.expect(IllegalArgumentException.class);
      //   dataExtractor.parseMovie(null);
-    }
+    //}
 
     @Test
     public void testIfURLIsSet() throws IllegalArgumentException, IOException, IllegalAccessException {
