@@ -220,7 +220,7 @@ public class MockitoTest {
 
     ////DIRECT INPUT - sut if method is called
     @Test
-    public void testSearchByIdForBookDirect() throws IOException, ClassNotFoundException {
+    public void testSearchByIdForMovieDirect() throws IOException, ClassNotFoundException {
         //arrange
         String url = "http://localhost:8888";
         String detailPage = "http://localhost:8888/sample_site_to_crawl/details.php?id=202";
