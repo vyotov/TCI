@@ -228,18 +228,17 @@ public class MockitoTest {
     {
         //arrange
         String url = "http://localhost:8888";
-        String detailPage = "http://localhost:8888/sample_site_to_crawl/details.php?id=102";
+        String detailPage = "http://localhost:8888/sample_site_to_crawl/details.php?id=202";
+        Movie movie = getMovie();
 
-        Book book = getBook();
-        when(mockedUtils.findCategory(detailPage)).thenReturn(Category.BOOKS);
-        when(mockedDataExtractor.parseBook(element)).thenReturn(book);
+        when(mockedUtils.findCategory(detailPage)).thenReturn(Category.MOVIE);
+        when(mockedDataExtractor.parseMovie(element)).thenReturn(movie);
+        when(mockedUtils.getElement()).thenReturn(element);
 
-        //act
         Extractor extractor = new Extractor(url, mockedDataExtractor, mockedUtils);
-        extractor.searchById("102", mockedDataExtractor);
+        Object obj = extractor.searchById("202", mockedDataExtractor);
 
-        //assert
-        Assert.assertThat(extractor.searchById("102",mockedDataExtractor), is(book));
+        Assert.assertNotNull(obj);
     }
     //DIRECT OUTPUT PARAMS - sut if method called on param
 
