@@ -16,17 +16,13 @@ import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import java.io.IOException;
-import java.util.Arrays;
-import java.util.HashSet;
-
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 
-import static org.hamcrest.Matchers.hasProperty;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.*;
 import static org.mockito.Mockito.*;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -224,8 +220,7 @@ public class MockitoTest {
 
     ////DIRECT INPUT - sut if method is called
     @Test
-    public void testSearchByIdForBookDirect() throws  IOException,ClassNotFoundException
-    {
+    public void testSearchByIdForBookDirect() throws IOException, ClassNotFoundException {
         //arrange
         String url = "http://localhost:8888";
         String detailPage = "http://localhost:8888/sample_site_to_crawl/details.php?id=102";
@@ -239,13 +234,13 @@ public class MockitoTest {
         extractor.searchById("102", mockedDataExtractor);
 
         //assert
-        Assert.assertThat(extractor.searchById("102",mockedDataExtractor), is(book));
+        Assert.assertThat(extractor.searchById("102", mockedDataExtractor), is(book));
     }
     //DIRECT OUTPUT PARAMS - sut if method called on param
 
     //DIRECT INPUT PARAMS - sut if method called on param
     @Test
-    public void verifyIfGetElementsByTagIsCalled() throws IOException, ClassNotFoundException {
+    public void verifyIfGetElementsByTagIsCalled() throws IOException {
         //arrange
         String url = "http://localhost:8888";
         String detailPage = "http://localhost:8888/sample_site_to_crawl/details.php?id=202";
@@ -267,7 +262,7 @@ public class MockitoTest {
     }
 
     @Test
-    public void verifyIfParseMovieProperty() throws IOException, ClassNotFoundException {
+    public void verifyIfParseMovieProperty() throws IOException {
         //arrange
         String url = "http://localhost:8888";
         String detailPage = "http://localhost:8888/sample_site_to_crawl/details.php?id=202";
@@ -278,7 +273,7 @@ public class MockitoTest {
         Element mockedTmpValue = mock(Element.class);
         Movie mockedMovie = mock(Movie.class);
 
-        DataExtractor dataExtractor =  new DataExtractor();
+        DataExtractor dataExtractor = new DataExtractor();
         dataExtractor.setUrl(detailPage);
 
         when(element.getElementsByTag("th")).thenReturn(mockedElementsKey);
@@ -298,7 +293,7 @@ public class MockitoTest {
     }
 
     @Test
-    public void verifyIfParseBookAuthors() throws IOException, ClassNotFoundException {
+    public void verifyIfParseBookAuthors() throws IOException {
         //arrange
         String url = "http://localhost:8888";
         String detailPage = "http://localhost:8888/sample_site_to_crawl/details.php?id=101";
@@ -308,7 +303,7 @@ public class MockitoTest {
         Element mockedTmpValue = mock(Element.class);
         Book mockedBook = mock(Book.class);
 
-        DataExtractor dataExtractor =  new DataExtractor();
+        DataExtractor dataExtractor = new DataExtractor();
         dataExtractor.setUrl(detailPage);
         List<String> authorss = null;
         List<String> authors = new ArrayList<>();

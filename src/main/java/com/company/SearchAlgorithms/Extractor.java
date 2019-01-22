@@ -32,10 +32,6 @@ public class Extractor {
     private Utils utils;
     private DataExtractor dataExtractor;
 
-    public String getURL() {
-        return URL;
-    }
-
     public Extractor(String URL, DataExtractor dataExtractor,Utils utils) throws MalformedURLException {
         this.dataExtractor = dataExtractor;
         this.URL = URL;
@@ -51,10 +47,6 @@ public class Extractor {
             //  URL myURL = new URL("http://localhost:8080");
             URLConnection myURLConnection = myURL.openConnection();
             myURLConnection.connect();
-        } catch (MalformedURLException e) {
-            // new URL() failed
-            // ...
-            return false;
         } catch (IOException e) {
             // openConnection() failed
             // ...
@@ -64,7 +56,6 @@ public class Extractor {
     }
 
 
-    //Tested
     public void getPageLinks(String URL) throws MalformedURLException {
         if (!isValidURL(URL) && !canConnectToUrl(URL)) {
             throw new MalformedURLException();
@@ -95,7 +86,6 @@ public class Extractor {
         }
     }
 
-    //Tested
     public Object searchById(String searchById,DataExtractor dataExtractor) throws IOException, ClassNotFoundException {
         if (searchById.equals("")) {
             throw new IllegalArgumentException("Empty search id " + searchById);
@@ -127,8 +117,7 @@ public class Extractor {
         return object;
     }
 
-    //Tested
-    public JSONObject getJsonResultForSearchById(String searchById) throws IOException, ClassNotFoundException, IllegalAccessException {
+    public JSONObject getJsonResultForSearchById(String searchById) throws IOException, ClassNotFoundException {
         JSONObject result = new JSONObject();
         startTime = System.currentTimeMillis();
         result.put("id", searchById);
@@ -138,7 +127,6 @@ public class Extractor {
         return result;
     }
 
-    //Tested
     public boolean checkIfStringContainsOnlyNumbers(String text) {
         if (text == null) {
             throw new RuntimeException("Parameter text should not be called with null value");
@@ -146,8 +134,7 @@ public class Extractor {
         return text.matches("\\d+");
     }
 
-    //Tested
-    public JSONObject getJsonForSearchByKeyWord(String text) throws IOException, ClassNotFoundException, IllegalAccessException {
+    public JSONObject getJsonForSearchByKeyWord(String text) throws IOException, ClassNotFoundException {
 
         if (text.equals("")) {
             throw new NullPointerException("Empty search keyword" + text);
@@ -162,13 +149,11 @@ public class Extractor {
         return result;
     }
 
-    //Tested
     public JSONObject getAllObjects() throws IOException, ClassNotFoundException {
         startTime = System.currentTimeMillis();
         List<Object> moviesList = new ArrayList<>();
         List<Object> bookList = new ArrayList<>();
         List<Object> musicList = new ArrayList<>();
-        Element element = null;
         for (String url : links) {
             String number = url.substring(url.lastIndexOf("=") + 1);
             if (!number.equals("") && checkIfStringContainsOnlyNumbers(number)) {
@@ -301,50 +286,10 @@ public class Extractor {
                     }
                 }
             }
-            /*
-             * do something for each entry
-             */
         }
         return new JsonObject();
     }
 
-
-    //public Category findCategory(String url) throws ClassNotFoundException {
-    //    if (url.equals("")) {
-    //        throw new ClassNotFoundException();
-    //    }
-    //    Document doc = null;
-    //    try {
-    //        doc = Jsoup.connect(url).get();
-    //    } catch (IOException e) {
-    //        e.printStackTrace();
-    //    }
-    //    //Find the media details tag on the right of the page
-    //    Elements results = doc.getElementsByClass(Constants.media_detail);
-    //    System.out.println("RESULT: "+ results);
-    //    //Table
-    //    if(results !=null) {
-    //        table = results.select("table").first();
-    //        Elements th = table.getElementsByTag("th");
-    //        Elements td = table.getElementsByTag("td");
-    //        for (int i = 0, l = th.size(); i < l; i++) {
-    //            String key = th.get(i).text();
-    //            String value = td.get(i).text();
-    //            //Check which category:
-    //            if (key.equals(Constants.category)) {
-    //                switch (value) {
-    //                    case Constants.music:
-    //                        return Category.MUSIC;
-    //                    case Constants.movies:
-    //                        return Category.MOVIE;
-    //                    case Constants.books:
-    //                        return Category.BOOKS;
-    //                }
-    //            }
-    //        }
-    //    }
-    //    return null;
-    //}
 
     public Long getTimeDuration() {
         return endTime - startTime;
