@@ -17,12 +17,9 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
-
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.HashSet;
-
-import static com.sun.org.apache.xerces.internal.util.PropertyState.is;
 import static org.hamcrest.Matchers.hasProperty;
 import static org.mockito.Mockito.*;
 
@@ -38,7 +35,6 @@ public class MokitoTest {
     private Element element;
     @Mock
     private HashSet<String> mockedLinks;
-    //MOCKITO DUMMY OBJ
 
     // MOCKITO EXCEPTIONS
     @Test(expected = ClassNotFoundException.class)
@@ -96,6 +92,33 @@ public class MokitoTest {
         Assert.assertEquals(obj, book);
     }
     //INDIRECT OUTPUT
+    @Test
+    public void verifyParseBook() throws IOException, ClassNotFoundException {
+        String url = "http://localhost:8888";
+        String detailPage = "http://localhost:8888/sample_site_to_crawl/details.php?id=102";
+        //arrange
+        when(mockedUtils.findCategory(detailPage)).thenReturn(Category.BOOKS);
+        when(mockedUtils.getElement()).thenReturn(element);
+
+        Extractor extractor = new Extractor(url, mockedDataExtractor, mockedUtils);
+        //Act
+        extractor.searchById("102", mockedDataExtractor);
+        verify(mockedDataExtractor).parseBook(element);
+    }
+
+    @Test
+    public void verifyParseMusic() throws IOException, ClassNotFoundException {
+        String url = "http://localhost:8888";
+        String detailPage = "http://localhost:8888/sample_site_to_crawl/details.php?id=302";
+        //arrange
+        when(mockedUtils.findCategory(detailPage)).thenReturn(Category.MUSIC);
+        when(mockedUtils.getElement()).thenReturn(element);
+        Extractor extractor = new Extractor(url, mockedDataExtractor, mockedUtils);
+        //Act
+        extractor.searchById("302", mockedDataExtractor);
+        verify(mockedDataExtractor).parseMusic(element);
+    }
+
     @Test
     public void verifyParseMovie() throws IOException, ClassNotFoundException {
         String url = "http://localhost:8888";
@@ -155,52 +178,9 @@ public class MokitoTest {
 
         Music music = dataExtractor.parseMusic(element);
         Assert.assertThat(music,hasProperty("genre",  Matchers.is(genre)));
-        //verify(element, times(1)).getElementsByTag("th");
-        //verify(element, times(1)).getElementsByTag("td");
 
     }
 
-    @Test
-    public void verifyParseBook() throws IOException, ClassNotFoundException {
-        String url = "http://localhost:8888";
-        String detailPage = "http://localhost:8888/sample_site_to_crawl/details.php?id=102";
-        //arrange
-        when(mockedUtils.findCategory(detailPage)).thenReturn(Category.BOOKS);
-        when(mockedUtils.getElement()).thenReturn(element);
-
-        Extractor extractor = new Extractor(url, mockedDataExtractor, mockedUtils);
-        //Act
-        extractor.searchById("102", mockedDataExtractor);
-        verify(mockedDataExtractor).parseBook(element);
-    }
-
-    @Test
-    public void verifyParseMusic() throws IOException, ClassNotFoundException {
-        String url = "http://localhost:8888";
-        String detailPage = "http://localhost:8888/sample_site_to_crawl/details.php?id=302";
-        //arrange
-        when(mockedUtils.findCategory(detailPage)).thenReturn(Category.MUSIC);
-        when(mockedUtils.getElement()).thenReturn(element);
-        Extractor extractor = new Extractor(url, mockedDataExtractor, mockedUtils);
-        //Act
-        extractor.searchById("302", mockedDataExtractor);
-        verify(mockedDataExtractor).parseMusic(element);
-    }
-
-    @Test
-    public void verifyGetAllObjects() {
-        //mockedDataExtractor.
-        //behave
-        //when(mockedExtractor.getPageCount()).thenReturn(22);
-        //verify(mockedExtractor).getPageCount();
-
-    }
-
-    //INDIRECT OUTPUT
-    @Test
-    public void testPageLinks() {
-
-    }
 
     private Movie getMovie() {
         Movie movie = new Movie();

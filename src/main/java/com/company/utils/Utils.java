@@ -32,7 +32,6 @@ public class Utils {
         }
         //Find the media details tag on the right of the page
         Elements results = doc.getElementsByClass(Constants.media_detail);
-        System.out.println("RESULT: " + results);
         //Table
         if (results != null) {
             table = results.select("table").first();

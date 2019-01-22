@@ -36,7 +36,6 @@ public class CustomMatcherTest {
     public void shouldPassForPageCount() {
         // Given
         Integer pages = extractor.getPageCount();
-        System.out.println("WAHAT: "+pages);
         // Then
         assertThat(pages, (not(page())));
     }
