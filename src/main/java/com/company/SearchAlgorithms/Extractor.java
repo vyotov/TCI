@@ -40,6 +40,10 @@ public class Extractor {
         getPageLinks(URL);
     }
 
+    public String getURL() {
+        return URL;
+    }
+
     public boolean canConnectToUrl(String URL) {
         try {
             URL myURL = new URL(URL);
@@ -286,6 +290,7 @@ public class Extractor {
                     }
                 }
             }
+
         }
         return new JsonObject();
     }
