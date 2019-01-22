@@ -32,7 +32,11 @@ public class Extractor {
     private Utils utils;
     private DataExtractor dataExtractor;
 
-    public Extractor(String URL, DataExtractor dataExtractor,Utils utils) throws MalformedURLException {
+    public HashSet<String> getLinks() {
+        return links;
+    }
+
+    public Extractor(String URL, DataExtractor dataExtractor, Utils utils) throws MalformedURLException {
         this.dataExtractor = dataExtractor;
         this.URL = URL;
         this.utils = utils;

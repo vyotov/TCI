@@ -5,8 +5,10 @@ import com.company.SearchAlgorithms.DataExtractor;
 import com.company.SearchAlgorithms.Extractor;
 import com.company.utils.Utils;
 import com.google.gson.Gson;
+import org.hamcrest.Description;
 import org.hamcrest.FeatureMatcher;
 import org.hamcrest.Matcher;
+import org.hamcrest.TypeSafeMatcher;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -14,7 +16,10 @@ import org.junit.rules.ExpectedException;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
+import java.util.ArrayList;
+import java.util.Collection;
 
+import static com.company.Models.matcher.custom.IsCollectionEmpty.isListEmpty;
 import static com.company.Models.matcher.custom.IsPage.page;
 import static com.company.Models.matcher.custom.IsValidUrl.IsValidUrl;
 import static com.company.Models.matcher.custom.ValidateJsonString.isValidJson;
@@ -96,4 +101,16 @@ public class CustomMatcherTest {
             }
         };
     }
+
+
+    @Test
+    public void testIfCollectionIsEmptyWithMatcher() throws MalformedURLException {
+        String url = "http://localhost:8888";
+        DataExtractor dataExtractor = new DataExtractor();
+        Utils util = new Utils();
+        Extractor extractor = new Extractor(url, dataExtractor, util);
+        assertThat(false, isListEmpty(extractor.getLinks()));
+
+    }
+
 }
