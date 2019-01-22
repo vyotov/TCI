@@ -27,8 +27,8 @@ public class ValidateJsonString extends TypeSafeMatcher<Boolean> {
     }
 
     @Override
-    protected boolean matchesSafely(Boolean expected) {
-        return isJSONValid(value) || (isJSONValid(value) == expected);
+    protected boolean matchesSafely(Boolean actual) {
+        return isJSONValid(value) || (isJSONValid(value) == actual);
     }
 
     private boolean isJSONValid(String jsonInString) {

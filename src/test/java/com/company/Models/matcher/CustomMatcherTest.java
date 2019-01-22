@@ -65,7 +65,7 @@ public class CustomMatcherTest {
         Extractor extractor = new Extractor("http://localhost:8888", dataExtractor, util);
 
         String jsonString = new Gson().toJson(extractor.findObjectModelForSearchText(extractor.getAllObjects(), "Elvis Presley"));
-        assertThat(true, isValidJson(jsonString.substring(0,10)));
+        assertThat(true, isValidJson(jsonString));
     }
 
     //TEST TO SEE IF MATCHER WORKS
