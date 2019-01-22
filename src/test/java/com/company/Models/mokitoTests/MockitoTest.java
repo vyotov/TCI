@@ -137,81 +137,6 @@ public class MockitoTest {
         verify(mockedDataExtractor).parseMovie(element);
     }
 
-    //DIRECT INPUT - sut if method called on param
-    @Test
-    public void verifyIfParseMovie() throws IOException {
-        //arrange
-        String detailPage = "http://localhost:8888/sample_site_to_crawl/details.php?id=202";
-        Elements elements = mock(Elements.class);
-        DataExtractor dataExtractor = new DataExtractor();
-        dataExtractor.setUrl(detailPage);
-
-        when(element.getElementsByTag("th")).thenReturn(elements);
-        when(elements.size()).thenReturn(0); //Skip
-
-        when(element.getElementsByTag("td")).thenReturn(elements);
-        when(mockedUtils.getElement()).thenReturn(element);
-        //act
-        dataExtractor.parseMovie(element);
-        //assert
-        verify(element, times(1)).getElementsByTag("th");
-        verify(element, times(1)).getElementsByTag("td");
-    }
-
-
-    @Test
-    public void verifyIfMovieStars() throws IOException {
-        //arrange
-        String detailPage = "http://localhost:8888/sample_site_to_crawl/details.php?id=201";
-        String keyWord = "Tom Hanks";
-
-        Elements elementsKey = mock(Elements.class);
-        Elements elementsValue = mock(Elements.class);
-        Element tmpKey = mock(Element.class);
-        Element tmpValue = mock(Element.class);
-        String arrayAuthors = "Tom Hanks, Rebecca Williams, Sally Field, Michael Conner Humphreys";
-        DataExtractor dataExtractor = new DataExtractor();
-        dataExtractor.setUrl(detailPage);
-        //act
-        when(element.getElementsByTag("th")).thenReturn(elementsKey);
-        when(element.getElementsByTag("td")).thenReturn(elementsValue);
-        when(elementsKey.size()).thenReturn(1); //Loop 1
-        when(elementsKey.get(0)).thenReturn(tmpKey);
-        when(elementsValue.get(0)).thenReturn(tmpValue);
-        when(tmpKey.text()).thenReturn("Stars");
-        when(tmpValue.text()).thenReturn(arrayAuthors);
-        Movie movie = dataExtractor.parseMovie(element);
-        //Assert
-        assertThat(movie.getStars(), hasItem(keyWord));
-    }
-
-    @Test
-    public void verifyIfBookAuthorsCalled() {
-        //arrange
-        String detailPage = "http://localhost:8888/sample_site_to_crawl/details.php?id=102";
-        String keyWord = "Robert C. Martin";
-
-        Elements elementsKey = mock(Elements.class);
-        Elements elementsValue = mock(Elements.class);
-        Element tmpKey = mock(Element.class);
-        Element tmpValue = mock(Element.class);
-
-        String arrayAuthors = "Robert C. Martin";
-        DataExtractor dataExtractor = new DataExtractor();
-        dataExtractor.setUrl(detailPage);
-        //act
-        when(element.getElementsByTag("th")).thenReturn(elementsKey);
-        when(element.getElementsByTag("td")).thenReturn(elementsValue);
-        when(elementsKey.size()).thenReturn(1); //Loop 1
-        when(elementsKey.get(0)).thenReturn(tmpKey);
-        when(elementsValue.get(0)).thenReturn(tmpValue);
-        when(tmpKey.text()).thenReturn("Authors");
-        when(tmpValue.text()).thenReturn(arrayAuthors);
-        Book movie = dataExtractor.parseBook(element);
-        //Assert
-        assertThat(movie.getAuthors(), hasItem(keyWord));
-    }
-
 
     //DIRECT OUTPUT - sut return value
     @Test
@@ -407,6 +332,79 @@ public class MockitoTest {
         //assert
         verify(mockedBook, times(1)).setAuthors(authors);
 
+    }
+
+    @Test
+    public void verifyIfParseMovie() throws IOException {
+        //arrange
+        String detailPage = "http://localhost:8888/sample_site_to_crawl/details.php?id=202";
+        Elements elements = mock(Elements.class);
+        DataExtractor dataExtractor = new DataExtractor();
+        dataExtractor.setUrl(detailPage);
+
+        when(element.getElementsByTag("th")).thenReturn(elements);
+        when(elements.size()).thenReturn(0); //Skip
+
+        when(element.getElementsByTag("td")).thenReturn(elements);
+        when(mockedUtils.getElement()).thenReturn(element);
+        //act
+        dataExtractor.parseMovie(element);
+        //assert
+        verify(element, times(1)).getElementsByTag("th");
+        verify(element, times(1)).getElementsByTag("td");
+    }
+
+    @Test
+    public void verifyIfMovieStars() throws IOException {
+        //arrange
+        String detailPage = "http://localhost:8888/sample_site_to_crawl/details.php?id=201";
+        String keyWord = "Tom Hanks";
+
+        Elements elementsKey = mock(Elements.class);
+        Elements elementsValue = mock(Elements.class);
+        Element tmpKey = mock(Element.class);
+        Element tmpValue = mock(Element.class);
+        String arrayAuthors = "Tom Hanks, Rebecca Williams, Sally Field, Michael Conner Humphreys";
+        DataExtractor dataExtractor = new DataExtractor();
+        dataExtractor.setUrl(detailPage);
+        //act
+        when(element.getElementsByTag("th")).thenReturn(elementsKey);
+        when(element.getElementsByTag("td")).thenReturn(elementsValue);
+        when(elementsKey.size()).thenReturn(1); //Loop 1
+        when(elementsKey.get(0)).thenReturn(tmpKey);
+        when(elementsValue.get(0)).thenReturn(tmpValue);
+        when(tmpKey.text()).thenReturn("Stars");
+        when(tmpValue.text()).thenReturn(arrayAuthors);
+        Movie movie = dataExtractor.parseMovie(element);
+        //Assert
+        assertThat(movie.getStars(), hasItem(keyWord));
+    }
+
+    @Test
+    public void verifyIfBookAuthorsCalled() {
+        //arrange
+        String detailPage = "http://localhost:8888/sample_site_to_crawl/details.php?id=102";
+        String keyWord = "Robert C. Martin";
+
+        Elements elementsKey = mock(Elements.class);
+        Elements elementsValue = mock(Elements.class);
+        Element tmpKey = mock(Element.class);
+        Element tmpValue = mock(Element.class);
+
+        String arrayAuthors = "Robert C. Martin";
+        DataExtractor dataExtractor = new DataExtractor();
+        dataExtractor.setUrl(detailPage);
+        //act
+        when(element.getElementsByTag("th")).thenReturn(elementsKey);
+        when(element.getElementsByTag("td")).thenReturn(elementsValue);
+        when(elementsKey.size()).thenReturn(1); //Loop 1
+        when(elementsKey.get(0)).thenReturn(tmpKey);
+        when(elementsValue.get(0)).thenReturn(tmpValue);
+        when(tmpKey.text()).thenReturn("Authors");
+        when(tmpValue.text()).thenReturn(arrayAuthors);
+        Book movie = dataExtractor.parseBook(element);
+        //Assert
+        assertThat(movie.getAuthors(), hasItem(keyWord));
     }
 
     private Movie getMovie() {
