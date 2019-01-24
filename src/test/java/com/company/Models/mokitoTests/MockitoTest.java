@@ -235,6 +235,20 @@ public class MockitoTest {
         System.out.println(obj);
         Assert.assertNotNull(obj);
     }
+    @Test
+    public void testJsonResultForSearchById() throws IOException, ClassNotFoundException {
+        //arrange
+        String url = "http://localhost:8888";
+        String detailPage = "http://localhost:8888/sample_site_to_crawl/details.php?id=202";
+        Movie movie = getMovie();
+        when(mockedUtils.findCategory(detailPage)).thenReturn(Category.MOVIE);
+        when(mockedDataExtractor.parseMovie(element)).thenReturn(movie);
+        when(mockedUtils.getElement()).thenReturn(element);
+
+        Extractor extractor = new Extractor(url, mockedDataExtractor, mockedUtils);
+        Object obj = extractor.getJsonResultForSearchById("202");
+        Assert.assertNotNull(obj.toString().contains("Office Space"));
+    }
     //DIRECT OUTPUT PARAMS - sut if method called on param
 
     //DIRECT INPUT PARAMS - sut if method called on param
